@@ -167,6 +167,12 @@
   @media (max-width: 40rem) { .bar-cta .btn { display: none; } .bar { padding: 0 8px 0 14px; } }
   @supports (background: -webkit-named-image(i)) { .bar::before { -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); } }
 
+  /* nav logo: light-on-dark mark by default, full-colour mark on the light glass bar */
+  .logo-light { opacity: 0; }
+  .bar.scrolled.light .logo-light { opacity: 1; }
+  .bar.scrolled.light .logo-dark { opacity: 0; }
+  .logo-dark, .logo-light { transition: opacity .45s var(--ease-out-expo); }
+
   /* marquee */
   .marquee { overflow: hidden; padding: 1.1rem 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
   .marquee__track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
@@ -183,6 +189,11 @@
   .blueprint-fallback { background-color: var(--color-void);
     background-image: linear-gradient(rgba(90,169,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(90,169,255,.07) 1px, transparent 1px);
     background-size: 56px 56px; background-position: center; }
+
+  /* slow Ken Burns drift on the background slideshow (transform only) */
+  .kenburns { transform-origin: 30% 40%; animation: kenburns 9s linear forwards; will-change: transform; }
+  .kenburns--alt { transform-origin: 70% 60%; }
+  @keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.12); } }
 
   /* scroll cue */
   .scrollcue i { display: block; width: 1px; height: 56px; background: var(--color-hairline-d); position: relative; overflow: hidden; }

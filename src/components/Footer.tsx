@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mark, Phone, Arrow } from "./Icons";
+import Image from "next/image";
+import { Phone, Arrow } from "./Icons";
 import { BRAND, CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
 
@@ -13,10 +14,7 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div className="shell">
           <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr_1.1fr] md:gap-gutter">
             <div>
-              <Link className="flex items-center gap-2.5 text-bone no-underline mb-4" href={href(locale, "home")}>
-                <Mark className="w-10 h-10" />
-                <span className="font-display font-extrabold uppercase tracking-[.02em] text-[1.15rem] leading-none">Z Construction<small className="block font-mono font-normal text-[.58rem] tracking-[.18em] text-bone/60 mt-[3px]">&amp; Remodeling LLC</small></span>
-              </Link>
+              <Link className="inline-block mb-5" href={href(locale, "home")} aria-label={BRAND.name}><Image src="/brand/logo-on-dark.png" alt={BRAND.name} width={1076} height={680} sizes="220px" className="w-[220px] h-auto" /></Link>
               <p className="max-w-[40ch] text-step--1">{c.footer.blurb}</p>
               <span className="inline-flex items-center gap-2 mt-4 rounded-full border border-hairline-d px-3 py-1.5 font-mono text-[.72rem] tracking-[.12em] uppercase text-bone before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-amber">{c.footer.badge}</span>
             </div>

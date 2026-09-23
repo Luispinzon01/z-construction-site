@@ -17,7 +17,7 @@ const display = Barlow_Condensed({ subsets: ["latin"], weight: ["700", "800"], d
 const body = Barlow({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap", variable: "--font-barlow" });
 const mono = Space_Mono({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--font-mono-sp" });
 
-export const metadata: Metadata = { metadataBase: new URL(SITE_URL), icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }] } };
+export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
 export const viewport: Viewport = { themeColor: "#16233a" };
 
 export function generateStaticParams() { return LOCALES.map((locale) => ({ locale })); }
@@ -29,7 +29,7 @@ function jsonLd(locale: Locale) {
     "@type": ["GeneralContractor", "HomeAndConstructionBusiness", "LocalBusiness"],
     "@id": `${SITE_URL}/#business`,
     name: BRAND.name, alternateName: BRAND.short, url: `${SITE_URL}/`, inLanguage: locale,
-    telephone: BRAND.tel, email: BRAND.email, image: photo("hero", 1600), description: c.meta.home.description, priceRange: "$$",
+    logo: `${SITE_URL}/brand/logo.png`, telephone: BRAND.tel, email: BRAND.email, image: photo("hero", 1600), description: c.meta.home.description, priceRange: "$$",
     address: { "@type": "PostalAddress", addressLocality: BRAND.city, addressRegion: BRAND.region, postalCode: BRAND.zip, addressCountry: "US" },
     geo: { "@type": "GeoCoordinates", latitude: BRAND.geo.lat, longitude: BRAND.geo.lng },
     areaServed: [

@@ -5,7 +5,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Mark, Globe } from "./Icons";
+import Image from "next/image";
+import { Globe } from "./Icons";
 import { BRAND, CONTENT } from "@/lib/content";
 import { href, pageFromSlug, type Locale, type PageKey } from "@/lib/i18n";
 
@@ -67,7 +68,10 @@ export default function Nav({ locale }: { locale: Locale }) {
     <header className="navwrap">
       <nav ref={bar} className={`bar${scrolled ? " scrolled" : ""}${light ? " light" : ""}${open ? " open" : ""}`} style={{ ["--menuh" as string]: `${menuH}px` }} aria-label={c.ui.primaryNav}>
         <Link className="brand flex items-center gap-2.5 no-underline" href={href(locale, "home")} aria-label={BRAND.name}>
-          <Mark className="w-[34px] h-[34px] shrink-0" />
+          <span className="relative shrink-0 w-[62px] h-[28px]">
+            <Image src="/brand/mark-on-dark.png" alt="" fill sizes="62px" priority className="logo-dark object-contain" />
+            <Image src="/brand/mark.png" alt="" fill sizes="62px" priority className="logo-light object-contain" />
+          </span>
           <span className="font-display font-extrabold uppercase tracking-[.02em] text-[1.15rem] leading-none">Z Construction<small className="brand__small hidden min-[40rem]:block font-mono font-normal text-[.58rem] tracking-[.18em] opacity-80 mt-[3px] whitespace-nowrap">&amp; Remodeling · Auburn, AL</small></span>
         </Link>
         <div className="links">

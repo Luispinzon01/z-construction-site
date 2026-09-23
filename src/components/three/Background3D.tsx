@@ -5,6 +5,7 @@
    the reader is down in the reviews. */
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import HomeSlideshow from "./HomeSlideshow";
 
 const BlueprintLiquid = dynamic(() => import("./BlueprintLiquid"), { ssr: false, loading: () => null });
 
@@ -31,10 +32,13 @@ export default function Background3D({ zoneId = "canvas-zone" }: { zoneId?: stri
       className="blueprint-fallback pointer-events-none fixed inset-0 -z-10 transition-opacity duration-700"
       style={{ opacity: active ? 1 : 0 }}
     >
+      {/* 1. remodeled-home slideshow  2. navy tint so the grid still reads  3. WebGL  4. text scrims */}
+      <HomeSlideshow active={active} reduced={reduced} />
+      <div className="absolute inset-0 bg-void/[.42]" />
       {ready && <BlueprintLiquid active={active} reduced={reduced} mobile={mobile} />}
       {/* legibility scrim: keeps the copy readable no matter what color the paint is in */}
-      <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_20%_30%,rgba(10,17,32,0.78),transparent_62%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,32,0.3)_0%,rgba(10,17,32,0.5)_55%,rgba(10,17,32,0.82)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(110%_80%_at_15%_45%,rgba(10,17,32,0.72),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,32,0.25)_0%,rgba(10,17,32,0.3)_50%,rgba(10,17,32,0.75)_100%)]" />
     </div>
   );
 }

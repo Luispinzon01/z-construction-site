@@ -73,7 +73,7 @@ void main() {
   float edge = smoothstep(0.0, 0.14, vUv.x) * smoothstep(0.0, 0.14, 1.0 - vUv.x)
              * smoothstep(0.0, 0.14, vUv.y) * smoothstep(0.0, 0.14, 1.0 - vUv.y);
   vec3 col = mix(uColorA, uColorB, clamp(vPull * 1.8, 0.0, 1.0));
-  float a = uOpacity * (0.22 + 0.62 * edge) * (0.38 + vPull * 1.3);
+  float a = uOpacity * (0.34 + 0.66 * edge) * (0.55 + vPull * 1.3);
   gl_FragColor = vec4(col, clamp(a, 0.0, 1.0));
 }
 `;
@@ -109,7 +109,7 @@ void main() {
   if (r > 0.25) discard;
   float soft = 1.0 - smoothstep(0.16, 0.25, r);
   vec3 col = mix(uColorA, uColorB, clamp(vPull * 1.8, 0.0, 1.0));
-  gl_FragColor = vec4(col, soft * uOpacity * (0.42 + vPull));
+  gl_FragColor = vec4(col, soft * uOpacity * (0.6 + vPull));
 }
 `;
 
@@ -278,7 +278,6 @@ export default function BlueprintLiquid({ active, reduced, mobile }: { active: b
         style={{ position: "absolute", inset: 0 }}
         resize={{ scroll: false, debounce: { scroll: 50, resize: 120 } }}
       >
-        <color attach="background" args={["#0a1120"]} />
         <fog attach="fog" args={["#0a1120", 6.5, 15]} />
         <ambientLight intensity={0.25} />
         <directionalLight position={[4, 6, 5]} intensity={1.1} color="#ffe6c4" />
