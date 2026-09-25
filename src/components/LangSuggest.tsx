@@ -2,15 +2,14 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CONTENT } from "@/lib/content";
-import { href, type Locale } from "@/lib/i18n";
-import { currentPage } from "./Nav";
+import type { Locale } from "@/lib/i18n";
+import { altHrefFor } from "./Nav";
 
 export default function LangSuggest({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const [show, setShow] = useState(false);
   const other: Locale = locale === "en" ? "es" : "en";
-  const page = currentPage(locale, pathname);
-  const alt = href(other, page === "thanks" ? "home" : page);
+  const alt = altHrefFor(locale, pathname);
   const t = CONTENT[locale].langSuggest;
 
   useEffect(() => {

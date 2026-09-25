@@ -3,7 +3,7 @@ import { SplitWords } from "./motion";
 import type { PhotoKey } from "@/lib/content";
 
 /* Interior-page hero: full-bleed photo, dark scrim, bottom-left lockup. */
-export default function PageHero({ photoKey, alt, eyebrow, h1, lede }: { photoKey: PhotoKey; alt: string; eyebrow: string; h1: string; lede: string }) {
+export default function PageHero({ photoKey, alt, eyebrow, h1, lede, children }: { photoKey: PhotoKey; alt: string; eyebrow: string; h1: string; lede: string; children?: React.ReactNode }) {
   return (
     <section className="relative isolate flex items-end min-h-[min(72svh,720px)] overflow-clip bg-navy-2 text-bone" data-tone="dark">
       <div className="absolute inset-0 -z-30"><Photo k={photoKey} alt={alt} sizes="100vw" priority /></div>
@@ -13,6 +13,7 @@ export default function PageHero({ photoKey, alt, eyebrow, h1, lede }: { photoKe
         <span className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright">{eyebrow}</span>
         <SplitWords as="h1" text={h1} className="d d-lg max-w-[16ch]" />
         <p className="lede text-bone/95">{lede}</p>
+        {children}
       </div>
     </section>
   );

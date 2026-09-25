@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
-import { Arrow } from "@/components/Icons";
+import { Arrow, WhatsApp } from "@/components/Icons";
 import { SplitWords, Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
@@ -15,7 +15,11 @@ export default function ThanksPage({ locale }: { locale: Locale }) {
         <span className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright">{t.eyebrow}</span>
         <SplitWords as="h1" text={t.h1} className="d d-lg max-w-[16ch]" />
         <Reveal delay={0.4}><p className="lede text-bone/95">{t.lede} <a className="text-amber" href={`tel:${BRAND.tel}`}>{BRAND.phone}</a>.</p></Reveal>
-        <Reveal delay={0.5} className="flex flex-wrap gap-3 mt-2"><Link className="btn btn--solid" href={href(locale, "home")}>{t.home} <Arrow /></Link><Link className="btn btn--ghost" href={href(locale, "work")}>{t.work}</Link></Reveal>
+        <Reveal delay={0.5} className="mt-4 max-w-[52ch]">
+          <h2 className="eyebrow text-amber-bright mb-3">{t.nextH}</h2>
+          <ol className="grid gap-2">{t.next.map((x, i) => <li key={x} className="flex gap-3"><span className="font-mono text-amber">0{i + 1}</span><span className="text-bone/90">{x}</span></li>)}</ol>
+        </Reveal>
+        <Reveal delay={0.6} className="flex flex-wrap gap-3 mt-4"><a className="btn btn--solid" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp /> {t.wa}</a><Link className="btn btn--ghost" href={href(locale, "work")}>{t.work}</Link></Reveal>
       </div>
     </section>
   );
