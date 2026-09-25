@@ -10,11 +10,13 @@ import { Arrow, Check, Stars } from "@/components/Icons";
 import { Reveal, Stagger, Item, SplitWords, Counter, Magnetic } from "@/components/motion";
 import { CONTENT, type Service } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
+import { serviceHref } from "@/lib/routes";
+import { CARD_PAGE } from "@/lib/content-services";
 
 function ServiceCard({ s, i, locale }: { s: Service; i: number; locale: Locale }) {
   return (
     <Item>
-      <Link href={href(locale, "services", s.id)} className="svc group relative block overflow-hidden rounded-card border border-hairline-d bg-void/75 text-bone no-underline transition-colors hover:border-hairline-d-strong">
+      <Link href={serviceHref(locale, CARD_PAGE[s.id])} className="svc group relative block overflow-hidden rounded-card border border-hairline-d bg-void/75 text-bone no-underline transition-colors hover:border-hairline-d-strong">
         <div className="relative aspect-[16/10] overflow-hidden">
           <Photo k={s.photo} alt={s.alt} sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 50vw, 100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(15,26,46,.85))]" />
@@ -56,7 +58,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
             <Reveal delay={0.7}><p className="lede text-bone/95">{h.lede}</p></Reveal>
             <Reveal delay={0.85} className="flex flex-wrap gap-3 mt-2">
               <Magnetic><Link className="btn btn--solid" href={href(locale, "contact")}>{h.primary} <Arrow /></Link></Magnetic>
-              <Link className="btn btn--ghost" href={href(locale, "work")}>{h.secondary}</Link>
+              <Link className="btn btn--ghost" href={href(locale, "estimator")}>{h.secondary}</Link>
             </Reveal>
             <Stagger delay={1} className="flex flex-wrap gap-x-7 gap-y-2.5 mt-6 pt-5 border-t border-hairline-d-strong slate text-bone">
               {h.meta.map((m) => <Item key={m} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-amber" /> {m}</Item>)}
@@ -186,7 +188,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
             <h2 className="d h-md text-navy">{h.areaH}</h2>
             <p className="mt-4 max-w-[58ch] text-muted">{h.areaP}</p>
             <ul className="grid grid-cols-2 gap-x-6 mt-6 text-step--1">{c.areas.slice(0, 8).map((a) => <li key={a} className="py-1.5 border-b border-hairline">{a}</li>)}</ul>
-            <Link className="text-link text-navy mt-8" href={href(locale, "contact", "areas")}>{h.areaLink} <Arrow /></Link>
+            <Link className="text-link text-navy mt-8" href={href(locale, "areas")}>{h.areaLink} <Arrow /></Link>
           </Reveal>
         </div>
       </section>

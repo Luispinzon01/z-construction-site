@@ -2,6 +2,8 @@
 
 Next.js 16 · React 19 · Tailwind CSS v4 · @react-three/fiber · Framer Motion. English at `/`, Spanish at `/es` (native copy, localized slugs, hreflang).
 
+> **Growth system:** market research, positioning, SEO & AI-search plan, ready-to-import Google Ads, ChatGPT/Meta/LSA playbooks, the lead pipeline and a 90-day plan live in [`docs/growth/`](docs/growth/README.md).
+
 ## Run
 
 ```bash
@@ -18,16 +20,23 @@ Deploy on Vercel (framework preset detects Next). Set the env vars from `.env.ex
 | --- | --- |
 | `src/lib/content.ts` | **Every word on the site, in both languages.** Edit copy here, not in components. Spanish is written natively (usted register) for Auburn/Opelika families, not machine-translated. |
 | `src/lib/i18n.ts` | Locales, localized slugs (`/services` ↔ `/es/servicios`), URL helpers. |
+| `src/lib/routes.ts` | Resolves every URL to a route (fixed page, service, town or guide) in either language; drives the language switch, hreflang, sitemap and `llms.txt`. |
+| `src/lib/content-services.ts` | The 9 service landing pages (EN + ES): copy, what's included, cost drivers, FAQs. |
+| `src/lib/content-areas.ts` | The 4 town pages (EN + ES), built on local permit/historic/housing facts. |
+| `src/lib/content-guides.ts` | The 6 guides (EN + ES). Cost tables are generated from the estimator. |
+| `src/lib/estimator.ts` | One price table for the cost estimator, service pages and guides. Calibrate yearly. |
+| `src/lib/leads.ts` | Lead pipeline: scoring, channel attribution, owner email/SMS, homeowner auto-reply, CRM webhook, Meta CAPI. |
+| `src/lib/attribution.ts`, `src/lib/track.ts`, `src/components/Tracking.tsx` | First/last-touch attribution, and GA4 / Google Ads / Meta / Microsoft / CallRail / GTM tracking, each enabled by one env var. |
 | `src/proxy.ts` | Locale routing: `/` → English (rewritten to `/en` internally), `/es/...` → Spanish. |
 | `src/app/[locale]/layout.tsx` | Fonts (Barlow Condensed / Barlow / Space Mono), nav, footer, grain, JSON-LD LocalBusiness schema. |
 | `src/app/[locale]/[[...slug]]/page.tsx` | Routes slug → page component; per-page metadata with canonical + hreflang. |
-| `src/app/api/quote/route.ts` | Quote form → email via Resend (logs to console when `RESEND_API_KEY` is unset). |
+| `src/app/api/quote/route.ts` | Quote form endpoint: validates, rate-limits, scores and fans the lead out (see `src/lib/leads.ts`). Logs to console when nothing is configured. |
 | `src/components/three/BlueprintLiquid.tsx` | The WebGL scene: cursor-warped blueprint grid that morphs into a clearcoat liquid-paint surface on scroll. |
 | `src/components/three/Background3D.tsx` | Client-only host; pauses the render loop when the hero/services zone leaves the viewport. |
 | `src/components/motion.tsx` | Framer Motion primitives: `Reveal`, `Stagger`/`Item`, `SplitWords` (CSS keyframes), `Counter`, `Magnetic`. |
 | `src/components/pages/*` | One component per page (Home, Services, About, Work, Reviews, Contact, Thanks). |
 | `src/app/globals.css` | Tailwind `@theme` tokens + the handful of custom pieces (glass nav, grain, marquee, compare slider, faq, forms). |
-| `src/app/sitemap.ts`, `robots.ts` | Bilingual sitemap with alternates; robots. |
+| `src/app/sitemap.ts`, `robots.ts`, `llms.txt/route.ts` | Bilingual sitemap with hreflang alternates for every route; robots that welcomes search and AI crawlers; a generated `/llms.txt` fact sheet. |
 
 ## The 3D background, briefly
 
@@ -55,5 +64,6 @@ Transform and opacity only. No animated filters, box-shadows or large blurred su
 2. Replace the six sample reviews with verbatim reviews from Google / Angi / HomeAdvisor.
 3. Replace Unsplash placeholders with job photos (drop them in `public/work/` and swap `photo()` sources).
 4. Confirm the four homepage counters (projects, square feet, years, rating).
-5. Set `NEXT_PUBLIC_SITE_URL` to the real domain; add Resend key and verify the sending domain.
-6. Optional: `npx @next/codemod@canary middleware-to-proxy .` is already done (file is `src/proxy.ts`).
+5. Set `NEXT_PUBLIC_SITE_URL` to the real domain; add Resend key and verify the sending domain. See `.env.example` for SMS alerts, CRM webhook, WhatsApp and ad tracking.
+6. Calibrate `src/lib/estimator.ts` ranges against recent signed jobs.
+7. Optional: `npx @next/codemod@canary middleware-to-proxy .` is already done (file is `src/proxy.ts`).

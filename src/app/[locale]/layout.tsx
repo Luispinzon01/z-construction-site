@@ -7,6 +7,11 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import LangSuggest from "@/components/LangSuggest";
+import Tracking from "@/components/Tracking";
+import { SERVICE_PAGES } from "@/lib/content-services";
+import { AREA_PAGES } from "@/lib/content-areas";
+import { absolute, href } from "@/lib/i18n";
+import { serviceHref, areaHref } from "@/lib/routes";
 import { BRAND, CONTENT, photo } from "@/lib/content";
 import { isLocale, LOCALES, SITE_URL, type Locale } from "@/lib/i18n";
 
@@ -35,12 +40,23 @@ function jsonLd(locale: Locale) {
     areaServed: [
       { "@type": "City", name: "Auburn", sameAs: "https://en.wikipedia.org/wiki/Auburn,_Alabama" },
       { "@type": "City", name: "Opelika", sameAs: "https://en.wikipedia.org/wiki/Opelika,_Alabama" },
-      { "@type": "AdministrativeArea", name: "Lee County, Alabama" },
+      { "@type": "City", name: "Smiths Station", sameAs: "https://en.wikipedia.org/wiki/Smiths_Station,_Alabama" },
+      { "@type": "AdministrativeArea", name: "Lee County, Alabama", sameAs: "https://en.wikipedia.org/wiki/Lee_County,_Alabama" },
     ],
     availableLanguage: ["en", "es"],
+    knowsLanguage: ["en", "es"],
+    contactPoint: [{ "@type": "ContactPoint", telephone: BRAND.tel, contactType: "customer service", availableLanguage: ["English", "Spanish"], areaServed: "US-AL" }],
+    ...(BRAND.profiles.length ? { sameAs: BRAND.profiles } : {}),
+    subjectOf: AREA_PAGES.map((a) => ({ "@type": "WebPage", name: a.t[locale].title, url: absolute(areaHref(locale, a.id)) })),
+    potentialAction: { "@type": "QuoteAction", target: absolute(href(locale, "contact")) },
     openingHoursSpecification: BRAND.hours.map((h) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
-    hasOfferCatalog: { "@type": "OfferCatalog", name: "Construction, Remodeling & Painting Services", itemListElement: c.services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.name } })) },
-    aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "2", bestRating: "5" },
+    hasOfferCatalog: { "@type": "OfferCatalog", name: "Construction, Remodeling & Painting Services", itemListElement: SERVICE_PAGES.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.t[locale].name, url: absolute(serviceHref(locale, s.id)) } })) },
+    /* No AggregateRating here on purpose: Google ignores self-served review
+       stars for local businesses, and marking up the sample reviews would
+       violate its review-snippet policy. Let Google/Yelp show real ratings. */
+    ...(/^#?0+$/.test(BRAND.license.replace(/\D/g, "")) ? {} : {
+      hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "license", name: `Alabama Home Builders Licensure Board license ${BRAND.license}`, recognizedBy: { "@type": "GovernmentOrganization", name: "Alabama Home Builders Licensure Board", url: "https://hblb.alabama.gov/" } },
+    }),
   };
 }
 
@@ -58,6 +74,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <main id="main">{children}</main>
         <Footer locale={locale} />
         <LangSuggest locale={locale} />
+        <Tracking />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(locale)) }} />
       </body>
     </html>

@@ -8,21 +8,25 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Globe } from "./Icons";
 import { BRAND, CONTENT } from "@/lib/content";
-import { href, pageFromSlug, type Locale, type PageKey } from "@/lib/i18n";
+import { href, type Locale } from "@/lib/i18n";
+import { routeFromPath, routeHref, type Route } from "@/lib/routes";
 
-const ORDER: Exclude<PageKey, "thanks">[] = ["home", "services", "about", "work", "reviews", "contact"];
+const ORDER = ["home", "services", "about", "work", "reviews", "contact"] as const;
 
-export function currentPage(locale: Locale, pathname: string): PageKey {
-  const rest = locale === "es" ? pathname.replace(/^\/es\/?/, "") : pathname.replace(/^\//, "");
-  return pageFromSlug(locale, rest ? rest.split("/") : []) ?? "home";
+/** The same page in the other language (thank-you → home). */
+export function altHrefFor(locale: Locale, pathname: string): string {
+  const other: Locale = locale === "en" ? "es" : "en";
+  const r: Route = routeFromPath(locale, pathname);
+  return r.kind === "page" && r.key === "thanks" ? href(other, "home") : routeHref(other, r);
 }
 
 export default function Nav({ locale }: { locale: Locale }) {
   const c = CONTENT[locale];
   const pathname = usePathname();
-  const page = currentPage(locale, pathname);
+  const route = routeFromPath(locale, pathname);
+  const page = route.kind === "page" ? route.key : route.kind === "service" ? "services" : null;
   const other: Locale = locale === "en" ? "es" : "en";
-  const altHref = href(other, page === "thanks" ? "home" : page);
+  const altHref = altHrefFor(locale, pathname);
   const bar = useRef<HTMLElement>(null);
   const menu = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
