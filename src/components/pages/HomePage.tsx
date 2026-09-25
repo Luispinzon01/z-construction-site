@@ -9,7 +9,7 @@ import SectionHead from "@/components/SectionHead";
 import ReviewsBlock from "@/components/ReviewsBlock";
 import { Arrow, Check } from "@/components/Icons";
 import { Reveal, Stagger, Item, SplitWords, Counter, Magnetic } from "@/components/motion";
-import { CONTENT, type Service } from "@/lib/content";
+import { BRAND, CONTENT, type Service } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
 import { serviceHref } from "@/lib/routes";
 import { CARD_PAGE } from "@/lib/content-services";
@@ -56,19 +56,19 @@ export default function HomePage({ locale }: { locale: Locale }) {
           <div className="shell relative grid gap-4 pt-[calc(var(--barh)+5rem)] pb-24 sm:pb-16 md:pb-20">
             {/* The H1 is the plain-language line (service + place), which is what
                 Google reads; the big brand tagline below it is a styled <p>. */}
-            <Reveal><h1 className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright font-normal">{h.eyebrow}</h1></Reveal>
+            <h1 className="rise eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright font-normal">{h.eyebrow}</h1>
             <p className="d d-xl max-w-[13ch]">
               <SplitWords text={h.h1} className="block" delay={0.1} />
               <SplitWords text={h.h1Accent} className="block text-amber" delay={0.45} />
             </p>
-            <Reveal delay={0.7}><p className="lede text-bone/95">{h.lede}</p></Reveal>
-            <Reveal delay={0.85} className="flex flex-wrap gap-3 mt-2">
+            <p className="rise lede text-bone/95" style={{ ["--d" as string]: ".55s" }}>{h.lede}</p>
+            <div className="rise flex flex-wrap gap-3 mt-2" style={{ ["--d" as string]: ".7s" }}>
               <Magnetic><Link className="btn btn--solid" href={href(locale, "contact")}>{h.primary} <Arrow /></Link></Magnetic>
               <Link className="btn btn--ghost" href={href(locale, "estimator")}>{h.secondary}</Link>
-            </Reveal>
-            <Stagger delay={1} className="flex flex-wrap gap-x-7 gap-y-2.5 mt-6 pt-5 border-t border-hairline-d-strong slate text-bone">
-              {h.meta.map((m) => <Item key={m} className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-amber" /> {m}</Item>)}
-            </Stagger>
+            </div>
+            <ul className="flex flex-wrap gap-x-7 gap-y-2.5 mt-6 pt-5 border-t border-hairline-d-strong slate text-bone">
+              {h.meta.map((m, i) => <li key={m} className="rise flex items-center gap-2" style={{ ["--d" as string]: `${0.85 + i * 0.07}s` }}><Check className="w-3.5 h-3.5 text-amber" /> {m}</li>)}
+            </ul>
           </div>
           <div className="scrollcue absolute right-gutter bottom-8 hidden lg:flex items-center gap-3 font-mono text-[.68rem] tracking-[.18em] uppercase text-bone/70 [writing-mode:vertical-rl]" aria-hidden="true"><i />{c.ui.scroll}</div>
         </section>
@@ -78,13 +78,17 @@ export default function HomePage({ locale }: { locale: Locale }) {
           <div className="absolute inset-0 -z-[1] bg-[linear-gradient(180deg,rgba(10,17,32,.55),rgba(10,17,32,.35))]" />
           <div className="shell relative">
             <Stagger className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-hairline-d border border-hairline-d rounded-card overflow-hidden">
-              {h.proof.map((k) => (
-                <Item key={k.label} className="bg-void/70 p-6 md:p-8">
+              {h.proof.map((k, i) => {
+                const inner = <>
                   <strong className="block d text-step-4 leading-[.9] text-bone">{k.value !== undefined ? <Counter value={k.value} decimals={k.decimals} /> : k.display}</strong>
                   <span className="block mt-3 font-display uppercase text-step-1 leading-none text-amber-bright">{k.label}</span>
                   <span className="block mt-2 slate text-bone/70">{k.note}</span>
-                </Item>
-              ))}
+                </>;
+                /* The rating tile links out to where the reviews actually live; an isolated claim is worth less than a verifiable one. */
+                return i === 0
+                  ? <Item key={k.label}><a className="block h-full bg-void/70 p-6 md:p-8 no-underline hover:bg-void/90 transition-colors" href={BRAND.angiUrl} target="_blank" rel="noopener">{inner}</a></Item>
+                  : <Item key={k.label} className="bg-void/70 p-6 md:p-8">{inner}</Item>;
+              })}
             </Stagger>
           </div>
         </section>

@@ -33,13 +33,15 @@ export function Item({ children, className, ...rest }: Div) {
 /** Word-mask reveal for headlines. Pure CSS keyframes (see globals.css) so the
     headline is visible and animating before any JavaScript has hydrated. */
 export function SplitWords({ text, className, delay = 0, as: Tag = "span" }: { text: string; className?: string; delay?: number; as?: "span" | "h1" | "h2" }) {
+  /* Each word is a masked slot; the words themselves stay real text, so no
+     ARIA is needed for screen readers to read the line normally. */
   const words = text.split(/\s+/);
   return (
-    <Tag className={className} aria-label={text}>
+    <Tag className={className}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block align-top overflow-hidden pb-[.16em] -mb-[.16em]" aria-hidden="true">
+        <span key={i} className="inline-block align-top overflow-hidden pb-[.16em] -mb-[.16em]">
           <span className="inline-block word-in" style={{ animationDelay: `${delay + i * 0.045}s` }}>{w}</span>
-          {i < words.length - 1 ? "\u00A0" : ""}
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </Tag>

@@ -33,6 +33,7 @@ export const BRAND = {
   license: "#00000", // TODO Alabama HBLB license number. Hidden from the page and schema while it is a placeholder.
   googleReviewUrl: "https://g.page/r/REPLACE_WITH_GOOGLE_REVIEW_LINK/review", // TODO
   angiUrl: "https://www.angi.com/", // TODO direct link to the Angi profile
+  hblbSearchUrl: "https://alhobprod.glsuite.us/GLSuiteWeb/Clients/ALHOB/Public/LicenseeSearch.aspx",
   homeAdvisorUrl: "https://www.homeadvisor.com/", // TODO direct link to the HomeAdvisor profile
   /* WhatsApp Business number, digits only with country code. Spanish-speaking
      families overwhelmingly prefer WhatsApp to a phone call or a form. */
@@ -101,14 +102,14 @@ export interface SiteContent {
   about: {
     eyebrow: string; h1: string; lede: string; storyEyebrow: string; storyH: string; storyP: string[]; storyBadge: string;
     valuesEyebrow: string; valuesH: string; values: { h: string; p: string }[];
-    licEyebrow: string; licH: string; licP: string; licChecks: string[];
+    licEyebrow: string; licH: string; licP: string; licChecks: string[]; licVerify: string;
     areaEyebrow: string; areaH: string; areaP: string; stats: { n: string; l: string }[]; ctaH: string; ctaP: string;
   };
   work: { eyebrow: string; h1: string; lede: string; filterLbl: string; filters: { v: string; l: string }[]; cells: GalleryCell[]; notice: string; ctaH: string; ctaP: string };
   reviews: { eyebrow: string; h1: string; lede: string; intro: string; items: Review[]; proofH: string; proofP: string; readAngi: string; readHA: string; askEyebrow: string; askH: string; askP: string; google: string; refEyebrow: string; refH: string; refP: string; refLink: string };
   contact: {
     eyebrow: string; h1: string; lede: string; formEyebrow: string; formH: string; formP: string;
-    f: { name: string; phone: string; email: string; city: string; cityPh: string; service: string; timeline: string; budget: string; contactPref: string; smsConsent: string; select: string; message: string; messagePh: string; send: string; sending: string; note: string; ok: string; err: string; honeypot: string; privacy: string };
+    f: { name: string; phone: string; email: string; city: string; cityPh: string; service: string; timeline: string; budget: string; contactPref: string; smsConsent: string; select: string; message: string; messagePh: string; send: string; sending: string; note: string; ok: string; err: string; honeypot: string; privacy: string; next: string; back: string; stepOf: string; steps: [string, string, string] };
     serviceOptions: { v: string; l: string }[]; timelineOptions: { v: string; l: string }[]; budgetOptions: { v: string; l: string }[]; contactOptions: { v: string; l: string }[];
     waH: string; waP: string;
     callH: string; callP: string; emailH: string; emailP: string; hoursH: string; hoursRows: [string, string][]; basedH: string; basedP: string;
@@ -158,7 +159,7 @@ const en: SiteContent = {
     eyebrow: "Painting & remodeling contractor in Auburn & Opelika, AL",
     h1: "Built with precision.", h1Accent: "Finished like art.",
     lede: "Family-owned painting and remodeling for Auburn and Opelika homes. Paint, cabinets, floors, kitchens, baths and additions, quoted in writing and done by the owner's own crew.",
-    primary: "Build Your Vision", secondary: "Price My Project",
+    primary: "Get my free estimate", secondary: "Price my project",
     proof: [
       { value: 5, decimals: 1, label: "Star rating", note: "Every review so far" },
       { display: "$0", label: "Written estimates", note: "No fee, no obligation" },
@@ -242,6 +243,7 @@ const en: SiteContent = {
     licEyebrow: "Licensed & insured", licH: "Protected, on paper",
     licP: "We carry general liability insurance and are licensed for residential work in the State of Alabama. Copies of our license and certificate of insurance are available on request, and we're glad to provide them before you sign anything.",
     licChecks: ["Licensed for residential work in Alabama", "General liability insurance, certificate available on request", "Permits pulled in our name for permitted work", "Written estimates and contracts on every project"],
+    licVerify: "Check any Alabama contractor's license on the state's HBLB licensee search",
     areaEyebrow: "Service area", areaH: "Auburn, Opelika & Lee County",
     areaP: "We're headquartered in Auburn and work throughout Lee County. If you're within about 30 minutes of downtown Auburn, we'll come take a look.",
     stats: [{ n: "5.0", l: "Rating" }, { n: String(BRAND.founded), l: "Founded" }, { n: "1", l: "Point of contact" }, { n: "$0", l: "Estimates" }],
@@ -290,9 +292,9 @@ const en: SiteContent = {
     lede: "Tell us about the project. We'll follow up within one business day to set a time to come out.",
     formEyebrow: "Request an estimate", formH: "Tell us what you're thinking", formP: "Every field marked required helps us give you a faster, more accurate answer.",
     f: { name: "Name", phone: "Phone", email: "Email", city: "Property city", cityPh: "Auburn, Opelika…", service: "Service", timeline: "Timeline", budget: "Budget range", contactPref: "Best way to reach you", smsConsent: "OK to text me about this request. Msg & data rates may apply. Reply STOP to opt out.", select: "Select one", message: "Tell us about the project", messagePh: "What room, what you'd like to change, anything we should know about the house.",
-      send: "Send my request", sending: "Sending…", note: "We reply within one business day. Your info is never shared or sold.",
+      send: "Get my free estimate", sending: "Sending…", next: "Next", back: "Back", stepOf: "Step {n} of 3", steps: ["Your project", "The details", "How to reach you"], note: "We reply within one business day. Your info is never shared or sold.",
       ok: "Thanks, we got it. Expect a call or email within one business day.", err: "Something went wrong sending the form. Please call or text us directly and we will take care of you.", honeypot: "Leave this empty", privacy: "Privacy policy" },
-    serviceOptions: [{ v: "kitchensBaths", l: "Kitchen or bath" }, { v: "remodeling", l: "Home remodeling" }, { v: "additions", l: "Home addition" }, { v: "painting", l: "Interior / exterior painting" }, { v: "finishing", l: "Cabinet painting & trim" }, { v: "repairs", l: "Flooring / repairs" }, { v: "rental", l: "Rental turnover / make-ready" }, { v: "other", l: "Something else" }],
+    serviceOptions: [{ v: "painting", l: "Interior / exterior painting" }, { v: "finishing", l: "Cabinet painting & trim" }, { v: "repairs", l: "Flooring / repairs" }, { v: "kitchensBaths", l: "Kitchen or bath" }, { v: "remodeling", l: "Home remodeling" }, { v: "additions", l: "Home addition" }, { v: "rental", l: "Rental turnover / make-ready" }, { v: "other", l: "Something else" }],
     timelineOptions: [{ v: "asap", l: "As soon as possible" }, { v: "1-3m", l: "Within 1–3 months" }, { v: "3-6m", l: "3–6 months" }, { v: "planning", l: "Just planning" }],
     budgetOptions: [{ v: "lt5", l: "Under $5,000" }, { v: "5-15", l: "$5,000–$15,000" }, { v: "15-40", l: "$15,000–$40,000" }, { v: "40-100", l: "$40,000–$100,000" }, { v: "100+", l: "$100,000+" }, { v: "unsure", l: "Not sure yet" }],
     contactOptions: [{ v: "call", l: "Call" }, { v: "text", l: "Text" }, { v: "whatsapp", l: "WhatsApp" }, { v: "email", l: "Email" }],
@@ -370,7 +372,7 @@ const es: SiteContent = {
     eyebrow: "Pintura y remodelación de casas en Auburn y Opelika, AL",
     h1: "Construido con precisión.", h1Accent: "Terminado con arte.",
     lede: "Empresa familiar de pintura y remodelación para casas de Auburn y Opelika. Pintura, gabinetes, pisos, cocinas, baños y ampliaciones, con presupuesto por escrito y hechos por la propia cuadrilla del dueño. Y lo atendemos en español.",
-    primary: "Construyamos su visión", secondary: "Calcule su proyecto",
+    primary: "Pida su presupuesto gratis", secondary: "Calcule su proyecto",
     proof: [
       { value: 5, decimals: 1, label: "Calificación", note: "En todas las reseñas hasta hoy" },
       { display: "$0", label: "Presupuesto por escrito", note: "Sin costo y sin compromiso" },
@@ -454,6 +456,7 @@ const es: SiteContent = {
     licEyebrow: "Licencia y seguro", licH: "Todo en regla, por escrito",
     licP: "Contamos con seguro de responsabilidad civil y con licencia para trabajo residencial en el estado de Alabama. Si quiere ver la licencia y el certificado de seguro antes de firmar cualquier cosa, con gusto se los entregamos. Es lo correcto.",
     licChecks: ["Licencia para trabajo residencial en Alabama", "Seguro de responsabilidad civil, certificado disponible a solicitud", "Permisos tramitados a nuestro nombre", "Presupuesto y contrato por escrito en cada proyecto"],
+    licVerify: "Verifique la licencia de cualquier contratista de Alabama en el buscador oficial de la HBLB",
     areaEyebrow: "Zona de servicio", areaH: "Auburn, Opelika y el condado de Lee",
     areaP: "Nuestra base está en Auburn y trabajamos en todo el condado de Lee. Si está a unos 30 minutos del centro de Auburn, pasamos a ver su proyecto.",
     stats: [{ n: "5.0", l: "Calificación" }, { n: String(BRAND.founded), l: "Fundada" }, { n: "1", l: "Solo responsable" }, { n: "$0", l: "Presupuestos" }],
@@ -502,9 +505,9 @@ const es: SiteContent = {
     lede: "Cuéntenos de su proyecto. En un día hábil le llamamos para ponernos de acuerdo y pasar a su casa. Lo atendemos en español.",
     formEyebrow: "Solicite su presupuesto", formH: "Cuéntenos qué tiene en mente", formP: "Con estos datos le damos una respuesta más rápida y más precisa.",
     f: { name: "Nombre", phone: "Teléfono", email: "Correo electrónico", city: "Ciudad de la propiedad", cityPh: "Auburn, Opelika…", service: "Servicio", timeline: "¿Para cuándo?", budget: "Presupuesto aproximado", contactPref: "¿Cómo prefiere que le contactemos?", smsConsent: "Acepto recibir mensajes de texto sobre esta solicitud. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.", select: "Elija una opción", message: "Cuéntenos del proyecto", messagePh: "Qué espacio, qué le gustaría cambiar y cualquier detalle de la casa que debamos saber.",
-      send: "Enviar solicitud", sending: "Enviando…", note: "Le respondemos en un día hábil. Sus datos no se comparten ni se venden.",
+      send: "Pedir mi presupuesto gratis", sending: "Enviando…", next: "Siguiente", back: "Atrás", stepOf: "Paso {n} de 3", steps: ["Su proyecto", "Los detalles", "Cómo contactarlo"], note: "Le respondemos en un día hábil. Sus datos no se comparten ni se venden.",
       ok: "Listo, recibimos su solicitud. Espere nuestra llamada o correo en un día hábil.", err: "Hubo un problema al enviar el formulario. Llámenos o mándenos un mensaje y con gusto lo atendemos.", honeypot: "Deje este campo vacío", privacy: "Política de privacidad" },
-    serviceOptions: [{ v: "kitchensBaths", l: "Cocina o baño" }, { v: "remodeling", l: "Remodelación de casa" }, { v: "additions", l: "Ampliación" }, { v: "painting", l: "Pintura interior / exterior" }, { v: "finishing", l: "Pintura de gabinetes y molduras" }, { v: "repairs", l: "Pisos / reparaciones" }, { v: "rental", l: "Casa de renta / cambio de inquilino" }, { v: "other", l: "Otra cosa" }],
+    serviceOptions: [{ v: "painting", l: "Pintura interior / exterior" }, { v: "finishing", l: "Pintura de gabinetes y molduras" }, { v: "repairs", l: "Pisos / reparaciones" }, { v: "kitchensBaths", l: "Cocina o baño" }, { v: "remodeling", l: "Remodelación de casa" }, { v: "additions", l: "Ampliación" }, { v: "rental", l: "Casa de renta / cambio de inquilino" }, { v: "other", l: "Otra cosa" }],
     timelineOptions: [{ v: "asap", l: "Lo antes posible" }, { v: "1-3m", l: "En 1 a 3 meses" }, { v: "3-6m", l: "En 3 a 6 meses" }, { v: "planning", l: "Apenas estoy planeando" }],
     budgetOptions: [{ v: "lt5", l: "Menos de $5,000" }, { v: "5-15", l: "$5,000–$15,000" }, { v: "15-40", l: "$15,000–$40,000" }, { v: "40-100", l: "$40,000–$100,000" }, { v: "100+", l: "Más de $100,000" }, { v: "unsure", l: "Todavía no sé" }],
     contactOptions: [{ v: "whatsapp", l: "WhatsApp" }, { v: "call", l: "Llamada" }, { v: "text", l: "Mensaje de texto" }, { v: "email", l: "Correo" }],

@@ -2,9 +2,9 @@ import PageHero from "@/components/PageHero";
 import Photo from "@/components/Photo";
 import CtaBand from "@/components/CtaBand";
 import SectionHead from "@/components/SectionHead";
-import { Check } from "@/components/Icons";
+import { Arrow, Check } from "@/components/Icons";
 import { Reveal, Stagger, Item } from "@/components/motion";
-import { CONTENT } from "@/lib/content";
+import { BRAND, CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
 import { JsonLd, webPage } from "@/lib/schema";
 import { photo } from "@/lib/content";
@@ -43,6 +43,7 @@ export default function AboutPage({ locale }: { locale: Locale }) {
             <h2 className="d h-md text-navy">{a.licH}</h2>
             <p className="mt-4 max-w-[58ch] text-muted">{a.licP}</p>
             <ul className="grid gap-3 my-6">{a.licChecks.map((x) => <li key={x} className="flex gap-3 items-start"><Check className="w-5 h-5 shrink-0 mt-[.2em] text-amber-deep" /><span>{x}</span></li>)}</ul>
+            <a className="text-link text-navy text-[.9rem]" href={BRAND.hblbSearchUrl} target="_blank" rel="noopener">{a.licVerify} <Arrow /></a>
           </Reveal>
           <Reveal delay={0.1}>
             <span className="eyebrow text-amber-deep mb-4">{a.areaEyebrow}</span>

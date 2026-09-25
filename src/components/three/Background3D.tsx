@@ -16,9 +16,26 @@ export default function Background3D({ zoneId = "canvas-zone" }: { zoneId?: stri
   const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-    setMobile(window.matchMedia("(max-width: 48rem)").matches || navigator.hardwareConcurrency <= 4);
-    setReady(true);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const small = window.matchMedia("(max-width: 48rem)").matches;
+    const lowEnd = (navigator.hardwareConcurrency || 8) <= 4 || ((navigator as { deviceMemory?: number }).deviceMemory ?? 8) <= 4
+      || !!(navigator as { connection?: { saveData?: boolean } }).connection?.saveData;
+    setReduced(reduce);
+    setMobile(small);
+    /* The WebGL scene costs ~1.9 s of main-thread time on a throttled phone
+       (shader compile, PMREM environment, 120×74 mesh) and delays hydration,
+       which delays the hero text paint. So: phones, low-end devices and
+       reduced-motion users get the slideshow + CSS blueprint grid only, and
+       desktops load the scene after the page is interactive and idle. */
+    if (reduce || small || lowEnd) return;
+    let cancelled = false;
+    const start = () => { if (!cancelled) setReady(true); };
+    const idle = (window as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    const t = setTimeout(() => (idle ? idle(start, { timeout: 2000 }) : start()), 900);
+    return () => { cancelled = true; clearTimeout(t); };
+  }, []);
+
+  useEffect(() => {
     const zone = document.getElementById(zoneId);
     if (!zone || !("IntersectionObserver" in window)) return;
     const io = new IntersectionObserver(([en]) => setActive(en.isIntersecting), { rootMargin: "40% 0px 40% 0px" });
@@ -33,7 +50,7 @@ export default function Background3D({ zoneId = "canvas-zone" }: { zoneId?: stri
       style={{ opacity: active ? 1 : 0 }}
     >
       {/* 1. remodeled-home slideshow  2. navy tint so the grid still reads  3. WebGL  4. text scrims */}
-      <HomeSlideshow active={active} reduced={reduced} />
+      <HomeSlideshow active={active} reduced={reduced || mobile} />
       <div className="absolute inset-0 bg-void/[.42]" />
       {ready && <BlueprintLiquid active={active} reduced={reduced} mobile={mobile} />}
       {/* legibility scrim: keeps the copy readable no matter what color the paint is in */}

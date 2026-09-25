@@ -195,6 +195,12 @@
   .kenburns--alt { transform-origin: 70% 60%; }
   @keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.12); } }
 
+  /* hero entrance without JavaScript: paints at first frame, then rises in */
+  /* transform only: an element that starts at opacity 0 is excluded from
+     Largest Contentful Paint, which hid the hero copy from the metric. */
+  .rise { animation: rise 0.7s var(--ease-out-expo) both; animation-delay: var(--d, 0s); }
+  @keyframes rise { from { transform: translateY(28px); } to { transform: none; } }
+
   /* scroll cue */
   .scrollcue i { display: block; width: 1px; height: 56px; background: var(--color-hairline-d); position: relative; overflow: hidden; }
   .scrollcue i::after { content: ""; position: absolute; inset: 0; background: var(--color-amber); transform: translateY(-100%); animation: cue-run 2.4s var(--ease-soft) infinite; }

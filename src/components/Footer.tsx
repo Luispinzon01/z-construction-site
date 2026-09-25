@@ -12,7 +12,7 @@ import { areaHref, serviceHref } from "@/lib/routes";
 export default function Footer({ locale }: { locale: Locale }) {
   const c = CONTENT[locale];
   const other: Locale = locale === "en" ? "es" : "en";
-  const H = ({ children }: { children: React.ReactNode }) => <h4 className="font-mono font-normal text-[.74rem] tracking-[.24em] uppercase text-bone/60 mb-4">{children}</h4>;
+  const H = ({ children }: { children: React.ReactNode }) => <p className="font-mono font-normal text-[.74rem] tracking-[.24em] uppercase text-bone/60 mb-4">{children}</p>;
   const L = ({ to, children }: { to: string; children: React.ReactNode }) => <li><Link className="text-bone hover:text-amber no-underline" href={to}>{children}</Link></li>;
   return (
     <>
@@ -24,7 +24,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             <p className="text-ink"><strong className="d text-step-1 text-navy mr-2">Hablamos español.</strong><span className="text-muted">Spanish-speaking contractor in Auburn · Presupuesto, contrato y obra en español.</span></p>
             <div className="flex flex-wrap gap-2">
               <a className="btn btn--line btn--sm" href={href("es", "home")} hrefLang="es">Ver en español</a>
-              <a className="btn btn--sm bg-[#1f8f4e] text-white" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp /> WhatsApp</a>
+              <a className="btn btn--sm bg-[#075e54] text-white" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp /> WhatsApp</a>
             </div>
           </div>
         </aside>
@@ -71,7 +71,7 @@ export default function Footer({ locale }: { locale: Locale }) {
       {/* sticky phone-width action bar: call · WhatsApp · quote */}
       <div className="fixed left-3 right-3 bottom-3 z-[900] grid grid-cols-[1fr_auto_1.45fr] gap-1.5 p-1.5 rounded-full bg-navy-2/95 shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)] lg:hidden" aria-label={c.ui.quickActions} data-track="mobile-bar">
         <a href={`tel:${BRAND.tel}`} className="h-[46px] rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.06em] text-bone border border-hairline-d-strong"><Phone className="w-4 h-4" /> {c.ui.call}</a>
-        <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#1f8f4e]"><WhatsApp className="w-5 h-5" /></a>
+        <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /></a>
         <Link href={href(locale, "contact")} className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-1.5 no-underline font-display uppercase font-bold tracking-[.04em] whitespace-nowrap text-[.95rem] bg-amber text-navy-2">{c.ui.quoteShort} <Arrow className="w-4 h-4 max-[380px]:hidden" /></Link>
       </div>
     </>
