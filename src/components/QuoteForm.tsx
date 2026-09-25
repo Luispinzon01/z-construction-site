@@ -35,12 +35,39 @@ export default function QuoteForm({ locale, service, compact = false }: { locale
     setStatus("sending");
     const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
     try {
-      const r = await fetch("/api/quote", {
+      /* Two delivery paths run side by side:
+         1. /api/quote: the full pipeline (Resend email, Twilio text, CRM webhook),
+            active for whichever channels have env vars set.
+         2. Web3Forms (free, 250/month), when NEXT_PUBLIC_WEB3FORMS_KEY is set.
+            It posts from the browser because the free plan rejects server-side
+            calls, and it means a lead still reaches the owner's inbox before any
+            paid channel is configured. The key is public by design.
+         The lead counts as sent if either path delivers it. */
+      const w3fKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+      const label = (opts: { v: string; l: string }[], v?: string) => opts.find((o) => o.v === v)?.l || v || "-";
+      const w3f = w3fKey && !data.company
+        ? fetch("https://api.web3forms.com/submit", {
+            method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              access_key: w3fKey, botcheck: "", from_name: "Z Construction website", replyto: data.email,
+              subject: `New estimate request: ${data.name} · ${data.city || "Lee County"} · ${label(c.serviceOptions, data.service)}`,
+              Name: data.name, Phone: data.phone, Email: data.email, City: data.city,
+              Service: label(c.serviceOptions, data.service), Timeline: label(c.timelineOptions, data.timeline), Budget: label(c.budgetOptions, data.budget),
+              "Contact by": label(c.contactOptions, data.contactPref), "Texts OK": data.smsConsent ? "Yes" : "No",
+              Message: data.message, Language: locale === "es" ? "Spanish" : "English", Page: location.href,
+            }),
+          }).then((r) => r.json()).then((j: { success?: boolean }) => !!j.success).catch(() => false)
+        : Promise.resolve(false);
+      const api = fetch("/api/quote", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, language: locale, page: location.href, attribution: getAttribution() }),
-      });
-      const j = (await r.json().catch(() => ({}))) as { ok?: boolean; leadId?: string };
-      if (!r.ok || !j.ok) throw new Error(String(r.status));
+      }).then(async (r) => ({ r, j: (await r.json().catch(() => ({}))) as { ok?: boolean; leadId?: string; delivered?: boolean } }))
+        .catch(() => ({ r: null as Response | null, j: {} as { ok?: boolean; leadId?: string; delivered?: boolean } }));
+      const [w3fOk, { r, j }] = await Promise.all([w3f, api]);
+      /* In production an "ok but delivered: false" answer means no channel is configured.
+         Treat that as a failure so the visitor sees the call-us message instead of a false success. */
+      const apiOk = !!r?.ok && !!j.ok && (j.delivered !== false || process.env.NODE_ENV !== "production");
+      if (!w3fOk && !apiOk) throw new Error(String(r?.status ?? "network"));
       trackLead({ leadId: j.leadId || crypto.randomUUID(), service: data.service || "other", email: data.email, phone: data.phone, language: locale });
       router.push(href(locale, "thanks"));
     } catch { setStatus("error"); }
