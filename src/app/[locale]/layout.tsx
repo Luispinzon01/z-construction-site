@@ -75,7 +75,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         <Footer locale={locale} />
         <LangSuggest locale={locale} />
         <Tracking />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(locale)) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd(locale), {
+          "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: BRAND.name, inLanguage: ["en", "es"], publisher: { "@id": `${SITE_URL}/#business` },
+        }]).replace(/</g, "\\u003c") }} />
       </body>
     </html>
   );

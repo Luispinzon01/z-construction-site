@@ -54,11 +54,13 @@ export default function HomePage({ locale }: { locale: Locale }) {
           <div className="absolute inset-0 -z-[1] bg-[linear-gradient(90deg,rgba(10,17,32,.8)_0%,rgba(10,17,32,.55)_45%,rgba(10,17,32,.1)_100%)]" />
           <BlueprintHud />
           <div className="shell relative grid gap-4 pt-[calc(var(--barh)+5rem)] pb-24 sm:pb-16 md:pb-20">
-            <Reveal><span className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright">{h.eyebrow}</span></Reveal>
-            <h1 className="d d-xl max-w-[13ch]">
+            {/* The H1 is the plain-language line (service + place), which is what
+                Google reads; the big brand tagline below it is a styled <p>. */}
+            <Reveal><h1 className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright font-normal">{h.eyebrow}</h1></Reveal>
+            <p className="d d-xl max-w-[13ch]">
               <SplitWords text={h.h1} className="block" delay={0.1} />
               <SplitWords text={h.h1Accent} className="block text-amber" delay={0.45} />
-            </h1>
+            </p>
             <Reveal delay={0.7}><p className="lede text-bone/95">{h.lede}</p></Reveal>
             <Reveal delay={0.85} className="flex flex-wrap gap-3 mt-2">
               <Magnetic><Link className="btn btn--solid" href={href(locale, "contact")}>{h.primary} <Arrow /></Link></Magnetic>

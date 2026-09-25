@@ -34,7 +34,7 @@ export const GUIDES: Guide[] = [
     t: {
       en: {
         title: "Kitchen Remodel Cost in Auburn, AL (2026 Price Guide)", eyebrow: "Cost guide · 2026",
-        description: "What a kitchen remodel costs in Auburn and Opelika, AL in 2026: refresh vs. full remodel vs. new layout, with real local ranges, what drives price, and what pays back at resale.",
+        description: "What a kitchen remodel costs in Auburn and Opelika, AL in 2026: refresh, full remodel or new layout, with local price ranges and what pays back at resale.",
         h1: "How much does a kitchen remodel cost in Auburn, AL?", lede: "Real 2026 ranges for Auburn, Opelika and Lee County, from a cabinet-and-counter refresh to a gutted kitchen with a new layout.",
         answer: `In Auburn and Opelika in 2026, a kitchen refresh (painted cabinets, new counters, backsplash, lighting) typically costs ${mid("kitchen", 0)}. A full remodel that keeps the layout runs ${mid("kitchen", 1)}, and one that moves walls or plumbing runs ${mid("kitchen", 2)}, labor and materials included, at mid-range finishes.`,
         sections: [
@@ -68,8 +68,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "¿Cuánto cuesta remodelar una cocina en Auburn, AL? (Precios 2026)", eyebrow: "Guía de costos · 2026",
-        description: "Cuánto cuesta remodelar una cocina en Auburn y Opelika, Alabama en 2026: renovación ligera, remodelación completa o nueva distribución, con rangos reales de la zona y qué hace variar el precio.",
+        title: "¿Cuánto cuesta remodelar una cocina en Auburn? (2026)", eyebrow: "Guía de costos · 2026",
+        description: "Cuánto cuesta remodelar una cocina en Auburn y Opelika, AL en 2026: renovación, remodelación completa o nueva distribución, con precios reales de la zona.",
         h1: "¿Cuánto cuesta remodelar una cocina en Auburn, AL?", lede: "Rangos reales de 2026 para Auburn, Opelika y el condado de Lee, desde cambiar cubiertas y pintar gabinetes hasta una cocina nueva con otra distribución.",
         answer: `En Auburn y Opelika, en 2026, renovar una cocina (pintar gabinetes, cubiertas nuevas, salpicadero e iluminación) cuesta normalmente ${mid("kitchen", 0)}. Una remodelación completa sin cambiar la distribución cuesta ${mid("kitchen", 1)}, y si se mueven paredes o plomería, ${mid("kitchen", 2)}, con mano de obra y materiales, en acabados intermedios.`,
         sections: [
@@ -110,7 +110,7 @@ export const GUIDES: Guide[] = [
     t: {
       en: {
         title: "Bathroom Remodel Cost in Auburn & Opelika, AL (2026)", eyebrow: "Cost guide · 2026",
-        description: "2026 bathroom remodel costs in Auburn and Opelika, AL: refreshes, full hall baths, tub-to-shower conversions and primary baths, with local ranges and what drives price.",
+        description: "2026 bathroom remodel costs in Auburn and Opelika, AL: refreshes, full hall baths, tub-to-shower conversions and primary baths, with local price ranges.",
         h1: "How much does a bathroom remodel cost in Auburn, AL?", lede: "From a vanity-and-fixtures refresh to a curbless primary shower, here's what bathrooms cost in Lee County in 2026.",
         answer: `In Auburn and Opelika in 2026, a bathroom refresh typically costs ${mid("bath", 0)}. A full hall bath taken down to the studs with a tiled tub or shower runs ${mid("bath", 1)}, and a primary bath with a layout change or curbless shower runs ${mid("bath", 2)}, at mid-range finishes, installed.`,
         sections: [
@@ -137,8 +137,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "¿Cuánto cuesta remodelar un baño en Alabama? Precios 2026 en Auburn y Opelika", eyebrow: "Guía de costos · 2026",
-        description: "Cuánto cuesta remodelar un baño en Estados Unidos, con precios reales de 2026 en Auburn y Opelika, Alabama: renovación, baño completo, cambio de tina por regadera y baño principal.",
+        title: "¿Cuánto cuesta remodelar un baño en Alabama? (2026)", eyebrow: "Guía de costos · 2026",
+        description: "Precios reales 2026 para remodelar un baño en Auburn y Opelika, AL: renovación, baño completo, cambio de tina por regadera y baño principal, y qué influye.",
         h1: "¿Cuánto cuesta remodelar un baño en Alabama?", lede: "Desde cambiar el tocador y los accesorios hasta una regadera grande sin escalón: esto cuestan los baños en el condado de Lee en 2026.",
         answer: `En Auburn y Opelika, en 2026, renovar un baño cuesta normalmente ${mid("bath", 0)}. Un baño completo hasta la estructura, con tina o regadera de azulejo, cuesta ${mid("bath", 1)}, y un baño principal con cambio de distribución o regadera a ras de piso, ${mid("bath", 2)}, con acabados intermedios e instalado.`,
         sections: [
@@ -171,7 +171,7 @@ export const GUIDES: Guide[] = [
     id: "permits", slug: { en: "remodeling-permits-auburn-opelika-al", es: "permisos-remodelacion-auburn-opelika" }, photo: "framing1", published: D, updated: D, service: "remodeling",
     t: {
       en: {
-        title: "Do I Need a Permit to Remodel in Auburn or Opelika, AL? (2026)", eyebrow: "Permit guide · 2026",
+        title: "Remodeling Permits in Auburn & Opelika, AL (2026 Guide)", eyebrow: "Permit guide · 2026",
         description: "Which home projects need a building permit in Auburn, Opelika and Lee County, AL, which don't, how each city's process works, and historic-district rules.",
         h1: "Do I need a permit to remodel in Auburn or Opelika?", lede: "What needs a permit, what doesn't, and how the process works with the City of Auburn, the City of Opelika and Lee County.",
         answer: "In Auburn and Opelika you need a building permit for additions, structural changes, decks, and new or relocated plumbing, electrical or HVAC work. Cosmetic work such as painting, flooring, trim and cabinet painting generally doesn't need one. Outside city limits, Lee County Building Inspection issues permits. A licensed contractor normally pulls the permit in their own name.",
@@ -199,8 +199,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "¿Necesito permiso para remodelar en Auburn u Opelika, AL? (Guía 2026)", eyebrow: "Guía de permisos · 2026",
-        description: "Qué obras necesitan permiso de construcción en Auburn, Opelika y el condado de Lee, Alabama, cuáles no, cómo funciona el trámite en cada ciudad y las reglas de las zonas históricas. En español.",
+        title: "¿Necesito permiso para remodelar en Auburn u Opelika?", eyebrow: "Guía de permisos · 2026",
+        description: "Qué obras necesitan permiso en Auburn, Opelika y el condado de Lee, cuáles no, cómo es el trámite en cada ciudad y las reglas de zonas históricas. En español.",
         h1: "¿Necesito permiso para remodelar en Auburn u Opelika?", lede: "Qué necesita permiso, qué no y cómo es el trámite con la ciudad de Auburn, la ciudad de Opelika y el condado de Lee, explicado en español.",
         answer: "En Auburn y Opelika se necesita permiso de construcción para ampliaciones, cambios de estructura, terrazas y trabajos nuevos o reubicados de plomería, electricidad o aire acondicionado. Los trabajos estéticos, como pintura, pisos, molduras y pintar gabinetes, normalmente no lo necesitan. Fuera de la ciudad, los permisos los da Building Inspection del condado de Lee. Lo normal es que el contratista con licencia saque el permiso a su nombre.",
         sections: [
@@ -233,8 +233,8 @@ export const GUIDES: Guide[] = [
     id: "hire-contractor", slug: { en: "check-contractor-license-alabama", es: "como-verificar-contratista-alabama" }, photo: "worker1", published: D, updated: D, service: "remodeling",
     t: {
       en: {
-        title: "How to Check a Contractor's License in Alabama (the $10,000 Rule)", eyebrow: "Hiring guide · 2026",
-        description: "Alabama requires a Home Builders Licensure Board license for residential work over $10,000. How to verify a contractor's license and insurance, what belongs in the contract, and red flags to watch for.",
+        title: "How to Check a Contractor License in Alabama ($10K Rule)", eyebrow: "Hiring guide · 2026",
+        description: "Alabama requires a Home Builders license for residential jobs over $10,000. How to verify a contractor's license and insurance, and red flags before you sign.",
         h1: "How to check a contractor's license in Alabama", lede: "The $10,000 rule, how to look up a license, what to ask for before you sign, and the red flags that should end the conversation.",
         answer: "In Alabama, anyone doing residential construction, remodeling or repair where the cost, labor and materials combined, exceeds $10,000 must hold a license from the Alabama Home Builders Licensure Board (HBLB). You can look up a contractor's license on the HBLB website before you sign. Also ask for a certificate of insurance, get a written contract with a clear scope and payment schedule, and never pay most of the price up front.",
         sections: [
@@ -254,8 +254,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "Cómo verificar a un contratista en Alabama antes de contratarlo (la regla de $10,000)", eyebrow: "Guía para contratar · 2026",
-        description: "En Alabama, las obras residenciales de más de $10,000 requieren licencia de la Junta de Constructores (HBLB). Cómo verificar la licencia y el seguro de un contratista, qué debe decir el contrato y señales de alerta. En español.",
+        title: "Cómo verificar a un contratista en Alabama", eyebrow: "Guía para contratar · 2026",
+        description: "En Alabama, las obras de más de $10,000 requieren licencia de la Junta de Constructores (HBLB). Cómo verificar licencia y seguro, y señales de alerta.",
         h1: "Cómo verificar a un contratista en Alabama", lede: "La regla de los $10,000, cómo buscar una licencia, qué pedir antes de firmar y las señales que deben hacerlo pensar dos veces. Para que nadie se aproveche.",
         answer: "En Alabama, cualquier persona que construya, remodele o repare una casa cuando el costo total, mano de obra más materiales, pase de $10,000 debe tener licencia de la Junta de Licencias de Constructores de Vivienda de Alabama (Alabama Home Builders Licensure Board, HBLB). Puede buscar la licencia en la página de la HBLB antes de firmar. También pida el certificado de seguro, un contrato por escrito con el alcance y los pagos claros, y nunca pague la mayor parte por adelantado.",
         sections: [
@@ -285,7 +285,7 @@ export const GUIDES: Guide[] = [
     t: {
       en: {
         title: "Rental Turnover Checklist for Auburn, AL Landlords (2026)", eyebrow: "Landlord guide · 2026",
-        description: "A room-by-room rental turnover checklist for Auburn and Opelika landlords, with 2026 turnover costs, a durable spec sheet, and how to beat the summer lease crunch.",
+        description: "A room-by-room rental turnover checklist for Auburn and Opelika landlords, with 2026 turnover costs, a durable spec sheet and how to beat the summer rush.",
         h1: "The Auburn landlord's rental turnover checklist", lede: "How to plan, sequence and price a turnover between tenants, especially when Auburn's leases all turn over the same summer weeks.",
         answer: `Book turnover work 6–8 weeks before move-out, walk the unit the day the tenant leaves, and work in this order: repairs and drywall, paint, flooring, fixtures, then final clean. In Auburn, a light turnover usually costs ${mid("rental", 0)}, and a medium turn with new LVP and fixtures ${mid("rental", 1)}.`,
         sections: [
@@ -313,8 +313,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "Cómo preparar una casa de renta entre inquilinos en Auburn, AL (lista 2026)", eyebrow: "Guía para dueños · 2026",
-        description: "Lista cuarto por cuarto para preparar una casa de renta en Auburn y Opelika entre inquilinos, con costos 2026, especificaciones que duran y cómo ganarle a la temporada del verano. En español.",
+        title: "Cómo preparar una casa de renta en Auburn, AL (2026)", eyebrow: "Guía para dueños · 2026",
+        description: "Lista cuarto por cuarto para preparar una casa de renta en Auburn y Opelika entre inquilinos, con costos 2026, materiales que duran y cómo ganarle al verano.",
         h1: "Cómo preparar su casa de renta en Auburn", lede: "Cómo planear, ordenar y cotizar el trabajo entre un inquilino y otro, sobre todo cuando todos los contratos de Auburn cambian en las mismas semanas del verano.",
         answer: `Aparte el trabajo de 6 a 8 semanas antes de que salga el inquilino, revise la casa el mismo día que se va y trabaje en este orden: reparaciones y tablaroca, pintura, pisos, accesorios y limpieza final. En Auburn, un cambio ligero cuesta normalmente ${mid("rental", 0)} y uno mediano con piso LVP y accesorios nuevos ${mid("rental", 1)}.`,
         sections: [
@@ -349,8 +349,8 @@ export const GUIDES: Guide[] = [
     id: "cabinets-paint-vs-replace", slug: { en: "paint-or-replace-kitchen-cabinets", es: "pintar-o-cambiar-gabinetes-de-cocina" }, photo: "kitchen2", published: D, updated: D, service: "cabinets", estimator: "cabinets",
     t: {
       en: {
-        title: "Paint or Replace Kitchen Cabinets? Honest 2026 Cost Comparison (Auburn, AL)", eyebrow: "Decision guide · 2026",
-        description: "Should you paint, reface or replace your kitchen cabinets? Costs in Auburn, AL for 2026, how to tell if your cabinets are good candidates for paint, and how a lasting cabinet finish is made.",
+        title: "Paint or Replace Kitchen Cabinets? 2026 Costs in Auburn", eyebrow: "Decision guide · 2026",
+        description: "Paint, reface or replace your kitchen cabinets? 2026 costs in Auburn, AL, how to tell if yours can be painted, and how a cabinet finish that lasts is made.",
         h1: "Paint or replace your kitchen cabinets?", lede: "When painting is the smartest money you'll spend on a kitchen, and when it isn't.",
         answer: `If your cabinet boxes are solid wood or plywood, in good shape, and you like the layout, professional cabinet painting (${mid("cabinets", 0)} for a small kitchen, ${mid("cabinets", 1)} for an average one in Auburn) gives you a new-looking kitchen for roughly a fifth of replacement cost. Replace them if boxes are water-damaged, particleboard is swelling, doors are peeling thermofoil, or you want a different layout.`,
         sections: [
@@ -370,8 +370,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       es: {
-        title: "¿Pintar o cambiar los gabinetes de la cocina? Comparación honesta 2026 (Auburn, AL)", eyebrow: "Guía para decidir · 2026",
-        description: "¿Conviene pintar, renovar o cambiar los gabinetes de su cocina? Costos en Auburn, Alabama para 2026, cómo saber si sus gabinetes sirven para pintarse y cómo se hace un acabado que dura. En español.",
+        title: "¿Pintar o cambiar los gabinetes de cocina? Costos 2026", eyebrow: "Guía para decidir · 2026",
+        description: "¿Pintar, renovar o cambiar sus gabinetes? Costos 2026 en Auburn, AL, cómo saber si los suyos se pueden pintar y cómo se logra un acabado que dura.",
         h1: "¿Pintar o cambiar los gabinetes de la cocina?", lede: "Cuándo pintar es el dinero mejor gastado en una cocina, y cuándo no.",
         answer: `Si sus gabinetes son de madera o triplay, están en buen estado y le gusta cómo está acomodada la cocina, pintarlos profesionalmente (${mid("cabinets", 0)} en una cocina chica y ${mid("cabinets", 1)} en una mediana en Auburn) le da una cocina que parece nueva por más o menos la quinta parte de lo que cuesta cambiarlos. Conviene cambiarlos si están dañados por el agua, si el aglomerado está hinchado, si las puertas son de vinil que se despega o si quiere otra distribución.`,
         sections: [

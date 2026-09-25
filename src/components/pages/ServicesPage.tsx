@@ -9,11 +9,17 @@ import { CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
 import { serviceHref } from "@/lib/routes";
 import { CARD_PAGE, SERVICE_PAGES, SERVICE_UI } from "@/lib/content-services";
+import { JsonLd, serviceList, webPage } from "@/lib/schema";
+import { photo } from "@/lib/content";
 
 export default function ServicesPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale]; const p = c.servicesPage;
   return (
     <>
+      <JsonLd data={[
+        webPage({ kind: "CollectionPage", name: c.meta.services.title, description: c.meta.services.description, path: href(locale, "services"), locale, image: photo("worker4", 1600) }),
+        serviceList(SERVICE_PAGES.map((sp) => ({ name: sp.t[locale].name, path: serviceHref(locale, sp.id) }))),
+      ]} />
       <PageHero photoKey="worker4" alt={c.services[0].alt} eyebrow={p.eyebrow} h1={p.h1} lede={p.lede} />
       <section className="bg-bone py-8 md:py-12" data-tone="light">
         <div className="shell">

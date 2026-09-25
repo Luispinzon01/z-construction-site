@@ -50,8 +50,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Kitchen Remodeling", alt: "Remodeled kitchen with white cabinets and a marble island in Auburn, AL",
-        title: "Kitchen Remodeling in Auburn & Opelika, AL | Free Estimates",
-        description: "Kitchen remodeling contractor in Auburn and Opelika, AL. Cabinets, quartz and granite counters, tile, islands and layout changes. Family-owned, licensed and insured. Free written estimates.",
+        title: "Kitchen Remodeling in Auburn & Opelika, AL | Free Estimate",
+        description: "Kitchen remodeling in Auburn and Opelika, AL: cabinets, quartz and granite counters, tile, islands and new layouts. Family-owned and insured. Free estimate.",
         eyebrow: "Kitchen remodeling · Auburn & Opelika, AL", h1: "Kitchen remodeling in Auburn, AL",
         lede: "From a cabinet-and-counter refresh to a gutted, re-planned kitchen with an island. One crew, one written price, and the owner on site.",
         intro: [
@@ -82,8 +82,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Remodelación de cocinas", alt: "Cocina remodelada con gabinetes blancos e isla de mármol en Auburn, AL",
-        title: "Remodelación de cocinas en Auburn y Opelika, AL | Hablamos español",
-        description: "Contratista de remodelación de cocinas en Auburn y Opelika, Alabama. Gabinetes, cubiertas de cuarzo y granito, azulejo, islas y cambios de distribución. Empresa familiar con licencia y seguro. Presupuesto gratis en español.",
+        title: "Remodelación de cocinas en Auburn y Opelika, AL",
+        description: "Remodelamos cocinas en Auburn y Opelika, AL: gabinetes, cubiertas de cuarzo y granito, azulejo, islas y nueva distribución. Presupuesto gratis en español.",
         eyebrow: "Remodelación de cocinas · Auburn y Opelika, AL", h1: "Remodelación de cocinas en Auburn, AL",
         lede: "Desde cambiar cubiertas y pintar gabinetes hasta una cocina nueva con isla. Una sola cuadrilla, un precio por escrito y el dueño en la obra, atendiéndole en español.",
         intro: [
@@ -121,8 +121,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Bathroom Remodeling", alt: "Remodeled primary bathroom with tiled walk-in shower in Opelika, AL",
-        title: "Bathroom Remodeling in Auburn & Opelika, AL | Walk-in Showers",
-        description: "Bathroom remodeling in Auburn and Opelika, AL: walk-in and curbless showers, tub-to-shower conversions, tile, vanities and full primary bath remodels. Waterproofed right. Free written estimates.",
+        title: "Bathroom Remodeling in Auburn & Opelika, AL | Showers",
+        description: "Bathroom remodeling in Auburn and Opelika, AL: walk-in and curbless showers, tub-to-shower conversions, tile and vanities, waterproofed right. Free estimate.",
         eyebrow: "Bathroom remodeling · Auburn & Opelika, AL", h1: "Bathroom remodeling in Auburn, AL",
         lede: "Walk-in showers, tub-to-shower conversions and full primary baths, waterproofed properly behind the tile where it matters most.",
         intro: [
@@ -152,8 +152,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Remodelación de baños", alt: "Baño principal remodelado con regadera de azulejo en Opelika, AL",
-        title: "Remodelación de baños en Auburn y Opelika, AL | Regaderas y azulejo",
-        description: "Remodelación de baños en Auburn y Opelika, Alabama: regaderas a ras de piso, cambio de tina por regadera, azulejo, tocadores y baños principales completos. Bien impermeabilizados. Presupuesto gratis en español.",
+        title: "Remodelación de baños en Auburn y Opelika, AL",
+        description: "Remodelamos baños en Auburn y Opelika, AL: regaderas a ras de piso, cambio de tina por regadera, azulejo y tocadores bien impermeabilizados. En español.",
         eyebrow: "Remodelación de baños · Auburn y Opelika, AL", h1: "Remodelación de baños en Auburn, AL",
         lede: "Regaderas grandes, cambio de tina por regadera y baños principales completos, con la impermeabilización bien hecha detrás del azulejo, que es donde más importa.",
         intro: [
@@ -190,8 +190,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Home Additions", alt: "Home addition framed with wood studs and roof trusses in Lee County, AL",
-        title: "Home Additions in Auburn & Opelika, AL | Bedrooms, Suites, Garages",
-        description: "Home addition contractor in Auburn, Opelika and Lee County, AL. Bedroom and bathroom additions, in-law suites, bonus rooms, sunrooms and garages that match your house. Permits handled.",
+        title: "Home Additions in Auburn & Opelika, AL | Rooms & Garages",
+        description: "Home additions in Auburn, Opelika and Lee County, AL: bedrooms, baths, in-law suites, bonus rooms, sunrooms and garages that match your house. Permits done.",
         eyebrow: "Home additions · Auburn, Opelika & Lee County", h1: "Home additions that look original",
         lede: "Bedrooms, primary suites, in-law suites, sunrooms and garages that match your roofline, siding and trim, so nobody can tell where the old house ends.",
         intro: [
@@ -221,8 +221,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Ampliaciones de casas", alt: "Ampliación de casa con estructura de madera en el condado de Lee, AL",
-        title: "Ampliaciones de casas en Auburn y Opelika, AL | Cuartos, suites y cocheras",
-        description: "Contratista de ampliaciones en Auburn, Opelika y el condado de Lee, Alabama. Cuartos y baños adicionales, suites para la familia, cuartos extra, solarios y cocheras que combinan con su casa. Permisos incluidos. Hablamos español.",
+        title: "Ampliaciones de casas en Auburn y Opelika, AL",
+        description: "Ampliamos casas en Auburn, Opelika y el condado de Lee: cuartos, baños, suites para la familia, solarios y cocheras que combinan con su casa. Con permisos.",
         eyebrow: "Ampliaciones · Auburn, Opelika y condado de Lee", h1: "Ampliaciones que parecen originales",
         lede: "Dormitorios, suites, cuartos para los papás o los suegros, solarios y cocheras que combinan con su techo, su fachada y sus molduras. Nadie va a notar dónde termina la casa vieja.",
         intro: [
@@ -259,8 +259,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Home Remodeling", alt: "Open-concept living room after a whole-home remodel in Auburn, AL",
-        title: "Home Remodeling Contractor in Auburn, AL | Whole-Home & Room Remodels",
-        description: "Whole-home and room remodeling in Auburn, Opelika and Lee County, AL. Open-concept conversions, bonus rooms, trim and built-ins, updates for older homes. Family-owned general contractor. Free estimates.",
+        title: "Home Remodeling Contractor in Auburn, AL | Whole-Home",
+        description: "Whole-home and room remodeling in Auburn, Opelika and Lee County, AL: open floor plans, bonus rooms, trim, built-ins and older homes updated. Free estimate.",
         eyebrow: "Home remodeling · Auburn, Opelika & Lee County", h1: "Home remodeling in Auburn, AL",
         lede: "Open up the floor plan, update an older house top to bottom, or finally finish the bonus room. Planned around how your family lives.",
         intro: [
@@ -289,8 +289,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Remodelación de casas", alt: "Sala de concepto abierto después de remodelar la casa en Auburn, AL",
-        title: "Remodelación de casas en Auburn, AL | Contratista que habla español",
-        description: "Remodelación de casas completas y de cuartos en Auburn, Opelika y el condado de Lee. Concepto abierto, cuartos extra, molduras, muebles empotrados y casas antiguas puestas al día. Contratista general familiar. Presupuesto gratis en español.",
+        title: "Remodelación de casas en Auburn, AL | En español",
+        description: "Remodelamos casas completas y cuartos en Auburn, Opelika y el condado de Lee: espacios abiertos, cuartos extra, molduras y casas antiguas al día. En español.",
         eyebrow: "Remodelación · Auburn, Opelika y condado de Lee", h1: "Remodelación de casas en Auburn, AL",
         lede: "Abrir la sala y la cocina, poner al día una casa vieja de arriba abajo o por fin terminar el cuarto de arriba. Todo planeado según cómo vive su familia.",
         intro: [
@@ -326,8 +326,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Interior & Exterior Painting", alt: "Painter masking windows before painting a house exterior in Auburn, AL",
-        title: "House Painters in Auburn & Opelika, AL | Interior & Exterior Painting",
-        description: "Interior and exterior house painting in Auburn and Opelika, AL. Pressure washing, rot repair, caulking and premium Sherwin-Williams and Benjamin Moore paint built for Alabama humidity. Free estimates.",
+        title: "House Painters in Auburn & Opelika, AL | Interior, Exterior",
+        description: "Interior and exterior house painting in Auburn and Opelika, AL: pressure washing, rot repair, caulking and premium paint for Alabama humidity. Free estimate.",
         eyebrow: "House painting · Auburn & Opelika, AL", h1: "House painters in Auburn, AL",
         lede: "Interior and exterior painting that starts with real prep: washing, scraping, rot repair and caulk, then premium paint made for Alabama sun and humidity.",
         intro: [
@@ -357,8 +357,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Pintura interior y exterior", alt: "Pintor cubriendo ventanas antes de pintar una casa en Auburn, AL",
-        title: "Pintores en Auburn y Opelika, AL | Pintura de casas interior y exterior",
-        description: "Pintura de casas por dentro y por fuera en Auburn y Opelika, Alabama. Lavado a presión, reparación de madera podrida, sellado y pintura Sherwin-Williams y Benjamin Moore para la humedad de Alabama. Presupuesto gratis en español.",
+        title: "Pintores en Auburn y Opelika, AL | Pintura de casas",
+        description: "Pintamos casas por dentro y por fuera en Auburn y Opelika, AL: lavado a presión, madera podrida, sellado y pintura de primera para la humedad. En español.",
         eyebrow: "Pintura de casas · Auburn y Opelika, AL", h1: "Pintores de casas en Auburn, AL",
         lede: "Pintura interior y exterior que empieza con una buena preparación: lavado, raspado, madera podrida reparada y sellado, y luego pintura de primera hecha para el sol y la humedad de Alabama.",
         intro: [
@@ -395,8 +395,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Cabinet Painting & Refinishing", alt: "Kitchen cabinets freshly refinished in white enamel in Auburn, AL",
-        title: "Cabinet Painting in Auburn & Opelika, AL | Sprayed Factory Finish",
-        description: "Kitchen cabinet painting and refinishing in Auburn and Opelika, AL. Doors removed, degreased, sanded, primed and sprayed with catalyzed enamel. A new-looking kitchen for a fraction of replacement cost.",
+        title: "Cabinet Painting in Auburn & Opelika, AL | Sprayed Finish",
+        description: "Kitchen cabinet painting in Auburn and Opelika, AL: degreased, sanded, primed and sprayed in durable enamel. A kitchen that looks new for far less than new.",
         eyebrow: "Cabinet painting · Auburn & Opelika, AL", h1: "Cabinet painting that looks factory-made",
         lede: "Doors and drawers off, degreased, sanded, primed and sprayed with a catalyzed enamel. A new-looking kitchen in about a week, for roughly a fifth of replacement cost.",
         intro: [
@@ -425,8 +425,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Pintura de gabinetes", alt: "Gabinetes de cocina recién pintados de blanco en Auburn, AL",
-        title: "Pintura de gabinetes en Auburn y Opelika, AL | Acabado de fábrica",
-        description: "Pintamos y renovamos gabinetes de cocina en Auburn y Opelika, Alabama. Quitamos puertas, desengrasamos, lijamos, aplicamos primario y pintamos a pistola con esmalte catalizado. Cocina como nueva por una fracción del costo. Hablamos español.",
+        title: "Pintura de gabinetes en Auburn y Opelika, AL",
+        description: "Pintamos gabinetes de cocina en Auburn y Opelika, AL: desengrasados, lijados, con primario y esmalte a pistola. Como nuevos por mucho menos que cambiarlos.",
         eyebrow: "Pintura de gabinetes · Auburn y Opelika, AL", h1: "Gabinetes pintados como de fábrica",
         lede: "Quitamos puertas y cajones, desengrasamos, lijamos, aplicamos primario y pintamos a pistola con esmalte catalizado. Una cocina que parece nueva en una semana, por más o menos la quinta parte de lo que cuesta cambiar los gabinetes.",
         intro: [
@@ -462,8 +462,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Flooring Installation", alt: "Installer laying luxury vinyl plank flooring in an Auburn, AL home",
-        title: "Flooring Installation in Auburn & Opelika, AL | LVP, Tile & Hardwood",
-        description: "Luxury vinyl plank (LVP), tile, engineered hardwood and laminate flooring installation in Auburn and Opelika, AL. Old floor removal, subfloor repair, trim and transitions. Rentals and homes. Free estimates.",
+        title: "Flooring Installation in Auburn, AL | LVP, Tile & Hardwood",
+        description: "LVP, tile, engineered hardwood and laminate floors installed in Auburn and Opelika, AL. Old floor removal, subfloor repair, trim and transitions. Free quote.",
         eyebrow: "Flooring · Auburn & Opelika, AL", h1: "Flooring installation in Auburn, AL",
         lede: "Waterproof LVP, tile and engineered hardwood, installed flat and quiet over a subfloor we've actually checked. Trim, transitions and baseboards included.",
         intro: [
@@ -492,8 +492,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Instalación de pisos", alt: "Instalador colocando piso de vinilo LVP en una casa de Auburn, AL",
-        title: "Instalación de pisos en Auburn y Opelika, AL | LVP, azulejo y madera",
-        description: "Instalamos piso de vinilo de lujo (LVP), azulejo, madera de ingeniería y laminado en Auburn y Opelika, Alabama. Retiro del piso viejo, reparación del subpiso, zoclos y transiciones. Casas y casas de renta. Presupuesto gratis en español.",
+        title: "Instalación de pisos en Auburn, AL | LVP, azulejo y madera",
+        description: "Instalamos piso LVP, azulejo, madera de ingeniería y laminado en Auburn y Opelika, AL. Retiro del piso viejo, subpiso, zoclos y transiciones. En español.",
         eyebrow: "Pisos · Auburn y Opelika, AL", h1: "Instalación de pisos en Auburn, AL",
         lede: "LVP a prueba de agua, azulejo y madera de ingeniería, instalados parejos y sin rechinidos sobre un subpiso que sí revisamos. Zoclos y transiciones incluidos.",
         intro: [
@@ -529,8 +529,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Home Repairs & Carpentry", alt: "Rebuilt front porch with new columns and railings in Opelika, AL",
-        title: "Home Repair Contractor in Auburn & Opelika, AL | Rot, Decks, Drywall",
-        description: "Home repairs in Auburn and Opelika, AL: wood rot and siding repair, deck and porch repair, drywall, doors, windows, storm and water damage, and pre-sale punch lists. Licensed and insured, no job too small.",
+        title: "Home Repairs in Auburn & Opelika, AL | Rot, Decks & Drywall",
+        description: "Home repairs in Auburn and Opelika, AL: wood rot, siding, decks and porches, drywall, doors, windows, storm damage and pre-sale punch lists. No job too small.",
         eyebrow: "Repairs & carpentry · Auburn & Opelika, AL", h1: "Home repairs, done like a remodel",
         lede: "Rotten trim, a soft deck board, drywall damage, a door that won't latch, or the inspection list before you sell. Handled with the same care as a full remodel.",
         intro: [
@@ -559,8 +559,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Reparaciones y carpintería", alt: "Porche reconstruido con columnas y barandal nuevos en Opelika, AL",
-        title: "Reparaciones de casas en Auburn y Opelika, AL | Madera podrida, terrazas, tablaroca",
-        description: "Reparaciones del hogar en Auburn y Opelika, Alabama: madera podrida y fachada, terrazas y porches, tablaroca, puertas, ventanas, daños por tormenta y agua, y reparaciones antes de vender. Con licencia y seguro. Hablamos español.",
+        title: "Reparaciones de casas en Auburn y Opelika, AL",
+        description: "Reparamos casas en Auburn y Opelika, AL: madera podrida, fachada, terrazas, tablaroca, puertas, ventanas, daños por tormenta y pendientes. En español.",
         eyebrow: "Reparaciones y carpintería · Auburn y Opelika, AL", h1: "Reparaciones hechas con el cuidado de una remodelación",
         lede: "Una moldura podrida, una tabla floja en la terraza, un golpe en la tablaroca, una puerta que no cierra o la lista del inspector antes de vender. Lo atendemos con la misma seriedad que una obra grande.",
         intro: [
@@ -596,8 +596,8 @@ export const SERVICE_PAGES: ServicePage[] = [
     t: {
       en: {
         name: "Rental Turnovers & Make-Ready", alt: "Freshly turned rental living room with new LVP flooring near Auburn University",
-        title: "Rental Turnover & Make-Ready Contractor in Auburn, AL | Landlords",
-        description: "Rental turnover and make-ready services for Auburn and Opelika landlords and property managers. Paint, LVP, repairs, cabinet refresh and punch lists between tenants, scheduled around Auburn University move-out and move-in dates.",
+        title: "Rental Turnover & Make-Ready in Auburn, AL | Landlords",
+        description: "Rental make-ready for Auburn and Opelika landlords: paint, LVP, repairs and punch lists between tenants, scheduled around Auburn University move-out dates.",
         eyebrow: "For landlords & property managers · Auburn, AL", h1: "Rental turnovers, done on your calendar",
         lede: "Paint, LVP, repairs and make-ready between tenants, scheduled around Auburn's move-out and move-in dates. Photo updates for owners who live out of town.",
         intro: [
@@ -626,8 +626,8 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       es: {
         name: "Casas de renta y cambio de inquilino", alt: "Sala de casa de renta recién preparada con piso LVP nuevo cerca de Auburn University",
-        title: "Preparación de casas de renta en Auburn, AL | Para dueños e inversionistas",
-        description: "Preparamos casas de renta entre inquilinos en Auburn y Opelika: pintura, piso LVP, reparaciones, gabinetes y detalles, según las fechas de salida y entrada de Auburn University. Para dueños, inversionistas y administradores. Hablamos español.",
+        title: "Preparación de casas de renta en Auburn, AL",
+        description: "Preparamos casas de renta entre inquilinos en Auburn y Opelika: pintura, piso LVP, reparaciones y pendientes, según las fechas de Auburn University.",
         eyebrow: "Para dueños e inversionistas · Auburn, AL", h1: "Casas de renta listas a tiempo",
         lede: "Pintura, piso LVP, reparaciones y preparación entre un inquilino y otro, según las fechas de salida y entrada de Auburn. Con fotos para los dueños que viven fuera.",
         intro: [

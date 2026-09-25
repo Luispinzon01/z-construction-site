@@ -26,8 +26,8 @@ export const AREA_PAGES: AreaPage[] = [
     popular: ["kitchen", "bathroom", "rental", "cabinets"],
     t: {
       en: {
-        name: "Auburn", title: "Remodeling Contractor in Auburn, AL | Kitchens, Baths, Additions",
-        description: "Auburn, AL remodeling and painting contractor. Kitchens, bathrooms, additions, cabinet painting and rental turnovers in Auburn neighborhoods from downtown to Moores Mill. Permits handled. Free estimates, English or Spanish.",
+        name: "Auburn", title: "Remodeling & Painting Contractor in Auburn, AL",
+        description: "Auburn, AL painting and remodeling: kitchens, baths, cabinets, additions and rental turns, from downtown to Moores Mill. Permits handled. English or Spanish.",
         eyebrow: "Service area · Auburn, Alabama", h1: "Remodeling contractor in Auburn, AL",
         lede: "Auburn is home. We build and paint in every part of town, from the older streets near campus to the subdivisions off Moores Mill and Richland Road, and we pull the permits with the City ourselves.",
         intro: [
@@ -48,8 +48,8 @@ export const AREA_PAGES: AreaPage[] = [
         ],
       },
       es: {
-        name: "Auburn", title: "Contratista de remodelación en Auburn, AL | Hablamos español",
-        description: "Contratista de remodelación y pintura en Auburn, Alabama. Cocinas, baños, ampliaciones, pintura de gabinetes y casas de renta en todos los vecindarios de Auburn. Permisos incluidos. Presupuesto gratis en español.",
+        name: "Auburn", title: "Contratista de remodelación y pintura en Auburn, AL",
+        description: "Pintura y remodelación en Auburn, AL: cocinas, baños, gabinetes, ampliaciones y casas de renta en todos los vecindarios. Con permisos. Atención en español.",
         eyebrow: "Zona de servicio · Auburn, Alabama", h1: "Contratista de remodelación en Auburn, AL",
         lede: "Auburn es nuestra casa. Construimos y pintamos en toda la ciudad, desde las calles viejas cerca de la universidad hasta los fraccionamientos de Moores Mill y Richland Road, y nosotros mismos tramitamos los permisos con la ciudad. Todo en español.",
         intro: [
@@ -77,8 +77,8 @@ export const AREA_PAGES: AreaPage[] = [
     popular: ["painting", "kitchen", "bathroom", "repairs"],
     t: {
       en: {
-        name: "Opelika", title: "Remodeling & Painting Contractor in Opelika, AL | Free Estimates",
-        description: "Opelika, AL remodeling, painting and repair contractor. Kitchens, baths, exterior painting, porch and rot repair, including historic Northside and Geneva Street homes. Permits handled with Opelika Public Works. English or Spanish.",
+        name: "Opelika", title: "Remodeling & Painting Contractor in Opelika, AL",
+        description: "Opelika, AL painting, remodeling and repairs: kitchens, baths, exterior paint, porches and rot repair, historic Northside homes included. English or Spanish.",
         eyebrow: "Service area · Opelika, Alabama", h1: "Remodeling & painting in Opelika, AL",
         lede: "Opelika has some of the area's best older homes, from the Northside historic district to the brick ranches around Saugahatchee. We update them carefully and handle permits with the City.",
         intro: [
@@ -99,8 +99,8 @@ export const AREA_PAGES: AreaPage[] = [
         ],
       },
       es: {
-        name: "Opelika", title: "Contratista de remodelación y pintura en Opelika, AL | Hablamos español",
-        description: "Contratista de remodelación, pintura y reparaciones en Opelika, Alabama. Cocinas, baños, pintura exterior, porches y madera podrida, incluso en las zonas históricas. Permisos con la ciudad de Opelika. Atención en español.",
+        name: "Opelika", title: "Contratista de remodelación y pintura en Opelika, AL",
+        description: "Pintura, remodelación y reparaciones en Opelika, AL: cocinas, baños, pintura exterior, porches y madera podrida, también en casas históricas. En español.",
         eyebrow: "Zona de servicio · Opelika, Alabama", h1: "Remodelación y pintura en Opelika, AL",
         lede: "Opelika tiene algunas de las casas más bonitas de la zona, desde el barrio histórico de Northside hasta las casas de ladrillo alrededor de Saugahatchee. Las ponemos al día con cuidado, tramitamos los permisos con la ciudad y lo atendemos en español.",
         intro: [
@@ -128,8 +128,8 @@ export const AREA_PAGES: AreaPage[] = [
     popular: ["additions", "repairs", "flooring", "painting"],
     t: {
       en: {
-        name: "Smiths Station & Beauregard", title: "Contractor in Smiths Station & Beauregard, AL | Additions, Decks, Repairs",
-        description: "Home additions, garages, decks, porches, flooring, painting and repairs in Smiths Station and Beauregard, AL. Family-owned Lee County contractor. We confirm the right permit office for your address. Free estimates.",
+        name: "Smiths Station & Beauregard", title: "Contractor in Smiths Station & Beauregard, AL",
+        description: "Additions, garages, decks, porches, flooring, painting and repairs in Smiths Station and Beauregard, AL. Family-owned Lee County contractor. Free estimates.",
         eyebrow: "Service area · South Lee County", h1: "Contractor in Smiths Station & Beauregard",
         lede: "Bigger lots, growing families and homes that need more room. In south Lee County we build a lot of additions, garages, porches and decks, and handle the repairs in between.",
         intro: [
@@ -150,8 +150,8 @@ export const AREA_PAGES: AreaPage[] = [
         ],
       },
       es: {
-        name: "Smiths Station y Beauregard", title: "Contratista en Smiths Station y Beauregard, AL | Ampliaciones, terrazas, reparaciones",
-        description: "Ampliaciones, cocheras, terrazas, porches, pisos, pintura y reparaciones en Smiths Station y Beauregard, Alabama. Empresa familiar del condado de Lee. Confirmamos qué oficina da el permiso para su dirección. Presupuesto gratis en español.",
+        name: "Smiths Station y Beauregard", title: "Contratista en Smiths Station y Beauregard, AL",
+        description: "Ampliaciones, cocheras, terrazas, porches, pisos, pintura y reparaciones en Smiths Station y Beauregard, AL. Empresa familiar del condado de Lee. En español.",
         eyebrow: "Zona de servicio · Sur del condado de Lee", h1: "Contratista en Smiths Station y Beauregard",
         lede: "Terrenos más grandes, familias que crecen y casas que necesitan más espacio. En el sur del condado de Lee hacemos muchas ampliaciones, cocheras, porches y terrazas, y todas las reparaciones de en medio.",
         intro: [
@@ -179,8 +179,8 @@ export const AREA_PAGES: AreaPage[] = [
     popular: ["remodeling", "additions", "repairs", "painting"],
     t: {
       en: {
-        name: "Lee County", title: "Lee County, AL Remodeling Contractor | Loachapoka, Salem, Waverly, Notasulga",
-        description: "Remodeling, additions, painting and repairs across rural Lee County, AL: Loachapoka, Salem, Waverly, Notasulga and nearby communities. Farmhouses, country homes and manufactured-home upgrades. Free estimates in English or Spanish.",
+        name: "Lee County", title: "Remodeling Contractor in Lee County, AL | Rural Homes",
+        description: "Remodeling, additions, painting and repairs across rural Lee County, AL: Loachapoka, Salem, Waverly, Notasulga and nearby. Free estimates, English or Spanish.",
         eyebrow: "Service area · Lee County, Alabama", h1: "Remodeling across Lee County",
         lede: "Loachapoka, Salem, Waverly, Notasulga and the country roads in between. Farmhouses, older homes on acreage and family land, updated by a local crew that shows up.",
         intro: [
@@ -201,8 +201,8 @@ export const AREA_PAGES: AreaPage[] = [
         ],
       },
       es: {
-        name: "Condado de Lee", title: "Contratista en el condado de Lee, AL | Loachapoka, Salem, Waverly, Notasulga",
-        description: "Remodelación, ampliaciones, pintura y reparaciones en todo el condado de Lee, Alabama: Loachapoka, Salem, Waverly, Notasulga y comunidades cercanas. Casas de campo y casas viejas con terreno. Presupuesto gratis en español.",
+        name: "Condado de Lee", title: "Contratista en el condado de Lee, AL | Zonas rurales",
+        description: "Remodelación, ampliaciones, pintura y reparaciones en el condado de Lee: Loachapoka, Salem, Waverly, Notasulga y alrededores. Presupuesto gratis en español.",
         eyebrow: "Zona de servicio · Condado de Lee, Alabama", h1: "Remodelación en todo el condado de Lee",
         lede: "Loachapoka, Salem, Waverly, Notasulga y los caminos de en medio. Casas de campo, casas viejas con terreno y propiedades de familia, renovadas por una cuadrilla local que sí llega.",
         intro: [

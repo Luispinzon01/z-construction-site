@@ -6,11 +6,14 @@ import { Arrow } from "@/components/Icons";
 import { Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
+import { JsonLd, webPage } from "@/lib/schema";
+import { photo } from "@/lib/content";
 
 export default function ReviewsPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale]; const r = c.reviews;
   return (
     <>
+      <JsonLd data={webPage({ kind: "WebPage", name: c.meta.reviews.title, description: c.meta.reviews.description, path: href(locale, "reviews"), locale, image: photo("porch3", 1600) })} />
       <PageHero photoKey="porch3" alt={r.h1} eyebrow={r.eyebrow} h1={r.h1} lede={r.lede} />
       <section className="sec bg-bone" data-tone="light">
         <div className="shell">

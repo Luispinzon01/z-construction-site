@@ -6,6 +6,8 @@ import { BRAND, CONTENT } from "@/lib/content";
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
 import { href, type Locale } from "@/lib/i18n";
+import { JsonLd, webPage } from "@/lib/schema";
+import { photo } from "@/lib/content";
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return <div className="rounded-card border border-hairline bg-bone p-6 pb-5"><h3 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-3">{title}</h3>{children}</div>;
@@ -15,6 +17,7 @@ export default function ContactPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale]; const k = c.contact;
   return (
     <>
+      <JsonLd data={webPage({ kind: "ContactPage", name: c.meta.contact.title, description: c.meta.contact.description, path: href(locale, "contact"), locale, image: photo("houseWhite", 1600) })} />
       <PageHero photoKey="houseWhite" alt={k.h1} eyebrow={k.eyebrow} h1={k.h1} lede={k.lede} />
       <section className="sec bg-bone" data-tone="light" id="quote">
         <div className="shell grid gap-12 lg:grid-cols-[1.15fr_.85fr] lg:gap-[calc(var(--spacing-gutter)*1.6)] lg:items-start">

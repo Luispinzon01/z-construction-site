@@ -13,6 +13,13 @@ export const config = {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  /* One URL per page: mixed-case paths (/Services, /es/Servicios) rendered
+     as duplicates of the lowercase page. Send them to the canonical spelling. */
+  if (pathname !== pathname.toLowerCase()) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.toLowerCase();
+    return NextResponse.redirect(url, 308);
+  }
   if (pathname === "/es" || pathname.startsWith("/es/")) return NextResponse.next();
   if (pathname === "/en" || pathname.startsWith("/en/")) {
     const url = request.nextUrl.clone();

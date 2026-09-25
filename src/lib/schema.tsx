@@ -29,6 +29,27 @@ export const article = (o: { headline: string; description: string; path: string
   mainEntityOfPage: absolute(o.path), author: { "@id": BUSINESS_ID }, publisher: { "@id": BUSINESS_ID },
 });
 
+/** Typed WebPage node for pages that have no richer type. `kind` picks the schema.org subtype. */
+export const webPage = (o: { kind: "AboutPage" | "ContactPage" | "CollectionPage" | "WebPage"; name: string; description: string; path: string; locale: Locale; image?: string }) => ({
+  "@context": "https://schema.org", "@type": o.kind,
+  "@id": `${absolute(o.path)}#webpage`, name: o.name, description: o.description, url: absolute(o.path), inLanguage: o.locale,
+  ...(o.image ? { primaryImageOfPage: { "@type": "ImageObject", contentUrl: o.image } } : {}),
+  about: { "@id": BUSINESS_ID }, isPartOf: { "@id": `${SITE_URL}/#website` },
+});
+
+/** ItemList of the service landing pages, for the services index. */
+export const serviceList = (items: { name: string; path: string }[]) => ({
+  "@context": "https://schema.org", "@type": "ItemList",
+  itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, url: absolute(it.path) })),
+});
+
+/** ImageGallery for the before/after page. */
+export const imageGallery = (o: { name: string; path: string; locale: Locale; images: { url: string; caption: string }[] }) => ({
+  "@context": "https://schema.org", "@type": "ImageGallery",
+  "@id": `${absolute(o.path)}#gallery`, name: o.name, url: absolute(o.path), inLanguage: o.locale, about: { "@id": BUSINESS_ID },
+  associatedMedia: o.images.map((im) => ({ "@type": "ImageObject", contentUrl: im.url, caption: im.caption })),
+});
+
 export function JsonLd({ data }: { data: object | object[] }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />;
 }

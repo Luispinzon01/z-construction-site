@@ -2,12 +2,16 @@ import PageHero from "@/components/PageHero";
 import GalleryGrid from "@/components/GalleryGrid";
 import CtaBand from "@/components/CtaBand";
 import { CONTENT } from "@/lib/content";
-import type { Locale } from "@/lib/i18n";
+import { href, type Locale } from "@/lib/i18n";
+import { JsonLd, imageGallery } from "@/lib/schema";
+import { photo } from "@/lib/content";
 
 export default function WorkPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale]; const w = c.work;
   return (
     <>
+      <JsonLd data={imageGallery({ name: c.meta.work.title, path: href(locale, "work"), locale,
+        images: w.cells.flatMap((x) => x.kind === "compare" ? [{ url: photo(x.before!, 1600), caption: x.altBefore! }, { url: photo(x.after!, 1600), caption: x.altAfter! }] : [{ url: photo(x.photo!, 1600), caption: `${x.title} · ${x.meta}` }]) })} />
       <PageHero photoKey="kitchen2" alt={w.cells[1].title} eyebrow={w.eyebrow} h1={w.h1} lede={w.lede} />
       <section className="sec bg-bone" data-tone="light">
         <div className="shell">

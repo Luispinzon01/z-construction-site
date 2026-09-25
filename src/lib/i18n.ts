@@ -46,5 +46,15 @@ export function pageFromSlug(locale: Locale, slug: string[] | undefined): PageKe
   return entry ? entry[0] : null;
 }
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.zconstructionremodeling.com").replace(/\/$/, "");
+/* Canonical origin for every canonical tag, hreflang link, sitemap entry and
+   schema @id. Order of precedence:
+   1. NEXT_PUBLIC_SITE_URL, set once the real domain is connected in Vercel;
+   2. VERCEL_PROJECT_PRODUCTION_URL, which Vercel sets at build time to the
+      project's production host (and switches to the custom domain on its own);
+   3. localhost for local builds.
+   Never hard-code an unregistered domain here: a canonical pointing at a
+   domain that doesn't resolve tells Google the real page is somewhere it
+   can't reach. */
+const fromVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "";
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || fromVercel || "http://localhost:3000").replace(/\/$/, "");
 export const absolute = (path: string) => `${SITE_URL}${path === "/" ? "/" : path}`;
