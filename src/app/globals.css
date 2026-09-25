@@ -162,7 +162,8 @@
     .links { min-width: 0; }
   }
   /* 62–74rem: links + language pill fit, the quote button does not; the CTA lives in the nav links' Contact + footer there */
-  @media (min-width: 62rem) and (max-width: 73.99rem) { .bar-cta .btn { display: none; } .links a { padding: 8px 9px; font-size: .9rem; } }
+  /* 62–74rem: not enough room for links + phone + button; the phone wins (calls close far better than forms) */
+  @media (min-width: 62rem) and (max-width: 73.99rem) { .bar-cta .btn { display: none; } .bar-cta .call { display: inline-block; } .links a { padding: 8px 9px; font-size: .9rem; } }
   @media (min-width: 74rem) { .bar-cta .call { display: inline-block; } .links a { padding: 8px 14px; } }
   @media (max-width: 40rem) { .bar-cta .btn { display: none; } .bar { padding: 0 8px 0 14px; } }
   @supports (background: -webkit-named-image(i)) { .bar::before { -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); } }

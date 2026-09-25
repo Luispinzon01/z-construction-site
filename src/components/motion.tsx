@@ -2,7 +2,7 @@
 /* Framer Motion primitives. One easing, one reveal, used everywhere so the
    whole site moves as a single system. Transform + opacity only. */
 import { motion, useInView, useReducedMotion, animate, useMotionValue, useSpring, type Variants } from "framer-motion";
-import { useEffect, useRef, useState, type ReactNode, type ComponentProps } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode, type ComponentProps } from "react";
 
 export const EASE = [0.22, 1, 0.36, 1] as const;
 export const fadeUp: Variants = { hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } };
@@ -39,10 +39,13 @@ export function SplitWords({ text, className, delay = 0, as: Tag = "span" }: { t
   return (
     <Tag className={className}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block align-top overflow-hidden pb-[.16em] -mb-[.16em]">
-          <span className="inline-block word-in" style={{ animationDelay: `${delay + i * 0.045}s` }}>{w}</span>
+        <Fragment key={i}>
+          <span className="inline-block align-top overflow-hidden pb-[.16em] -mb-[.16em]">
+            <span className="inline-block word-in" style={{ animationDelay: `${delay + i * 0.045}s` }}>{w}</span>
+          </span>
+          {/* the space lives between the inline blocks, not inside one, so it is neither trimmed nor unbreakable */}
           {i < words.length - 1 ? " " : ""}
-        </span>
+        </Fragment>
       ))}
     </Tag>
   );

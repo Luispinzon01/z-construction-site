@@ -18,9 +18,13 @@ import { isLocale, LOCALES, SITE_URL, type Locale } from "@/lib/i18n";
 /* Barlow Condensed for the display voice: upright, industrial, squared off —
    the type equivalent of a plumb wall. Barlow for body, Space Mono for the
    drafting-table metadata layer (eyebrows, specs, labels). */
+/* Four preloaded files, not six: the hero needs Condensed 800 (tagline),
+   Condensed 700 (buttons) and Barlow 400/600 (copy, nav). Barlow 500 was
+   never used, and the mono face only sets small labels, so it loads off the
+   critical path (preload: false) rather than gating the first paint. */
 const display = Barlow_Condensed({ subsets: ["latin"], weight: ["700", "800"], display: "swap", variable: "--font-bc" });
-const body = Barlow({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap", variable: "--font-barlow" });
-const mono = Space_Mono({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--font-mono-sp" });
+const body = Barlow({ subsets: ["latin"], weight: ["400", "600"], display: "swap", variable: "--font-barlow" });
+const mono = Space_Mono({ subsets: ["latin"], weight: ["400"], display: "swap", preload: false, variable: "--font-mono-sp" });
 
 export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
 export const viewport: Viewport = { themeColor: "#16233a" };
