@@ -25,6 +25,8 @@ const COMMITS = [
   { d: "Sep 25 19:03", h: "8a1c1ba", n: 164, s: "SEO pass: titles, descriptions, canonical origin, keyword H1, structured data" },
   { d: "Sep 25 19:15", h: "ea988cf", n: 151, s: "UX pass: fast hero, 3-step estimate form, verifiable proof, a11y 100" },
   { d: "Sep 25 19:16", h: "0227048", n: 15, s: "Font diet, phone in mid-size nav, headline spacing fix" },
+  { d: "Sep 25 22:40", h: "489c898", n: 550, s: "Second pass: promise block, Spanish WhatsApp-first, review page, this report" },
+  { d: "Sep 25 23:50", h: "third", n: 260, s: "Third pass: home-page prices, share cards, price catalog schema" },
 ];
 
 function H2({ k, children }: { k: string; children: React.ReactNode }) {
@@ -61,7 +63,7 @@ export default function ChangelogPage() {
           <Stat label="SEO titles in range" value="58 / 58" delta="from 17 / 58" note="≤ 60 characters, unique" />
           <Stat label="JavaScript on a phone" value="278 KB" delta="from 516 KB" note="Three.js stays on desktop only" />
           <Stat label="Estimate form" value="3 steps" delta="from 9 fields at once" note="Contact details asked last" />
-          <Stat label="Lines of code & docs" value="8,012" note="12 commits, 2 days" />
+          <Stat label="Lines of code & docs" value="8,800" note="14 commits, 3 days" />
         </div>
       </section>
 
@@ -239,6 +241,7 @@ export default function ChangelogPage() {
             [true, "3-step estimate form, WhatsApp, click-to-call bar, Spanish path WhatsApp-first"],
             [true, "Honest proof only: no invented counters, no sample reviews, license placeholder hidden"],
             [true, "Review-request page to text customers after every job: /review and /es/deje-su-resena (one tap to Google, Angi, HomeAdvisor)"],
+            [true, "Prices on the home page, branded share cards on every page, price catalog in structured data"],
             [false, "Turn off Vercel Deployment Protection for Production (site currently redirects to a Vercel login and is marked noindex)"],
             [false, "Connect the real domain and set NEXT_PUBLIC_SITE_URL"],
             [false, "Real phone, WhatsApp number, email, license number in src/lib/content.ts"],
@@ -251,6 +254,42 @@ export default function ChangelogPage() {
             [false, "Decide on a written workmanship warranty to publish (only one competitor states one; Five Star offers two years)"],
             [false, "Optional: a financing partner such as Hearth or Wisetack for kitchen and bath jobs (two competitors offer it)"],
           ].map(([ok, t]) => <div key={String(t)} className="flex items-start gap-3 rounded-[10px] border border-hairline-d p-4 text-step--1"><Chip ok={ok as boolean}>{ok ? "done" : "owner"}</Chip><span className="text-bone/85">{t as string}</span></div>)}
+        </div>
+      </section>
+
+      {/* THIRD PASS */}
+      <section className="shell py-10 md:py-14 border-t border-hairline-d">
+        <H2 k="08 · Third pass">Prices up front, and a card worth forwarding</H2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          <Stat label="Competitors publishing prices" value="0 / 14" note="Checked Sep 25, 2026" />
+          <Stat label="Price ranges on the home page" value="4" delta="from 0" note="Painting, cabinets, bath, kitchen" />
+          <Stat label="Priced offers in structured data" value="27" delta="from 9" note="Every estimator tier, as an OfferCatalog" />
+          <Stat label="Branded share cards" value="66" delta="from 0" note="One per page, in its language" />
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card title="What a forwarded link looks like now" sub="Before, a shared page previewed as an anonymous stock photo. Now every page renders its own card: company, page title, phone, a job photo, in English or Spanish. Referrals in the Spanish-speaking community travel by WhatsApp (Pew 2024: 54% of Hispanic adults use it, against 29% of all U.S. adults), and the preview is the first impression.">
+            <div className="grid gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/api/og?t=Pintura%20de%20casas%20en%20Auburn%20y%20Opelika&k=Pintura%20y%20remodelaci%C3%B3n%20de%20casas%20en%20Auburn%20y%20Opelika%2C%20AL&p=houseWhite&l=es" alt="Spanish share card: house painting in Auburn and Opelika" width={1200} height={630} className="w-full h-auto rounded-[10px] border border-hairline-d" loading="lazy" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/api/og?t=Kitchen%20Remodeling%20in%20Auburn%20%26%20Opelika&k=Painting%20%26%20remodeling%20contractor%20in%20Auburn%20%26%20Opelika%2C%20AL&p=kitchen1" alt="English share card: kitchen remodeling in Auburn and Opelika" width={1200} height={630} className="w-full h-auto rounded-[10px] border border-hairline-d" loading="lazy" />
+            </div>
+            <p className="mt-2 text-[.78rem] text-bone/60">Source: <Src href="https://www.pewresearch.org/internet/2024/01/31/americans-social-media-use/">Pew Research, Americans' Social Media Use, Jan 2024</Src>.</p>
+          </Card>
+          <div className="grid gap-4">
+            <Card title="Pricing moved to the home page" sub="Four ranges a homeowner asks about first (whole-interior paint, cabinet painting, a full hall bath, a full kitchen) now sit right under the services, each linking to its page. The numbers come from the one table that drives the estimator, the service pages and the guides, so they can never disagree. The headline says the quiet part: nobody else here publishes a price." table={{ head: ["Tile", "Range (mid-range finish)", "Links to"], rows: [["Interior painting, whole interior", "$6k–$11k", "/services/house-painting"], ["Cabinet painting, average kitchen", "$5k–$8k", "/services/cabinet-painting"], ["Bathroom, full hall bath", "$14k–$26k", "/services/bathroom-remodeling"], ["Kitchen, full remodel, same layout", "$25k–$45k", "/services/kitchen-remodeling"]] }}>
+              <Bars rows={[{ label: "Kitchen, full", value: 45 }, { label: "Bathroom, full", value: 26 }, { label: "Interior paint", value: 11 }, { label: "Cabinets", value: 8 }]} unit="k" max={50} labelW={150} color={C.s3} />
+              <p className="mt-2 text-[.78rem] text-bone/60">Top of each range, in thousands of dollars. Calibrate against signed jobs every January (src/lib/estimator.ts).</p>
+            </Card>
+            <div className="rounded-card border border-hairline-d bg-bone/[.03] p-5 md:p-6">
+              <h3 className="d text-step-1 leading-none mb-4">Also in this pass</h3>
+              <ul className="grid gap-2.5 text-step--1 text-bone/85">
+                <li><b className="text-bone">Price catalog for search and AI answers.</b> The estimator's 27 tiers are now an <code className="font-mono text-[.75rem]">OfferCatalog</code> with min and max prices, so "how much does a bathroom remodel cost in Auburn" can be answered with this site's range and a link.</li>
+                <li><b className="text-bone">Share cards allowed for social crawlers.</b> <code className="font-mono text-[.75rem]">/api/og</code> is the one API path robots.txt lets through; the rest stays blocked.</li>
+                <li><b className="text-bone">Fonts bundled for the cards.</b> Barlow and Barlow Condensed (open license) ship in the repo so the card renders the same on Vercel as on a laptop.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 

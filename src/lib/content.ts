@@ -98,6 +98,7 @@ export interface SiteContent {
     workEyebrow: string; workH: string; workP: string; workBtn: string;
     reviewsEyebrow: string; reviewsH: string;
     areaEyebrow: string; areaH: string; areaP: string; areaLink: string;
+    pricing: { eyebrow: string; h: string; p: string; btn: string; note: string; from: string };
   };
   services: Service[];
   servicesPage: { eyebrow: string; h1: string; lede: string; timelineLbl: string; rangeLbl: string; quoteBtn: string; faqEyebrow: string; faqH: string; faqLede: string; faq: { q: string; a: string }[]; ctaH: string; ctaP: string };
@@ -193,6 +194,7 @@ const en: SiteContent = {
     areaEyebrow: "Service area", areaH: "Local. Actually local.",
     areaP: "Auburn, Opelika and the Lee County communities around them, including rentals and game-day homes for owners who live out of town.",
     areaLink: "Check your address",
+    pricing: { eyebrow: "Real numbers before you call", h: "Most contractors won't put a price on their website. We do.", p: "These are 2026 planning ranges for Lee County, installed, labor and materials. Your written estimate is line by line, and it doesn't change unless you change the plan.", btn: "See every price", note: "Mid-range finishes. Standard runs about 15% less, premium about 30% more.", from: "Typical range" },
   },
   services: [
     { id: "remodeling", group: "build", name: "Home Remodeling", sub: "Whole-home and single-room remodels", blurb: "Whole-home and single-room remodels that respect the bones of the house.", photo: "kitchen3", alt: "Remodeled open-plan living area",
@@ -409,6 +411,7 @@ const es: SiteContent = {
     areaEyebrow: "Zona de servicio", areaH: "De aquí, de verdad.",
     areaP: "Auburn, Opelika y las comunidades del condado de Lee, incluidas las casas de renta y de fin de semana de dueños que viven fuera.",
     areaLink: "Vea si llegamos a su zona",
+    pricing: { eyebrow: "Números reales antes de llamar", h: "Casi ningún contratista de la zona publica precios. Nosotros sí.", p: "Son rangos de planeación 2026 para el condado de Lee, instalados, con mano de obra y materiales. Su presupuesto por escrito viene línea por línea y no cambia si usted no cambia el plan.", btn: "Ver todos los precios", note: "Acabados de gama media. Los estándar cuestan cerca de 15% menos y los premium unos 30% más.", from: "Rango típico" },
   },
   services: [
     { id: "remodeling", group: "build", name: "Remodelación de casas", sub: "Casa completa o una sola habitación", blurb: "Remodelaciones completas o de un solo espacio, respetando la estructura de la casa.", photo: "kitchen3", alt: "Sala remodelada con concepto abierto",

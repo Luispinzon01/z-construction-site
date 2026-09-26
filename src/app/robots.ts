@@ -8,8 +8,8 @@ export default function robots(): MetadataRoute.Robots {
   const disallow = ["/thank-you", "/es/gracias", "/review", "/es/deje-su-resena", "/api/"];
   return {
     rules: [
-      { userAgent: "*", allow: "/", disallow },
-      { userAgent: ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "Google-Extended", "Bingbot", "Applebot-Extended"], allow: "/", disallow },
+      { userAgent: "*", allow: ["/", "/api/og"], disallow },
+      { userAgent: ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "Google-Extended", "Bingbot", "Applebot-Extended"], allow: ["/", "/api/og"], disallow },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

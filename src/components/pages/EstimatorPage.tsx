@@ -9,9 +9,9 @@ import { Reveal } from "@/components/motion";
 import { CONTENT } from "@/lib/content";
 import { GUIDES } from "@/lib/content-guides";
 import { ESTIMATOR, money } from "@/lib/estimator";
-import { href, type Locale } from "@/lib/i18n";
+import { absolute, href, type Locale } from "@/lib/i18n";
 import { guideHref } from "@/lib/routes";
-import { JsonLd } from "@/lib/schema";
+import { BUSINESS_ID, JsonLd } from "@/lib/schema";
 
 export default function EstimatorPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale], e = c.estimator;
@@ -53,7 +53,16 @@ export default function EstimatorPage({ locale }: { locale: Locale }) {
         </div>
       </section>
       <CtaBand locale={locale} h={c.cta.h} p={c.cta.p} btn={c.cta.btn} word={c.cta.word} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebApplication", name: e.h1, applicationCategory: "UtilitiesApplication", operatingSystem: "Any", inLanguage: locale, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }} />
+      <JsonLd data={[
+        { "@context": "https://schema.org", "@type": "WebApplication", name: e.h1, applicationCategory: "UtilitiesApplication", operatingSystem: "Any", inLanguage: locale, offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } },
+        /* The price table as a catalog, so "how much does X cost in Auburn" answers can cite a range. */
+        { "@context": "https://schema.org", "@type": "OfferCatalog", name: `${e.result} · ${e.finish.mid.l}`, url: absolute(href(locale, "estimator")), inLanguage: locale,
+          itemListElement: Object.values(ESTIMATOR).flatMap((d) => d.tiers.map((t) => ({
+            "@type": "Offer", name: `${d.l[locale]}: ${t.l[locale]}`, description: t.d[locale], priceCurrency: "USD", offeredBy: { "@id": BUSINESS_ID },
+            areaServed: { "@type": "AdministrativeArea", name: "Lee County, AL" },
+            priceSpecification: { "@type": "PriceSpecification", minPrice: t.lo, maxPrice: t.hi, priceCurrency: "USD" },
+          }))) },
+      ]} />
     </>
   );
 }

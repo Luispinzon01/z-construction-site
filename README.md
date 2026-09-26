@@ -62,6 +62,14 @@ Transform and opacity only. No animated filters, box-shadows or large blurred su
 
 `/NewSiteNewYou` (any capitalization) is an unlisted, noindex report of everything that changed, with charts: Lighthouse before/after, SEO title and description lengths across all 58 URLs, site map, commit timeline, conversion research, a competitor comparison, the integrations checklist and the Angi-to-Google budget plan. Source: `src/app/changelog/`. It is not in the sitemap and is not linked from the site.
 
+## Share cards
+
+Every page's `og:image` is a branded card rendered on demand by `src/app/api/og/route.tsx` (title, kicker, phone, a job photo, in the page's language), so a link forwarded on WhatsApp, iMessage or Facebook previews as the company rather than a stock photo. The fonts it uses (Barlow, OFL) are bundled in `src/assets/fonts` and traced into the Vercel bundle by `outputFileTracingIncludes` in `next.config.ts`; `/api/og` is the one API path robots.txt allows so social crawlers can fetch it. Preview any card locally: `/api/og?t=Title&k=Kicker&p=kitchen1&l=es`.
+
+## Pricing
+
+One table, `src/lib/estimator.ts`, feeds the estimator, the "at a glance" ranges on service pages, the cost guides, the four price tiles on the home page and the `OfferCatalog` structured data. Calibrate it against signed jobs every January; nothing else needs to change.
+
 ## Review requests
 
 `/review` and `/es/deje-su-resena` are unlisted pages to text a customer the day a job finishes: one tap to Google, Angi or HomeAdvisor. Reviews are the asset a paid directory rents you; this builds them where the leads are free.

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /* The share-card route reads its fonts and logo from disk; make sure the
+     serverless bundle on Vercel carries them. */
+  outputFileTracingIncludes: { "/api/og": ["./src/assets/fonts/*.ttf", "./public/brand/logo-on-dark.png"] },
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [70, 75, 80],

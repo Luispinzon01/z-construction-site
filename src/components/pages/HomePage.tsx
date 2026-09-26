@@ -12,7 +12,11 @@ import { Reveal, Stagger, Item, SplitWords, Counter, Magnetic } from "@/componen
 import { BRAND, CONTENT, type Service } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
 import { serviceHref } from "@/lib/routes";
-import { CARD_PAGE } from "@/lib/content-services";
+import { CARD_PAGE, type ServicePageId } from "@/lib/content-services";
+import { ESTIMATOR, kRange, type EstimatorType } from "@/lib/estimator";
+
+/* Four ranges a homeowner asks about first, each linking to its service page. */
+const PRICE_PICKS: [EstimatorType, 0 | 1 | 2, ServicePageId][] = [["interior", 1, "painting"], ["cabinets", 1, "cabinets"], ["bath", 1, "bathroom"], ["kitchen", 1, "kitchen"]];
 
 function ServiceCard({ s, n, locale }: { s: Service; n: number; locale: Locale }) {
   return (
@@ -121,6 +125,39 @@ export default function HomePage({ locale }: { locale: Locale }) {
       </div>
 
       <Marquee items={h.marquee} />
+
+      {/* PRICING: none of the 14 local competitors checked in Sep 2026 publish a price. Four headline ranges from the same table that drives the estimator. */}
+      <section className="sec bg-bone" data-tone="light" id="pricing">
+        <div className="shell">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-gutter lg:items-end mb-10">
+            <Reveal>
+              <span className="eyebrow text-amber-deep mb-4">{h.pricing.eyebrow}</span>
+              <h2 className="d h-md text-navy max-w-[16ch]">{h.pricing.h}</h2>
+            </Reveal>
+            <Reveal delay={0.1}><p className="max-w-[56ch] text-muted">{h.pricing.p}</p></Reveal>
+          </div>
+          <Stagger className="grid gap-px bg-hairline border border-hairline rounded-card overflow-hidden sm:grid-cols-2 xl:grid-cols-4">
+            {PRICE_PICKS.map(([type, tier, page]) => {
+              const d = ESTIMATOR[type], t = d.tiers[tier];
+              return (
+                <Item key={type}>
+                  <Link href={serviceHref(locale, page)} className="group block h-full bg-bone-2 p-6 md:p-7 no-underline hover:bg-bone transition-colors">
+                    <span className="block slate text-amber-deep">{d.l[locale]}</span>
+                    <strong className="block d text-step-4 leading-[.9] text-navy mt-3">{kRange(t.lo, t.hi)}</strong>
+                    <span className="block mt-3 font-display uppercase text-step-0 leading-tight text-ink">{t.l[locale]}</span>
+                    <span className="block mt-1.5 text-step--1 text-muted">{t.d[locale]}</span>
+                    <span className="text-link text-navy mt-5 text-[.8rem] group-hover:text-amber-deep">{h.pricing.from} <Arrow className="w-3.5 h-3.5" /></span>
+                  </Link>
+                </Item>
+              );
+            })}
+          </Stagger>
+          <Reveal className="flex flex-wrap items-center justify-between gap-4 mt-6">
+            <p className="text-step--1 text-muted">{h.pricing.note}</p>
+            <Link className="btn btn--ink" href={href(locale, "estimator")}>{h.pricing.btn} <Arrow /></Link>
+          </Reveal>
+        </div>
+      </section>
 
       {/* RENTAL TURNS: the niche most local contractors only serve by accident */}
       <section className="sec bg-bone" data-tone="light">

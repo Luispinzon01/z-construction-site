@@ -98,3 +98,5 @@ export function estimate(type: EstimatorType, tier: 0 | 1 | 2, finish: Finish): 
 }
 
 export const money = (n: number) => `$${n.toLocaleString("en-US")}`;
+/** "$6k–$11k" style range for tiles; whole thousands unless the number needs a decimal. */
+export const kRange = (lo: number, hi: number) => `$${(lo / 1000).toFixed(lo % 1000 ? 1 : 0)}k–$${(hi / 1000).toFixed(hi % 1000 ? 1 : 0)}k`;

@@ -15,7 +15,7 @@ import AreasIndexPage from "@/components/pages/AreasIndexPage";
 import AreaPage from "@/components/pages/AreaPage";
 import ServiceDetailPage from "@/components/pages/ServiceDetailPage";
 import PrivacyPage from "@/components/pages/PrivacyPage";
-import { CONTENT, photo, type PhotoKey } from "@/lib/content";
+import { CONTENT, type PhotoKey } from "@/lib/content";
 import { serviceById } from "@/lib/content-services";
 import { AREA_PAGES } from "@/lib/content-areas";
 import { GUIDES } from "@/lib/content-guides";
@@ -35,6 +35,10 @@ const OG: Record<PageKey, PhotoKey> = {
   home: "hero", services: "kitchen1", about: "worker1", work: "kitchen2", reviews: "porch3", contact: "houseWhite", thanks: "porch1",
   estimator: "kitchen3", guides: "worker3", areas: "porch1", privacy: "houseWhite", review: "porch3",
 };
+
+/* Branded share card in the page's language; see src/app/api/og/route.tsx. */
+const ogCard = (locale: Locale, title: string, image: PhotoKey) =>
+  absolute(`/api/og?${new URLSearchParams({ t: title.split(" | ")[0], k: CONTENT[locale].home.eyebrow, p: image, l: locale })}`);
 
 function metaFor(locale: Locale, r: Route): { title: string; description: string; image: PhotoKey } {
   switch (r.kind) {
@@ -57,7 +61,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: m.title, description: m.description,
     alternates: { canonical, languages: { "en-US": absolute(routeHref("en", r)), "es-US": absolute(routeHref("es", r)), "x-default": absolute(routeHref("en", r)) } },
     robots: noindex ? { index: false, follow: true } : { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
-    openGraph: { type: r.kind === "guide" ? "article" : "website", siteName: "Z Construction & Remodeling LLC", title: m.title, description: m.description, url: canonical, locale: locale === "en" ? "en_US" : "es_US", alternateLocale: locale === "en" ? "es_US" : "en_US", images: [{ url: photo(m.image, 1600) }] },
+    openGraph: { type: r.kind === "guide" ? "article" : "website", siteName: "Z Construction & Remodeling LLC", title: m.title, description: m.description, url: canonical, locale: locale === "en" ? "en_US" : "es_US", alternateLocale: locale === "en" ? "es_US" : "en_US", images: [{ url: ogCard(locale, m.title, m.image), width: 1200, height: 630, alt: m.title }] },
     twitter: { card: "summary_large_image" },
     other: { "geo.region": "US-AL", "geo.placename": "Auburn", "geo.position": "32.6099;-85.4808", ICBM: "32.6099, -85.4808" },
   };
