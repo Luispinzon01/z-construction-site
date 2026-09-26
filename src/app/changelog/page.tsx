@@ -26,7 +26,7 @@ const COMMITS = [
   { d: "Sep 25 19:15", h: "ea988cf", n: 151, s: "UX pass: fast hero, 3-step estimate form, verifiable proof, a11y 100" },
   { d: "Sep 25 19:16", h: "0227048", n: 15, s: "Font diet, phone in mid-size nav, headline spacing fix" },
   { d: "Sep 25 22:40", h: "489c898", n: 550, s: "Second pass: promise block, Spanish WhatsApp-first, review page, this report" },
-  { d: "Sep 25 23:50", h: "third", n: 260, s: "Third pass: home-page prices, share cards, price catalog schema" },
+  { d: "Sep 25 23:50", h: "de759f9", n: 293, s: "Third pass: home-page prices, share cards, price catalog schema" },
 ];
 
 function H2({ k, children }: { k: string; children: React.ReactNode }) {
