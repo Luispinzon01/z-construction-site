@@ -6,6 +6,8 @@ import CtaBand from "@/components/CtaBand";
 import SectionHead from "@/components/SectionHead";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import QuoteForm from "@/components/QuoteForm";
+import Promise from "@/components/Promise";
+import Compare from "@/components/Compare";
 import { Arrow, Check, Phone } from "@/components/Icons";
 import { Reveal, Stagger, Item } from "@/components/motion";
 import { BRAND, CONTENT, photo } from "@/lib/content";
@@ -22,6 +24,9 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
   const path = serviceHref(locale, id);
   const est = s.estimator ? ESTIMATOR[s.estimator].tiers : null;
   const areaNames = AREA_PAGES.length ? AREA_PAGES.map((a) => a.t[locale].name) : ["Auburn", "Opelika", "Smiths Station"];
+  /* A before/after pair from the gallery for the categories that have one. */
+  const cmpCat: Partial<Record<ServicePageId, "kitchen" | "exterior" | "deck">> = { kitchen: "kitchen", cabinets: "kitchen", rental: "kitchen", painting: "exterior", repairs: "deck", remodeling: "kitchen" };
+  const cmp = cmpCat[id] ? c.work.cells.find((x) => x.kind === "compare" && x.cat === cmpCat[id]) : undefined;
 
   return (
     <>
@@ -64,6 +69,20 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
           </Reveal>
         </div>
       </section>
+
+      {cmp && (
+        <section className="sec bg-bone" data-tone="light">
+          <div className="shell grid gap-8 lg:grid-cols-[1.2fr_.8fr] lg:gap-gutter lg:items-center">
+            <Reveal><Compare before={cmp.before!} after={cmp.after!} altBefore={cmp.altBefore!} altAfter={cmp.altAfter!} labels={[c.ui.before, c.ui.after]} ariaLabel={c.ui.dragToCompare} /></Reveal>
+            <Reveal delay={0.1}>
+              <span className="eyebrow text-amber-deep mb-4">{c.home.workEyebrow}</span>
+              <h2 className="d h-md text-navy">{c.home.workH}</h2>
+              <p className="mt-4 max-w-[48ch] text-muted">{c.home.workP}</p>
+              <Link className="btn btn--ink mt-6" href={href(locale, "work")}>{c.home.workBtn} <Arrow /></Link>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* why us */}
       <section className="sec bg-navy-2 text-bone" data-tone="dark">
@@ -139,6 +158,7 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
             <Suspense fallback={null}><QuoteForm locale={locale} service={s.form} compact /></Suspense>
           </Reveal>
           <Reveal delay={0.1} className="grid gap-8">
+            <Promise locale={locale} />
             <div>
               <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-3">{ui.related}</h2>
               <ul className="grid gap-2">{s.related.map((r) => <li key={r}><Link className="text-link text-navy" href={serviceHref(locale, r)}>{serviceById(r).t[locale].name} <Arrow /></Link></li>)}</ul>

@@ -58,6 +58,18 @@ Transform and opacity only. No animated filters, box-shadows or large blurred su
 - No stored choice + browser language Spanish on an English page (or vice-versa) shows a small suggestion pill. No automatic redirect (Google advises against it).
 - Every page carries `<link rel="alternate" hreflang>` for en / es / x-default; the sitemap does too.
 
+## Build report
+
+`/NewSiteNewYou` (any capitalization) is an unlisted, noindex report of everything that changed, with charts: Lighthouse before/after, SEO title and description lengths across all 58 URLs, site map, commit timeline, conversion research, a competitor comparison, the integrations checklist and the Angi-to-Google budget plan. Source: `src/app/changelog/`. It is not in the sitemap and is not linked from the site.
+
+## Review requests
+
+`/review` and `/es/deje-su-resena` are unlisted pages to text a customer the day a job finishes: one tap to Google, Angi or HomeAdvisor. Reviews are the asset a paid directory rents you; this builds them where the leads are free.
+
+## Integrations
+
+Every tracking and lead channel is already in the code and switches on when its ID is set in Vercel (see `.env.example`): Google Ads conversions (form leads, call clicks, website-call number swap), GA4, Meta pixel, Microsoft UET, CallRail, GTM; lead delivery through Resend, Twilio, a CRM/Sheet webhook and Web3Forms. Nothing loads until its ID exists.
+
 ## Before launch (search `TODO` in `content.ts`)
 
 1. Real phone number, email, license number, Google review link.

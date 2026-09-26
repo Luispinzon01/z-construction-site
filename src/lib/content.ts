@@ -81,11 +81,13 @@ export interface SiteContent {
   nav: Record<"home" | "services" | "about" | "work" | "reviews" | "contact", string>;
   ui: {
     freeQuote: string; quoteShort: string; call: string; menu: string; primaryNav: string; quickActions: string;
-    langSwitch: string; langSwitchLong: string; langTitle: string; scroll: string; before: string; after: string; dragToCompare: string;
+    langSwitch: string; langSwitchLong: string; whatsappCta: string; langTitle: string; scroll: string; before: string; after: string; dragToCompare: string;
     readMore: string; skip: string; rating: string; ratingSources: string; starsLabel: string; whatsapp: string; home: string;
   };
   footer: { blurb: string; badge: string; services: string; company: string; contact: string; hours: string[]; rights: string; otherSite: string; areas: string; resources: string; estimator: string; guides: string; privacy: string; allAreas: string };
   cta: { h: string; p: string; btn: string; word: string };
+  promise: { h: string; items: string[] };
+  reviewRequest: { eyebrow: string; h1: string; lede: string; google: string; angi: string; ha: string; note: string; thanks: string };
   meta: Record<PageKey, { title: string; description: string }>;
   home: {
     eyebrow: string; h1: string; h1Accent: string; lede: string; primary: string; secondary: string; meta: string[]; marquee: string[];
@@ -131,7 +133,7 @@ const en: SiteContent = {
   nav: { home: "Home", services: "Services", about: "About", work: "Our Work", reviews: "Reviews", contact: "Contact" },
   ui: {
     freeQuote: "Get a Free Quote", quoteShort: "Free Quote", call: "Call", menu: "Menu", primaryNav: "Primary", quickActions: "Quick actions",
-    langSwitch: "ES", langSwitchLong: "ES · Español", langTitle: "Leer en español", scroll: "Scroll", before: "Before", after: "After",
+    langSwitch: "Español", langSwitchLong: "Español", whatsappCta: "Message us on WhatsApp", langTitle: "Leer en español", scroll: "Scroll", before: "Before", after: "After",
     dragToCompare: "Drag to compare before and after", readMore: "Read more reviews", skip: "Skip to content", rating: "5.0", ratingSources: "Angi · HomeAdvisor", starsLabel: "5 out of 5 stars",
     whatsapp: "WhatsApp", home: "Home",
   },
@@ -141,6 +143,8 @@ const en: SiteContent = {
     hours: ["Mon–Fri 7:00am–6:00pm", "Sat 8:00am–2:00pm"], rights: "All rights reserved.", otherSite: "Sitio en español",
     areas: "Service areas", resources: "Plan your project", estimator: "Cost estimator", guides: "Remodeling guides", privacy: "Privacy policy", allAreas: "All service areas",
   },
+  reviewRequest: { eyebrow: "Thank you", h1: "How did we do?", lede: "Two minutes from you is how the next family on your street finds a contractor they can trust. Pick whichever site you already use.", google: "Review us on Google", angi: "Review us on Angi", ha: "Review us on HomeAdvisor", note: "If anything wasn't right, call or text the owner first and we'll make it right.", thanks: "Thank you for trusting us with your home." },
+  promise: { h: "Our promise, in writing", items: ["A written scope and price before any work starts", "No surprise invoices: changes are agreed in writing first", "Licensed for residential work in Alabama and insured", "Clean site every day, and a walkthrough before we call it done", "A reply within one business day, in English or Spanish"] },
   cta: { h: "Ready to start your project?", p: "Tell us what you have in mind. We come out, take a look, and send a clear, written estimate. No pressure, no surprises.", btn: "Get a Free Quote", word: "Let's Build" },
   meta: {
     home: { title: "Painting & Remodeling in Auburn, AL | Z Construction", description: "Family-owned painters and remodelers in Auburn & Opelika, AL. Kitchens, baths, cabinets, floors and rental turns. Free written estimates. Hablamos español." },
@@ -153,12 +157,13 @@ const en: SiteContent = {
     estimator: { title: "Remodeling Cost Calculator | Auburn & Opelika, AL (2026)", description: "Free 2026 cost calculator for Auburn and Opelika, AL: kitchens, baths, additions, painting, cabinets, flooring and rental turns. A price range in 30 seconds." },
     guides: { title: "Remodeling Cost & Permit Guides | Auburn & Opelika, AL", description: "Straight answers for Lee County homeowners and landlords: 2026 remodeling costs, permits, checking a contractor license, rental turns and cabinet painting." },
     areas: { title: "Service Areas | Remodeling Contractor in Lee County, AL", description: "We paint and remodel homes in Auburn, Opelika, Smiths Station, Beauregard, Salem, Loachapoka, Waverly and Notasulga, Lee County, Alabama. Free estimates." },
+    review: { title: "Leave a review | Z Construction & Remodeling", description: "Thank you for choosing Z Construction & Remodeling. Leaving a quick review on Google, Angi or HomeAdvisor helps the next Auburn family find us." },
     privacy: { title: "Privacy Policy | Z Construction & Remodeling LLC", description: "How Z Construction & Remodeling LLC collects, uses and protects what you send through this website, including our text-message terms and your choices." },
   },
   home: {
     eyebrow: "Painting & remodeling contractor in Auburn & Opelika, AL",
     h1: "Built with precision.", h1Accent: "Finished like art.",
-    lede: "Family-owned painting and remodeling for Auburn and Opelika homes. Paint, cabinets, floors, kitchens, baths and additions, quoted in writing and done by the owner's own crew.",
+    lede: "Family-owned painters and remodelers in Auburn and Opelika. A written price before we start, the owner on every job, and the same crew from the first day to the last coat.",
     primary: "Get my free estimate", secondary: "Price my project",
     proof: [
       { value: 5, decimals: 1, label: "Star rating", note: "Every review so far" },
@@ -172,7 +177,7 @@ const en: SiteContent = {
       p: "Auburn's lease calendar doesn't wait. We repaint, replace worn floors, fix what tenants broke and clear the punch list in days, then send photos so out-of-town owners never have to drive in.",
       points: ["Full repaint: walls, trim and doors", "LVP flooring that stands up to tenants", "Drywall, doors, fixtures and punch lists", "Photo report when the unit is ready"],
       btn: "Plan a rental turn" },
-    meta: ["Free written estimates", "Owner on every job", "5.0 customer rating", "Hablamos español"],
+    meta: ["Free written estimates", "Prices on every service page", "Owner on every job", "Hablamos español"],
     marquee: ["Home Additions", "Kitchens & Baths", "Whole-Home Remodels", "Interior Painting", "Exterior Painting", "Cabinet Refinishing", "Flooring", "Repairs & Punch Lists", "Auburn · Opelika · Lee County"],
     processEyebrow: "How it works", processH: "No surprises. That's the whole process.", processLede: "Four steps, clearly communicated, so you always know where your project stands.",
     steps: [
@@ -290,7 +295,7 @@ const en: SiteContent = {
   contact: {
     eyebrow: "Contact · Free estimates in Auburn & Opelika", h1: "Get a free quote",
     lede: "Tell us about the project. We'll follow up within one business day to set a time to come out.",
-    formEyebrow: "Request an estimate", formH: "Tell us what you're thinking", formP: "Every field marked required helps us give you a faster, more accurate answer.",
+    formEyebrow: "Request an estimate", formH: "Tell us what you're thinking", formP: "Three quick questions and we'll be in touch with a time to come out.",
     f: { name: "Name", phone: "Phone", email: "Email", city: "Property city", cityPh: "Auburn, Opelika…", service: "Service", timeline: "Timeline", budget: "Budget range", contactPref: "Best way to reach you", smsConsent: "OK to text me about this request. Msg & data rates may apply. Reply STOP to opt out.", select: "Select one", message: "Tell us about the project", messagePh: "What room, what you'd like to change, anything we should know about the house.",
       send: "Get my free estimate", sending: "Sending…", next: "Next", back: "Back", stepOf: "Step {n} of 3", steps: ["Your project", "The details", "How to reach you"], note: "We reply within one business day. Your info is never shared or sold.",
       ok: "Thanks, we got it. Expect a call or email within one business day.", err: "Something went wrong sending the form. Please call or text us directly and we will take care of you.", honeypot: "Leave this empty", privacy: "Privacy policy" },
@@ -344,7 +349,7 @@ const es: SiteContent = {
   nav: { home: "Inicio", services: "Servicios", about: "Nosotros", work: "Proyectos", reviews: "Reseñas", contact: "Contacto" },
   ui: {
     freeQuote: "Pida su cotización gratis", quoteShort: "Cotización gratis", call: "Llamar", menu: "Menú", primaryNav: "Principal", quickActions: "Acciones rápidas",
-    langSwitch: "EN", langSwitchLong: "EN · English", langTitle: "Read in English", scroll: "Baje", before: "Antes", after: "Después",
+    langSwitch: "English", langSwitchLong: "English", whatsappCta: "Escríbanos por WhatsApp", langTitle: "Read in English", scroll: "Baje", before: "Antes", after: "Después",
     dragToCompare: "Deslice para comparar el antes y el después", readMore: "Ver más reseñas", skip: "Ir al contenido", rating: "5.0", ratingSources: "Angi · HomeAdvisor", starsLabel: "5 de 5 estrellas",
     whatsapp: "WhatsApp", home: "Inicio",
   },
@@ -354,6 +359,8 @@ const es: SiteContent = {
     hours: ["Lun–Vie 7:00am–6:00pm", "Sáb 8:00am–2:00pm"], rights: "Todos los derechos reservados.", otherSite: "Site in English",
     areas: "Zonas de servicio", resources: "Planee su proyecto", estimator: "Calculadora de costos", guides: "Guías de remodelación", privacy: "Política de privacidad", allAreas: "Todas las zonas",
   },
+  reviewRequest: { eyebrow: "Gracias", h1: "¿Cómo le fue con nosotros?", lede: "Dos minutos de su tiempo son la forma en que la siguiente familia de su calle encuentra un contratista de confianza. Use el sitio que ya conozca.", google: "Reseña en Google", angi: "Reseña en Angi", ha: "Reseña en HomeAdvisor", note: "Si algo no quedó bien, llame o mande mensaje al dueño primero y lo arreglamos.", thanks: "Gracias por confiarnos su casa." },
+  promise: { h: "Nuestro compromiso, por escrito", items: ["Alcance y precio por escrito antes de empezar cualquier trabajo", "Sin cobros sorpresa: cualquier cambio se acuerda por escrito primero", "Licencia para trabajo residencial en Alabama y seguro vigente", "Obra limpia cada día y un recorrido final antes de dar por terminado", "Respuesta en un día hábil, en español o en inglés"] },
   cta: { h: "¿Tiene un proyecto en mente?", p: "Cuéntenos qué quiere hacer. Pasamos a su casa, revisamos con calma y le dejamos un presupuesto claro y por escrito. Sin compromiso, sin presión y sin sorpresas después.", btn: "Pida su cotización gratis", word: "Manos a la obra" },
   meta: {
     home: { title: "Pintura y remodelación en Auburn, AL | Hablamos español", description: "Pintores y remodeladores en Auburn y Opelika, AL: cocinas, baños, gabinetes, pisos y casas de renta. Empresa familiar. Presupuesto gratis en español." },
@@ -366,12 +373,13 @@ const es: SiteContent = {
     estimator: { title: "Calculadora de costos de remodelación | Auburn, AL 2026", description: "Calcule gratis cuánto cuesta remodelar en Auburn y Opelika en 2026: cocina, baño, ampliación, pintura, gabinetes, pisos o casa de renta. En 30 segundos." },
     guides: { title: "Guías de costos y permisos para remodelar | Auburn, AL", description: "Respuestas claras para familias y dueños de rentas del condado de Lee: costos 2026, permisos, cómo verificar a un contratista, casas de renta y gabinetes." },
     areas: { title: "Zonas de servicio | Contratista en el condado de Lee, AL", description: "Pintamos y remodelamos casas en Auburn, Opelika, Smiths Station, Beauregard, Salem, Loachapoka, Waverly y Notasulga, condado de Lee. Hablamos español." },
+    review: { title: "Déjenos su reseña | Z Construction & Remodeling", description: "Gracias por elegir a Z Construction & Remodeling. Una reseña rápida en Google, Angi o HomeAdvisor ayuda a la siguiente familia de Auburn a encontrarnos." },
     privacy: { title: "Política de privacidad | Z Construction & Remodeling", description: "Cómo Z Construction & Remodeling LLC recopila, usa y protege lo que usted envía por este sitio, incluidos los términos de mensajes de texto y sus opciones." },
   },
   home: {
     eyebrow: "Pintura y remodelación de casas en Auburn y Opelika, AL",
     h1: "Construido con precisión.", h1Accent: "Terminado con arte.",
-    lede: "Empresa familiar de pintura y remodelación para casas de Auburn y Opelika. Pintura, gabinetes, pisos, cocinas, baños y ampliaciones, con presupuesto por escrito y hechos por la propia cuadrilla del dueño. Y lo atendemos en español.",
+    lede: "Pintores y remodeladores de Auburn y Opelika, empresa familiar. Precio por escrito antes de empezar, el dueño en cada obra y la misma cuadrilla del primer día a la última mano de pintura. Lo atendemos en español.",
     primary: "Pida su presupuesto gratis", secondary: "Calcule su proyecto",
     proof: [
       { value: 5, decimals: 1, label: "Calificación", note: "En todas las reseñas hasta hoy" },
@@ -385,7 +393,7 @@ const es: SiteContent = {
       p: "En Auburn el calendario de rentas no espera. Pintamos, cambiamos el piso gastado, reparamos lo que dejó el inquilino y resolvemos los pendientes en días. Al terminar le mandamos fotos, para que no tenga que venir si vive en otra ciudad.",
       points: ["Pintura completa: paredes, molduras y puertas", "Piso LVP que aguanta el uso de inquilinos", "Tablaroca, puertas, accesorios y pendientes", "Reporte con fotos cuando la casa está lista"],
       btn: "Planear el cambio de inquilino" },
-    meta: ["Presupuesto gratis y por escrito", "El dueño en cada obra", "Calificación de 5.0", "Atención en español"],
+    meta: ["Presupuesto gratis y por escrito", "Precios en cada servicio", "El dueño en cada obra", "Atención en español"],
     marquee: ["Ampliaciones", "Cocinas y baños", "Remodelaciones completas", "Pintura interior", "Pintura exterior", "Gabinetes", "Pisos", "Reparaciones", "Auburn · Opelika · Condado de Lee"],
     processEyebrow: "Así trabajamos", processH: "Sin sorpresas. Así de simple.", processLede: "Cuatro pasos, bien explicados, para que usted siempre sepa en qué va su obra.",
     steps: [
@@ -503,7 +511,7 @@ const es: SiteContent = {
   contact: {
     eyebrow: "Contacto · Cotización gratis en Auburn y Opelika", h1: "Pida su cotización gratis",
     lede: "Cuéntenos de su proyecto. En un día hábil le llamamos para ponernos de acuerdo y pasar a su casa. Lo atendemos en español.",
-    formEyebrow: "Solicite su presupuesto", formH: "Cuéntenos qué tiene en mente", formP: "Con estos datos le damos una respuesta más rápida y más precisa.",
+    formEyebrow: "Solicite su presupuesto", formH: "Cuéntenos qué tiene en mente", formP: "Tres preguntas rápidas y le escribimos para agendar la visita.",
     f: { name: "Nombre", phone: "Teléfono", email: "Correo electrónico", city: "Ciudad de la propiedad", cityPh: "Auburn, Opelika…", service: "Servicio", timeline: "¿Para cuándo?", budget: "Presupuesto aproximado", contactPref: "¿Cómo prefiere que le contactemos?", smsConsent: "Acepto recibir mensajes de texto sobre esta solicitud. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.", select: "Elija una opción", message: "Cuéntenos del proyecto", messagePh: "Qué espacio, qué le gustaría cambiar y cualquier detalle de la casa que debamos saber.",
       send: "Pedir mi presupuesto gratis", sending: "Enviando…", next: "Siguiente", back: "Atrás", stepOf: "Paso {n} de 3", steps: ["Su proyecto", "Los detalles", "Cómo contactarlo"], note: "Le respondemos en un día hábil. Sus datos no se comparten ni se venden.",
       ok: "Listo, recibimos su solicitud. Espere nuestra llamada o correo en un día hábil.", err: "Hubo un problema al enviar el formulario. Llámenos o mándenos un mensaje y con gusto lo atendemos.", honeypot: "Deje este campo vacío", privacy: "Política de privacidad" },

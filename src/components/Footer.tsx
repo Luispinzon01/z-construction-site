@@ -35,7 +35,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             <div>
               <Link className="inline-block mb-5" href={href(locale, "home")} aria-label={BRAND.name}><Image src="/brand/logo-on-dark.png" alt={BRAND.name} width={1076} height={680} sizes="220px" className="w-[220px] h-auto" /></Link>
               <p className="max-w-[40ch] text-step--1">{c.footer.blurb}</p>
-              <span className="inline-flex items-center gap-2 mt-4 rounded-full border border-hairline-d px-3 py-1.5 font-mono text-[.72rem] tracking-[.12em] uppercase text-bone before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-amber">{c.footer.badge}</span>
+              <span className="inline-flex items-center gap-2 mt-4 rounded-full border border-hairline-d px-3 py-1.5 font-mono text-[.72rem] tracking-[.12em] uppercase text-bone before:content-[''] before:w-[7px] before:h-[7px] before:rounded-full before:bg-amber">{c.footer.badge}{/^#?0+$/.test(BRAND.license.replace(/\D/g, "")) ? "" : ` · HBLB ${BRAND.license}`}</span>
             </div>
             <div><H>{c.footer.services}</H><ul className="grid gap-2">{SERVICE_PAGES.map((s) => <L key={s.id} to={serviceHref(locale, s.id)}>{s.t[locale].name}</L>)}</ul></div>
             <div className="grid gap-10 content-start">
@@ -69,9 +69,14 @@ export default function Footer({ locale }: { locale: Locale }) {
         </div>
       </footer>
       {/* sticky phone-width action bar: call · WhatsApp · quote */}
-      <div className="fixed left-3 right-3 bottom-3 z-[900] grid grid-cols-[1fr_auto_1.45fr] gap-1.5 p-1.5 rounded-full bg-navy-2/95 shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)] lg:hidden" aria-label={c.ui.quickActions} data-track="mobile-bar">
-        <a href={`tel:${BRAND.tel}`} className="h-[46px] rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.06em] text-bone border border-hairline-d-strong"><Phone className="w-4 h-4" /> {c.ui.call}</a>
-        <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /></a>
+      {/* Mobile bar. Spanish path: WhatsApp is a full button and comes first. */}
+      <div className={`fixed left-3 right-3 bottom-3 z-[900] grid gap-1.5 p-1.5 rounded-full bg-navy-2/95 shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)] lg:hidden ${locale === "es" ? "grid-cols-[1.3fr_auto_1.2fr]" : "grid-cols-[1fr_auto_1.45fr]"}`} aria-label={c.ui.quickActions} data-track="mobile-bar">
+        {locale === "es"
+          ? <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.04em] text-[.95rem] text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /> WhatsApp</a>
+          : <a href={`tel:${BRAND.tel}`} className="h-[46px] rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.06em] text-bone border border-hairline-d-strong"><Phone className="w-4 h-4" /> {c.ui.call}</a>}
+        {locale === "es"
+          ? <a href={`tel:${BRAND.tel}`} aria-label={c.ui.call} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone border border-hairline-d-strong"><Phone className="w-5 h-5" /></a>
+          : <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /></a>}
         <Link href={href(locale, "contact")} className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-1.5 no-underline font-display uppercase font-bold tracking-[.04em] whitespace-nowrap text-[.95rem] bg-amber text-navy-2">{c.ui.quoteShort} <Arrow className="w-4 h-4 max-[380px]:hidden" /></Link>
       </div>
     </>

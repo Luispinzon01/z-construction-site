@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import PageHero from "@/components/PageHero";
 import QuoteForm from "@/components/QuoteForm";
+import Promise from "@/components/Promise";
 import { Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
 import Link from "next/link";
@@ -28,6 +29,7 @@ export default function ContactPage({ locale }: { locale: Locale }) {
             <Suspense fallback={null}><QuoteForm locale={locale} /></Suspense>
           </Reveal>
           <Reveal delay={0.1} className="grid gap-4">
+            <Promise locale={locale} />
             <Card title={k.callH}><a className="d text-step-2 text-navy hover:text-amber-deep no-underline" href={`tel:${BRAND.tel}`}>{BRAND.phone}</a><p className="mt-2 text-step--1 text-muted">{k.callP}</p></Card>
             <Card title={k.waH}><a className="d text-step-1 text-navy hover:text-amber-deep no-underline" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener">WhatsApp →</a><p className="mt-2 text-step--1 text-muted">{k.waP}</p></Card>
             <Card title={k.emailH}><a className="d text-step-1 text-navy hover:text-amber-deep no-underline break-all" href={`mailto:${BRAND.email}`}>{BRAND.email}</a><p className="mt-2 text-step--1 text-muted">{k.emailP}</p></Card>

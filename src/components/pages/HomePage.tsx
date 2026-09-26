@@ -7,7 +7,7 @@ import Compare from "@/components/Compare";
 import CtaBand from "@/components/CtaBand";
 import SectionHead from "@/components/SectionHead";
 import ReviewsBlock from "@/components/ReviewsBlock";
-import { Arrow, Check } from "@/components/Icons";
+import { Arrow, Check, WhatsApp } from "@/components/Icons";
 import { Reveal, Stagger, Item, SplitWords, Counter, Magnetic } from "@/components/motion";
 import { BRAND, CONTENT, type Service } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
@@ -64,7 +64,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
             <p className="rise lede text-bone/95" style={{ ["--d" as string]: ".55s" }}>{h.lede}</p>
             <div className="rise flex flex-wrap gap-3 mt-2" style={{ ["--d" as string]: ".7s" }}>
               <Magnetic><Link className="btn btn--solid" href={href(locale, "contact")}>{h.primary} <Arrow /></Link></Magnetic>
-              <Link className="btn btn--ghost" href={href(locale, "estimator")}>{h.secondary}</Link>
+              {/* Spanish-speaking households reach for WhatsApp first (Pew 2024: 54% of Hispanic adults), so the Spanish path offers it up front. */}
+              {locale === "es"
+                ? <a className="btn btn--ghost" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp className="w-[18px] h-[18px]" /> {c.ui.whatsappCta}</a>
+                : <Link className="btn btn--ghost" href={href(locale, "estimator")}>{h.secondary}</Link>}
             </div>
             <ul className="flex flex-wrap gap-x-7 gap-y-2.5 mt-6 pt-5 border-t border-hairline-d-strong slate text-bone">
               {h.meta.map((m, i) => <li key={m} className="rise flex items-center gap-2" style={{ ["--d" as string]: `${0.85 + i * 0.07}s` }}><Check className="w-3.5 h-3.5 text-amber" /> {m}</li>)}

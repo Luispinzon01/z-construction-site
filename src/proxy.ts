@@ -13,6 +13,14 @@ export const config = {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  /* Unlisted build report. Any spelling of /NewSiteNewYou serves the
+     /changelog route; /changelog itself is not reachable directly (it falls
+     through to the locale router and 404s). The page is noindex and is not in
+     the sitemap. */
+  if (pathname.toLowerCase() === "/newsitenewyou") {
+    const url = request.nextUrl.clone(); url.pathname = "/changelog";
+    return NextResponse.rewrite(url);
+  }
   /* One URL per page: mixed-case paths (/Services, /es/Servicios) rendered
      as duplicates of the lowercase page. Send them to the canonical spelling. */
   if (pathname !== pathname.toLowerCase()) {

@@ -7,6 +7,7 @@ import WorkPage from "@/components/pages/WorkPage";
 import ReviewsPage from "@/components/pages/ReviewsPage";
 import ContactPage from "@/components/pages/ContactPage";
 import ThanksPage from "@/components/pages/ThanksPage";
+import ReviewRequestPage from "@/components/pages/ReviewRequestPage";
 import EstimatorPage from "@/components/pages/EstimatorPage";
 import GuidesIndexPage from "@/components/pages/GuidesIndexPage";
 import GuidePage from "@/components/pages/GuidePage";
@@ -24,7 +25,7 @@ import { indexableRoutes, resolve, routeHref, type Route } from "@/lib/routes";
 type Params = Promise<{ locale: string; slug?: string[] }>;
 
 export function generateStaticParams() {
-  const routes: Route[] = [...indexableRoutes(), { kind: "page", key: "thanks" }];
+  const routes: Route[] = [...indexableRoutes(), { kind: "page", key: "thanks" }, { kind: "page", key: "review" }];
   return LOCALES.flatMap((locale) =>
     routes.map((r) => routeHref(locale, r)).map((p) => p.replace(/^\/es/, "").replace(/^\//, "")).filter(Boolean).map((s) => ({ locale, slug: s.split("/") })),
   );
@@ -32,7 +33,7 @@ export function generateStaticParams() {
 
 const OG: Record<PageKey, PhotoKey> = {
   home: "hero", services: "kitchen1", about: "worker1", work: "kitchen2", reviews: "porch3", contact: "houseWhite", thanks: "porch1",
-  estimator: "kitchen3", guides: "worker3", areas: "porch1", privacy: "houseWhite",
+  estimator: "kitchen3", guides: "worker3", areas: "porch1", privacy: "houseWhite", review: "porch3",
 };
 
 function metaFor(locale: Locale, r: Route): { title: string; description: string; image: PhotoKey } {
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!r) return {};
   const m = metaFor(locale, r);
   const canonical = absolute(routeHref(locale, r));
-  const noindex = r.kind === "page" && r.key === "thanks";
+  const noindex = r.kind === "page" && (r.key === "thanks" || r.key === "review");
   return {
     title: m.title, description: m.description,
     alternates: { canonical, languages: { "en-US": absolute(routeHref("en", r)), "es-US": absolute(routeHref("es", r)), "x-default": absolute(routeHref("en", r)) } },
@@ -79,6 +80,7 @@ export default async function Page({ params }: { params: Params }) {
     case "reviews": return <ReviewsPage locale={l} />;
     case "contact": return <ContactPage locale={l} />;
     case "thanks": return <ThanksPage locale={l} />;
+    case "review": return <ReviewRequestPage locale={l} />;
     case "estimator": return <EstimatorPage locale={l} />;
     case "guides": return <GuidesIndexPage locale={l} />;
     case "areas": return <AreasIndexPage locale={l} />;

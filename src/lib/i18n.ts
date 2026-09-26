@@ -11,16 +11,16 @@ export const DEFAULT_LOCALE: Locale = "en";
 
 export type PageKey =
   | "home" | "services" | "about" | "work" | "reviews" | "contact" | "thanks"
-  | "estimator" | "guides" | "areas" | "privacy";
+  | "estimator" | "guides" | "areas" | "privacy" | "review";
 
 export const SLUGS: Record<Locale, Record<PageKey, string>> = {
   en: {
     home: "", services: "services", about: "about", work: "our-work", reviews: "reviews", contact: "contact", thanks: "thank-you",
-    estimator: "cost-estimator", guides: "guides", areas: "service-areas", privacy: "privacy-policy",
+    estimator: "cost-estimator", guides: "guides", areas: "service-areas", privacy: "privacy-policy", review: "review",
   },
   es: {
     home: "", services: "servicios", about: "nosotros", work: "proyectos", reviews: "resenas", contact: "contacto", thanks: "gracias",
-    estimator: "calculadora-de-costos", guides: "guias", areas: "zonas-de-servicio", privacy: "politica-de-privacidad",
+    estimator: "calculadora-de-costos", guides: "guias", areas: "zonas-de-servicio", privacy: "politica-de-privacidad", review: "deje-su-resena",
   },
 };
 

@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/i18n";
    OAI-SearchBot (ChatGPT search), PerplexityBot, Claude and Bing is how a
    local contractor gets recommended in AI answers. */
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/thank-you", "/es/gracias", "/api/"];
+  const disallow = ["/thank-you", "/es/gracias", "/review", "/es/deje-su-resena", "/api/"];
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow },
