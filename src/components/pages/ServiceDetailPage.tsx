@@ -13,9 +13,11 @@ import { Reveal, Stagger, Item } from "@/components/motion";
 import { BRAND, CONTENT, photo } from "@/lib/content";
 import { SERVICE_UI, serviceById, type ServicePageId } from "@/lib/content-services";
 import { AREA_PAGES } from "@/lib/content-areas";
-import { ESTIMATOR } from "@/lib/estimator";
+import { GUIDES } from "@/lib/content-guides";
+import { ESTIMATOR, kRange } from "@/lib/estimator";
+import { CONTENT_UPDATED } from "@/lib/seo";
 import { href, type Locale } from "@/lib/i18n";
-import { areaHref, serviceHref } from "@/lib/routes";
+import { areaHref, guideHref, serviceHref } from "@/lib/routes";
 import { faqPage, JsonLd, serviceNode } from "@/lib/schema";
 
 export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: ServicePageId }) {
@@ -26,6 +28,8 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
   const areaNames = AREA_PAGES.length ? AREA_PAGES.map((a) => a.t[locale].name) : ["Auburn", "Opelika", "Smiths Station"];
   /* A before/after pair from the gallery for the categories that have one. */
   const cmpCat: Partial<Record<ServicePageId, "kitchen" | "exterior" | "deck">> = { kitchen: "kitchen", cabinets: "kitchen", rental: "kitchen", painting: "exterior", repairs: "deck", remodeling: "kitchen" };
+  /* Hub → spoke: the guides written for this service, then any that point here as related. */
+  const guides = GUIDES.filter((g) => g.service === id).concat(GUIDES.filter((g) => g.service !== id && s.related.includes(g.service))).slice(0, 4);
   const cmp = cmpCat[id] ? c.work.cells.find((x) => x.kind === "compare" && x.cat === cmpCat[id]) : undefined;
 
   return (
@@ -47,10 +51,11 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
           <Reveal delay={0.1} className="rounded-card border border-hairline bg-bone-2 p-6">
             <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-4">{ui.glance}</h2>
             <dl className="grid gap-4">
-              {([[ui.timeline, t.glance.timeline], [ui.range, t.glance.range], [ui.permit, t.glance.permit]] as const).map(([k, v]) => (
+              {([[ui.timeline, t.glance.timeline], [ui.range, t.glance.range], [ui.permit, t.glance.permit], [ui.who, `${BRAND.name}, ${BRAND.city}, ${BRAND.region}`], [ui.where, ui.whereV], [ui.langs, ui.langsV]] as const).map(([k, v]) => (
                 <div key={k} className="border-b border-hairline pb-3 last:border-0 last:pb-0"><dt className="slate text-amber-deep">{k}</dt><dd className="mt-1 text-ink">{v}</dd></div>
               ))}
             </dl>
+            <p className="mt-4 slate text-muted">{ui.updated} <time dateTime={CONTENT_UPDATED}>{new Date(CONTENT_UPDATED + "T12:00:00Z").toLocaleDateString(locale === "es" ? "es-US" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time></p>
             {s.estimator && <Link className="text-link text-navy mt-5" href={`${href(locale, "estimator")}?type=${s.estimator}`}>{ui.estimatorCta} <Arrow /></Link>}
           </Reveal>
         </div>
@@ -109,7 +114,7 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
               {est.map((tier) => (
                 <div key={tier.l.en} className="bg-bone-2 p-6">
                   <span className="slate text-amber-deep">{tier.l[locale]}</span>
-                  <strong className="block d text-step-3 text-navy mt-2">${(tier.lo / 1000).toFixed(tier.lo % 1000 ? 1 : 0)}k–${(tier.hi / 1000).toFixed(tier.hi % 1000 ? 1 : 0)}k</strong>
+                  <strong className="block d text-step-3 text-navy mt-2">{kRange(tier.lo, tier.hi)}</strong>
                   <span className="block mt-2 text-step--1 text-muted">{tier.d[locale]}</span>
                 </div>
               ))}
@@ -137,6 +142,26 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
           </Stagger>
         </div>
       </section>
+
+      {guides.length > 0 && (
+        <section className="sec bg-bone" data-tone="light">
+          <div className="shell">
+            <SectionHead eyebrow={c.footer.guides} h={c.guidesIndex.guidesFor} />
+            <Stagger className="grid gap-px bg-hairline border border-hairline rounded-card overflow-hidden sm:grid-cols-2 xl:grid-cols-4">
+              {guides.map((g) => (
+                <Item key={g.id} className="bg-bone-2">
+                  <Link className="group block h-full p-6 no-underline hover:bg-bone" href={guideHref(locale, g.id)}>
+                    <span className="slate text-amber-deep">{g.t[locale].eyebrow}</span>
+                    <h3 className="d text-step-1 text-navy mt-2 leading-[1.05]">{g.t[locale].h1}</h3>
+                    <p className="mt-2 text-step--1 text-muted">{g.t[locale].lede}</p>
+                    <span className="text-link text-navy mt-4 text-[.8rem] group-hover:text-amber-deep">{c.guidesIndex.read} <Arrow className="w-3.5 h-3.5" /></span>
+                  </Link>
+                </Item>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+      )}
 
       {/* faq */}
       <section className="sec bg-bone" data-tone="light">
@@ -178,7 +203,9 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
 
       <CtaBand locale={locale} h={c.cta.h} p={c.cta.p} btn={c.cta.btn} word={c.cta.word} />
       <JsonLd data={[
-        serviceNode({ name: t.name, description: t.description, path, locale, areas: areaNames, image: photo(s.photo, 1600), lo: est?.[0].lo, hi: est?.[2].hi }),
+        serviceNode({ name: t.name, description: t.description, path, locale, areas: areaNames, image: photo(s.photo, 1600), lo: est?.[0].lo, hi: est?.[2].hi,
+          tiers: est?.map((tier) => ({ name: `${t.name}: ${tier.l[locale]}`, description: tier.d[locale], lo: tier.lo, hi: tier.hi })),
+          guides: guides.map((g) => ({ name: g.t[locale].h1, path: guideHref(locale, g.id) })) }),
         faqPage(t.faq),
       ]} />
     </>

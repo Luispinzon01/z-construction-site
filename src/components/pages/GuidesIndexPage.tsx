@@ -14,7 +14,9 @@ export default function GuidesIndexPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale], gi = c.guidesIndex;
   return (
     <>
-      <PageHero photoKey="worker3" alt={gi.h1} eyebrow={gi.eyebrow} h1={gi.h1} lede={gi.lede} />
+      <PageHero photoKey="worker3" alt={gi.h1} eyebrow={gi.eyebrow} h1={gi.h1} lede={gi.lede}>
+        <Link className="btn btn--ghost self-start mt-2" href={href(locale, "help")}>{c.footer.help} <Arrow /></Link>
+      </PageHero>
       <Breadcrumbs items={[{ name: c.ui.home, path: href(locale, "home") }, { name: c.footer.guides, path: href(locale, "guides") }]} />
       <section className="sec bg-bone" data-tone="light">
         <Stagger className="shell grid gap-6 md:grid-cols-2 xl:grid-cols-3">

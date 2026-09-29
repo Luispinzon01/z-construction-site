@@ -11,18 +11,20 @@
 import type { Locale } from "./i18n";
 import type { PhotoKey } from "./content";
 import type { ServicePageId } from "./content-services";
+import { BRAND } from "./content";
+import { ESTIMATOR, money, type EstimatorType } from "./estimator";
 
 export type AreaId = "auburn" | "opelika" | "smiths-station" | "lee-county";
 export interface AreaCopy {
   name: string; title: string; description: string; eyebrow: string; h1: string; lede: string;
   intro: string[]; local: { h: string; p: string }[]; places: string[]; faq: { q: string; a: string }[];
 }
-export interface AreaPage { id: AreaId; slug: Record<Locale, string>; photo: PhotoKey; map: string; drive: string; popular: ServicePageId[]; t: Record<Locale, AreaCopy> }
+export interface AreaPage { id: AreaId; slug: Record<Locale, string>; photo: PhotoKey; map: string; drive: Record<Locale, string>; popular: ServicePageId[]; t: Record<Locale, AreaCopy> }
 
 export const AREA_PAGES: AreaPage[] = [
   /* ------------------------------------------------------------ AUBURN */
   {
-    id: "auburn", slug: { en: "auburn-al", es: "auburn-al" }, photo: "porch3", map: "Auburn, AL", drive: "Home base",
+    id: "auburn", slug: { en: "auburn-al", es: "auburn-al" }, photo: "porch3", map: "Auburn, AL", drive: { en: "Home base", es: "Nuestra base" },
     popular: ["kitchen", "bathroom", "rental", "cabinets"],
     t: {
       en: {
@@ -73,7 +75,7 @@ export const AREA_PAGES: AreaPage[] = [
   },
   /* ------------------------------------------------------------ OPELIKA */
   {
-    id: "opelika", slug: { en: "opelika-al", es: "opelika-al" }, photo: "porch2", map: "Opelika, AL", drive: "10–15 minutes",
+    id: "opelika", slug: { en: "opelika-al", es: "opelika-al" }, photo: "porch2", map: "Opelika, AL", drive: { en: "10–15 minutes", es: "10–15 minutos" },
     popular: ["painting", "kitchen", "bathroom", "repairs"],
     t: {
       en: {
@@ -86,7 +88,7 @@ export const AREA_PAGES: AreaPage[] = [
           "Opelika also has the largest share of Spanish-speaking families in Lee County, and many families relocating for the area's manufacturing employers. We serve both: every estimate and conversation can be in English or Spanish.",
         ],
         local: [
-          { h: "Permits: Opelika Building Inspection Division", p: "Opelika requires plans and permits for construction, plus separate electrical, plumbing and mechanical permits. Plan review typically takes 3–4 business days and the permit card must be posted on site. We handle all of it with Public Works (700 Fox Trail)." },
+          { h: "Permits: Opelika Building Inspection Division", p: "Opelika requires plans and permits for construction, plus separate electrical, plumbing and mechanical permits. Plan review typically takes 3–4 business days and the permit card must be posted on site. We handle all of it with Public Works (710 Fox Trail)." },
           { h: "Historic districts", p: "Exterior changes in the Northside, Downtown and Geneva Street historic districts need a Certificate of Appropriateness. We match original trim, siding and porch details and prepare the application." },
           { h: "Older-home surprises", p: "Pre-1990 homes can hide rot, galvanized plumbing or outdated wiring. We look before we price and tell you what we find before we fix it." },
           { h: "Exterior paint that lasts", p: "Brick ranches and wood-sided homes here take a beating from sun and humidity. We wash, scrape, replace rotten wood and use coatings made for this climate." },
@@ -108,7 +110,7 @@ export const AREA_PAGES: AreaPage[] = [
           "Opelika es la ciudad del condado de Lee con más familias hispanas, y sabemos lo que significa encontrar un contratista que le explique todo en su idioma, por escrito, sin sorpresas. Aquí lo atendemos en español de principio a fin.",
         ],
         local: [
-          { h: "Permisos: Building Inspection de Opelika", p: "Opelika pide planos y permiso de construcción, además de permisos aparte para electricidad, plomería y aire acondicionado. La revisión tarda normalmente de 3 a 4 días hábiles y la tarjeta del permiso tiene que estar a la vista en la obra. Nosotros hacemos todo el trámite con Public Works (700 Fox Trail)." },
+          { h: "Permisos: Building Inspection de Opelika", p: "Opelika pide planos y permiso de construcción, además de permisos aparte para electricidad, plomería y aire acondicionado. La revisión tarda normalmente de 3 a 4 días hábiles y la tarjeta del permiso tiene que estar a la vista en la obra. Nosotros hacemos todo el trámite con Public Works (710 Fox Trail)." },
           { h: "Zonas históricas", p: "Los cambios exteriores en los distritos históricos de Northside, el centro y Geneva Street requieren un Certificado de Conformidad (COA). Igualamos molduras, fachada y detalles del porche originales y preparamos la solicitud." },
           { h: "Sorpresas en casas viejas", p: "Las casas de antes de 1990 pueden esconder madera podrida, tubería galvanizada o cableado viejo. Revisamos antes de cotizar y le avisamos lo que encontremos antes de arreglarlo." },
           { h: "Pintura exterior que dura", p: "Las casas de ladrillo y de madera sufren mucho con el sol y la humedad. Lavamos, raspamos, cambiamos la madera podrida y usamos pinturas hechas para este clima." },
@@ -124,7 +126,7 @@ export const AREA_PAGES: AreaPage[] = [
   },
   /* ------------------------------------------------------------ SMITHS STATION */
   {
-    id: "smiths-station", slug: { en: "smiths-station-al", es: "smiths-station-al" }, photo: "deck2", map: "Smiths Station, AL", drive: "About 25–30 minutes",
+    id: "smiths-station", slug: { en: "smiths-station-al", es: "smiths-station-al" }, photo: "deck2", map: "Smiths Station, AL", drive: { en: "About 25–30 minutes", es: "Unos 25–30 minutos" },
     popular: ["additions", "repairs", "flooring", "painting"],
     t: {
       en: {
@@ -175,7 +177,7 @@ export const AREA_PAGES: AreaPage[] = [
   },
   /* ------------------------------------------------------------ LEE COUNTY */
   {
-    id: "lee-county", slug: { en: "lee-county-al", es: "condado-de-lee-al" }, photo: "deck1", map: "Lee County, AL", drive: "15–30 minutes",
+    id: "lee-county", slug: { en: "lee-county-al", es: "condado-de-lee-al" }, photo: "deck1", map: "Lee County, AL", drive: { en: "15–30 minutes", es: "15–30 minutos" },
     popular: ["remodeling", "additions", "repairs", "painting"],
     t: {
       en: {
@@ -225,3 +227,17 @@ export const AREA_PAGES: AreaPage[] = [
     },
   },
 ];
+
+/* One self-contained passage per town page: who, where, languages and the
+   headline price ranges, in a sentence an assistant can quote whole. Prices
+   come from the estimator table, so they move when it moves. */
+export function areaSummary(locale: Locale, a: AreaPage): string {
+  const r = (k: EstimatorType) => { const t = ESTIMATOR[k].tiers; return `${money(t[0].lo)}–${money(t[2].hi)}`; };
+  const name = a.t[locale].name;
+  if (locale === "es") {
+    const where = a.id === "auburn" ? "su base" : `a ${a.drive.es.toLowerCase()} de su base en Auburn`;
+    return `${BRAND.name} pinta y remodela casas en ${name}, Alabama (${where}), y atiende en español o en inglés. Rangos típicos 2026 aquí: pintura interior desde ${money(ESTIMATOR.interior.tiers[0].lo)}, cocinas ${r("kitchen")}, baños ${r("bath")} y pintura de gabinetes ${r("cabinets")}.`;
+  }
+  const where = a.id === "auburn" ? "its home base" : `${a.drive.en.toLowerCase()} from its Auburn base`;
+  return `${BRAND.name} paints and remodels homes in ${name}, Alabama (${where}), in English or Spanish. Typical 2026 ranges here: interior painting from ${money(ESTIMATOR.interior.tiers[0].lo)}, kitchens ${r("kitchen")}, bathrooms ${r("bath")} and cabinet painting ${r("cabinets")}.`;
+}

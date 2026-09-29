@@ -18,6 +18,7 @@ Z is entering a market where **no remodeler has more than about 30 Google review
 | [06-lsa-meta-and-other-channels.md](06-lsa-meta-and-other-channels.md) | Google Local Services Ads, Facebook/Instagram, Nextdoor, direct mail, realtors, property managers, referrals |
 | [07-lead-system.md](07-lead-system.md) | How the lead pipeline works, how to turn each piece on, speed-to-lead scripts (EN/ES), follow-up cadence, review requests, CRM |
 | [08-budget-and-90-day-plan.md](08-budget-and-90-day-plan.md) | Budgets at $1,500 / $3,000 / $5,000 a month, KPIs, week-by-week 90-day plan |
+| [09-ai-visibility.md](09-ai-visibility.md) + [prompts](ai-visibility-prompts.csv) + [scorecard](ai-visibility-scorecard.csv) | How ChatGPT, Google AI, Copilot and Perplexity pick local businesses (sourced), the company-facts page, a competitor AI-readiness benchmark, the monthly 30-prompt test (EN + ES) and off-site actions ranked |
 | [research/](research/) | The full sourced research (competitors, market & SEO, paid channels) with links |
 
 ## What was built into the website

@@ -60,7 +60,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
           <div className="shell relative grid gap-4 pt-[calc(var(--barh)+5rem)] pb-24 sm:pb-16 md:pb-20">
             {/* The H1 is the plain-language line (service + place), which is what
                 Google reads; the big brand tagline below it is a styled <p>. */}
-            <h1 className="rise eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright font-normal">{h.eyebrow}</h1>
+            <h1 className="rise eyebrow self-start justify-self-start w-fit max-w-full rounded-md bg-navy-2/70 px-2.5 py-1 leading-tight text-amber-bright font-normal">{h.eyebrow}</h1>
             <p className="d d-xl max-w-[13ch]">
               <SplitWords text={h.h1} className="block" delay={0.1} />
               <SplitWords text={h.h1Accent} className="block text-amber" delay={0.45} />
@@ -188,6 +188,8 @@ export default function HomePage({ locale }: { locale: Locale }) {
               </Item>
             ))}
           </Stagger>
+
+          <Reveal className="mt-6"><Link className="text-link text-navy normal-case tracking-normal font-body font-semibold text-step-0" href={href(locale, "help")}>{h.newbie} <Arrow /></Link></Reveal>
 
           <div className="grid gap-8 mt-16 md:mt-24 lg:grid-cols-[1.2fr_.8fr] lg:gap-gutter lg:items-center">
             <Reveal>

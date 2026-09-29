@@ -8,16 +8,19 @@ import QuoteForm from "@/components/QuoteForm";
 import { Arrow, Check, Phone } from "@/components/Icons";
 import { Reveal, Stagger, Item } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
-import { AREA_PAGES, type AreaId } from "@/lib/content-areas";
+import { AREA_PAGES, areaSummary, type AreaId } from "@/lib/content-areas";
+import { CONTENT_UPDATED } from "@/lib/seo";
+import { GUIDES } from "@/lib/content-guides";
 import { SERVICE_PAGES, SERVICE_UI, serviceById } from "@/lib/content-services";
-import { absolute, href, type Locale } from "@/lib/i18n";
-import { areaHref, serviceHref } from "@/lib/routes";
-import { faqPage, JsonLd, BUSINESS_ID } from "@/lib/schema";
+import { href, type Locale } from "@/lib/i18n";
+import { areaHref, guideHref, serviceHref } from "@/lib/routes";
+import { faqPage, JsonLd } from "@/lib/schema";
 
 export default function AreaPage({ locale, id }: { locale: Locale; id: AreaId }) {
   const c = CONTENT[locale], ai = c.areasIndex, ui = SERVICE_UI[locale];
   const a = AREA_PAGES.find((x) => x.id === id)!, t = a.t[locale];
   const path = areaHref(locale, id);
+  const guides = GUIDES.filter((g) => a.popular.includes(g.service) || g.id === "permits").slice(0, 6);
   const others = AREA_PAGES.filter((x) => x.id !== id);
   return (
     <>
@@ -31,11 +34,15 @@ export default function AreaPage({ locale, id }: { locale: Locale; id: AreaId })
 
       <section className="sec bg-bone" data-tone="light">
         <div className="shell grid gap-10 lg:grid-cols-[1.2fr_.8fr] lg:gap-gutter lg:items-start">
-          <Reveal className="grid gap-4 max-w-[62ch] text-muted">{t.intro.map((p) => <p key={p}>{p}</p>)}</Reveal>
+          <Reveal className="grid gap-4 max-w-[62ch] text-muted">
+            <p className="text-ink font-semibold">{areaSummary(locale, a)}</p>
+            {t.intro.map((p) => <p key={p}>{p}</p>)}
+            <p className="slate">{ui.updated} <time dateTime={CONTENT_UPDATED}>{new Date(CONTENT_UPDATED + "T12:00:00Z").toLocaleDateString(locale === "es" ? "es-US" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time></p>
+          </Reveal>
           <Reveal delay={0.1} className="rounded-card border border-hairline bg-bone-2 p-6">
             <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-3">{ai.places}</h2>
             <ul className="grid grid-cols-2 gap-x-4 text-step--1">{t.places.map((p) => <li key={p} className="py-1.5 border-b border-hairline">{p}</li>)}</ul>
-            <p className="mt-4 slate text-amber-deep">{ai.drive}: {a.drive}</p>
+            <p className="mt-4 slate text-amber-deep">{ai.drive}: {a.drive[locale]}</p>
           </Reveal>
         </div>
       </section>
@@ -51,7 +58,7 @@ export default function AreaPage({ locale, id }: { locale: Locale; id: AreaId })
                   <Link className="group block p-6 no-underline text-ink h-full hover:bg-bone" href={serviceHref(locale, sid)}>
                     <h3 className="d text-step-1 text-navy">{s.name} <span className="text-muted">· {t.name}</span></h3>
                     <p className="mt-2 text-step--1 text-muted">{s.glance.range}</p>
-                    <span className="text-link text-amber-deep mt-3 text-[.9rem]">{ai.view} <Arrow /></span>
+                    <span className="text-link text-amber-deep mt-3 text-[.9rem]">{ai.viewService} <Arrow /></span>
                   </Link>
                 </Item>
               );
@@ -95,12 +102,13 @@ export default function AreaPage({ locale, id }: { locale: Locale; id: AreaId })
           <Reveal delay={0.1}>
             <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-3">{c.footer.allAreas}</h2>
             <ul className="grid gap-2">{others.map((o) => <li key={o.id}><Link className="text-link text-navy" href={areaHref(locale, o.id)}>{o.t[locale].name} <Arrow /></Link></li>)}</ul>
+            <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mt-10 mb-3">{c.footer.guides} · {t.name}</h2>
+            <ul className="grid gap-2">{guides.map((g) => <li key={g.id}><Link className="text-link text-navy normal-case tracking-normal font-body font-semibold" href={guideHref(locale, g.id)}>{g.t[locale].h1} <Arrow /></Link></li>)}</ul>
           </Reveal>
         </div>
       </section>
       <CtaBand locale={locale} h={c.cta.h} p={c.cta.p} btn={c.cta.btn} word={c.cta.word} />
       <JsonLd data={[
-        { "@context": "https://schema.org", "@type": "WebPage", "@id": `${absolute(path)}#page`, url: absolute(path), name: t.title, inLanguage: locale, about: { "@id": BUSINESS_ID }, spatialCoverage: { "@type": "Place", name: a.map } },
         faqPage(t.faq),
       ]} />
     </>

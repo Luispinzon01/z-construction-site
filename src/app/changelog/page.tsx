@@ -27,6 +27,7 @@ const COMMITS = [
   { d: "Sep 25 19:16", h: "0227048", n: 15, s: "Font diet, phone in mid-size nav, headline spacing fix" },
   { d: "Sep 25 22:40", h: "489c898", n: 550, s: "Second pass: promise block, Spanish WhatsApp-first, review page, this report" },
   { d: "Sep 25 23:50", h: "de759f9", n: 293, s: "Third pass: home-page prices, share cards, price catalog schema" },
+  { d: "Sep 29", h: "fourth", n: 3096, s: "Fourth pass: 7 guides, question hub, facts page, entity graph, AI-search layer" },
 ];
 
 function H2({ k, children }: { k: string; children: React.ReactNode }) {
@@ -242,6 +243,11 @@ export default function ChangelogPage() {
             [true, "Honest proof only: no invented counters, no sample reviews, license placeholder hidden"],
             [true, "Review-request page to text customers after every job: /review and /es/deje-su-resena (one tap to Google, Angi, HomeAdvisor)"],
             [true, "Prices on the home page, branded share cards on every page, price catalog in structured data"],
+            [true, "13 bilingual guides, 60-question hub, company facts page, connected schema graph, llms-full.txt, IndexNow"],
+            [false, "Confirm EPA lead-safe (RRP) firm certification: required to paint pre-1978 homes, and a selling point once confirmed"],
+            [false, "Owner name for guide authorship (BRAND.owner in content.ts) and an optional headshot"],
+            [false, "Yelp + Bing Places + Apple Business profiles with identical name/phone (ChatGPT's local cards come mostly from Yelp)"],
+            [false, "Search Console + Bing Webmaster verification tokens and an INDEXNOW_KEY in Vercel; run the monthly AI prompt test (docs/growth/ai-visibility-prompts.csv)"],
             [false, "Turn off Vercel Deployment Protection for Production (site currently redirects to a Vercel login and is marked noindex)"],
             [false, "Connect the real domain and set NEXT_PUBLIC_SITE_URL"],
             [false, "Real phone, WhatsApp number, email, license number in src/lib/content.ts"],
@@ -289,6 +295,35 @@ export default function ChangelogPage() {
                 <li><b className="text-bone">Fonts bundled for the cards.</b> Barlow and Barlow Condensed (open license) ship in the repo so the card renders the same on Vercel as on a laptop.</li>
               </ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOURTH PASS: SEO + AI SEARCH */}
+      <section className="shell py-10 md:py-14 border-t border-hairline-d">
+        <H2 k="09 · Search & AI answers">Built to be the answer, in both languages</H2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          <Stat label="Guides" value="13" delta="from 6" note="1,100–1,450 words each, EN + ES, sourced" />
+          <Stat label="Questions answered" value="60 × 2" delta="new" note="/questions · /es/preguntas-frecuentes" />
+          <Stat label="Indexable pages" value="76" delta="from 58" note="Every page has its Spanish twin" />
+          <Stat label="Schema problems" value="0" note="Graph audit over every sitemap URL" />
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card title="AI-search readiness, Z vs the local field" sub="Checked Sep 29, 2026 on each competitor's homepage, robots.txt and llms.txt. One point each: AI crawlers allowed, business schema, published prices, Spanish pages, answer/FAQ content, visible update dates. Web searches for 'pintores en Auburn Alabama' and 'contratista que hable español Auburn' surfaced no contractor at all: the Spanish lane is empty." table={{ head: ["Site", "Score (of 6)", "Prices", "Spanish"], rows: [["Z Construction", 6, "Yes", "Yes"], ["Five Star Painting", 3, "No", "No"], ["JL Remodeling", 3, "No", "No"], ["C&A Painting", 3, "No", "No"], ["Old Number One Customs", 3, "Inner pages", "No"], ["E&S (alt site)", 2, "No", "No"], ["First Choice Painting", 2, "No", "No"], ["Kelleys Painting", 2, "No", "No"], ["E&S Contractor Painting", 1, "No", "No"], ["CertaPro", 1, "No", "No"], ["Alabama Construction Pros", 1, "No", "No"], ["TLC Design/Build", 1, "No", "No"], ["Triple B", 0, "No", "No"]] }}>
+            <Bars rows={[{ label: "Z Construction", value: 6 }, { label: "Five Star", value: 3 }, { label: "JL Remodeling", value: 3 }, { label: "C&A Painting", value: 3 }, { label: "Old Number One", value: 3 }, { label: "First Choice", value: 2 }, { label: "Kelleys", value: 2 }, { label: "E&S", value: 1 }, { label: "CertaPro", value: 1 }, { label: "TLC", value: 1 }]} max={6} emphasis={0} labelW={150} />
+            <p className="mt-2 text-[.78rem] text-bone/60">Full method and sources: docs/growth/09-ai-visibility.md.</p>
+          </Card>
+          <div className="rounded-card border border-hairline-d bg-bone/[.03] p-5 md:p-6">
+            <h3 className="d text-step-1 leading-none mb-4">What changed</h3>
+            <ul className="grid gap-2.5 text-step--1 text-bone/85">
+              <li><b className="text-bone">Company facts page</b> (/company-facts, /es/datos-de-la-empresa): the one dated, quotable source of truth about the business, which the business schema points to.</li>
+              <li><b className="text-bone">Question hub for first-timers and landlords</b>: 60 questions per language in two lanes (homeowners; landlords, property managers, realtors, HOAs), a live accent-proof filter, a 22-term glossary and an Auburn-vs-Opelika table of permit offices, utilities, historic districts and Alabama 811, each checked against an official site.</li>
+              <li><b className="text-bone">Seven new guides</b>: painter pricing, when to paint an exterior in Alabama, builder-grade upgrades, tub-to-shower, LVP vs laminate vs tile in humidity, hiring a Spanish-speaking contractor (written Spanish-first), student-condo upkeep. Every price comes from the estimator table; every outside figure links its source.</li>
+              <li><b className="text-bone">One connected entity graph</b>: one WebPage per URL tied to its breadcrumb, main entity, the business and its other-language twin; tiered offers on services; citations and word counts on guides.</li>
+              <li><b className="text-bone">Crawl layer</b>: image sitemap with honest lastmod (and a fix for invalid XML), language-only hreflang, /llms-full.txt, IndexNow, Search Console and Bing verification hooks.</li>
+              <li><b className="text-bone">Bugs that fed crawlers wrong facts, fixed</b>: the star counter read "0.0" in the HTML; Spanish town pages showed English drive times; the license-search link pointed at a dead state server; the Opelika permit address was wrong (710, not 700, Fox Trail).</li>
+              <li><b className="text-bone">Lighthouse</b>: SEO, accessibility and best practices 100 on every page tested; mobile performance 84–90 in the slow-4G lab.</li>
+            </ul>
           </div>
         </div>
       </section>

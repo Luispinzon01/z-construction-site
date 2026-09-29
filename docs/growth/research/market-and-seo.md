@@ -258,7 +258,7 @@ Auburn-Opelika MSA housing units authorized by building permits (Census Building
   - https://www.auburnal.gov/inspection-services/services/permit-fees/
 
 **City of Opelika permits** [verified]:
-- Building Inspection Division, Public Works, 700 Fox Trail, **334-705-5420**.
+- Building Inspection Division, Public Works, 710 Fox Trail, **334-705-5420**.
 - "Any type of construction requires minimum plans, building permits, electrical, plumbing and mechanical permits"; repairs and maintenance are within the division's scope. Opelika uses the **2021 International Building Code**.
 - Plan review takes 3–4 business days. Sewer assessment fees must be paid before the permit is issued. The job-site permit card must be posted.
 - Inspections use a red-tag / green-tag system. Re-inspection costs $25, rising to $100 after the third red tag.

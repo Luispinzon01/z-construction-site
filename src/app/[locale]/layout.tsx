@@ -14,6 +14,7 @@ import { absolute, href } from "@/lib/i18n";
 import { serviceHref, areaHref } from "@/lib/routes";
 import { BRAND, CONTENT, photo } from "@/lib/content";
 import { isLocale, LOCALES, SITE_URL, type Locale } from "@/lib/i18n";
+import { ownerNode, OWNER_ID } from "@/lib/schema";
 
 /* Barlow Condensed for the display voice: upright, industrial, squared off —
    the type equivalent of a plumb wall. Barlow for body, Space Mono for the
@@ -26,7 +27,13 @@ const display = Barlow_Condensed({ subsets: ["latin"], weight: ["700", "800"], d
 const body = Barlow({ subsets: ["latin"], weight: ["400", "600"], display: "swap", variable: "--font-barlow" });
 const mono = Space_Mono({ subsets: ["latin"], weight: ["400"], display: "swap", preload: false, variable: "--font-mono-sp" });
 
-export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
+/* Search Console / Bing Webmaster ownership: paste the token from each tool's
+   "HTML tag" method into Vercel env vars. Nothing renders until set. */
+const verify = {
+  ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+  ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+};
+export const metadata: Metadata = { metadataBase: new URL(SITE_URL), ...(Object.keys(verify).length ? { verification: verify } : {}), formatDetection: { telephone: true, address: false, email: false } };
 export const viewport: Viewport = { themeColor: "#16233a" };
 
 export function generateStaticParams() { return LOCALES.map((locale) => ({ locale })); }
@@ -41,12 +48,18 @@ function jsonLd(locale: Locale) {
     logo: `${SITE_URL}/brand/logo.png`, telephone: BRAND.tel, email: BRAND.email, image: photo("hero", 1600), description: c.meta.home.description, priceRange: "$$",
     address: { "@type": "PostalAddress", addressLocality: BRAND.city, addressRegion: BRAND.region, postalCode: BRAND.zip, addressCountry: "US" },
     geo: { "@type": "GeoCoordinates", latitude: BRAND.geo.lat, longitude: BRAND.geo.lng },
+    /* Every town named in the copy, each tied to its Wikipedia entity, plus
+       the "about 30 minutes of downtown Auburn" rule as a circle (~40 km). */
     areaServed: [
-      { "@type": "City", name: "Auburn", sameAs: "https://en.wikipedia.org/wiki/Auburn,_Alabama" },
-      { "@type": "City", name: "Opelika", sameAs: "https://en.wikipedia.org/wiki/Opelika,_Alabama" },
-      { "@type": "City", name: "Smiths Station", sameAs: "https://en.wikipedia.org/wiki/Smiths_Station,_Alabama" },
+      ...["Auburn", "Opelika", "Smiths Station", "Loachapoka", "Waverly", "Beauregard", "Notasulga", "Salem", "Cusseta"].map((name) => ({ "@type": "City", name: `${name}, AL`, sameAs: `https://en.wikipedia.org/wiki/${name.replace(/ /g, "_")},_Alabama` })),
       { "@type": "AdministrativeArea", name: "Lee County, Alabama", sameAs: "https://en.wikipedia.org/wiki/Lee_County,_Alabama" },
+      { "@type": "GeoCircle", geoMidpoint: { "@type": "GeoCoordinates", latitude: BRAND.geo.lat, longitude: BRAND.geo.lng }, geoRadius: 40000 },
     ],
+    /* The company's own canonical description of itself, in this language. */
+    mainEntityOfPage: { "@id": `${absolute(href(locale, "facts"))}#webpage` },
+    knowsAbout: ["House painting", "Interior painting", "Exterior painting", "Cabinet painting and refinishing", "Kitchen remodeling", "Bathroom remodeling", "Tub-to-shower conversion", "Home additions", "LVP flooring installation", "Wood rot repair", "Rental property turnover", "Residential building permits in Auburn and Opelika, Alabama"],
+    foundingDate: String(BRAND.founded),
+    ...(ownerNode(locale) ? { founder: ownerNode(locale), employee: { "@id": OWNER_ID } } : {}),
     availableLanguage: ["en", "es"],
     knowsLanguage: ["en", "es"],
     contactPoint: [{ "@type": "ContactPoint", telephone: BRAND.tel, contactType: "customer service", availableLanguage: ["English", "Spanish"], areaServed: "US-AL" }],
@@ -54,6 +67,8 @@ function jsonLd(locale: Locale) {
     subjectOf: AREA_PAGES.map((a) => ({ "@type": "WebPage", name: a.t[locale].title, url: absolute(areaHref(locale, a.id)) })),
     potentialAction: { "@type": "QuoteAction", target: absolute(href(locale, "contact")) },
     openingHoursSpecification: BRAND.hours.map((h) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
+        hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${BRAND.name} ${BRAND.city} ${BRAND.region}`)}`,
+    slogan: c.home.h1 + " " + c.home.h1Accent,
     hasOfferCatalog: { "@type": "OfferCatalog", name: "Construction, Remodeling & Painting Services", itemListElement: SERVICE_PAGES.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.t[locale].name, url: absolute(serviceHref(locale, s.id)) } })) },
     /* No AggregateRating here on purpose: Google ignores self-served review
        stars for local businesses, and marking up the sample reviews would

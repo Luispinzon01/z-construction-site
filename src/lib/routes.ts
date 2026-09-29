@@ -53,7 +53,7 @@ export function routeFromPath(locale: Locale, pathname: string): Route {
 
 /** Every indexable route, for the sitemap, static params and llms.txt. */
 export function indexableRoutes(): Route[] {
-  const pages: PageKey[] = ["home", "services", "about", "work", "reviews", "contact", "estimator", "areas", "guides", "privacy"];
+  const pages: PageKey[] = ["home", "services", "about", "work", "reviews", "contact", "help", "facts", "estimator", "areas", "guides", "privacy"];
   return [
     ...pages.map((key) => ({ kind: "page", key }) as Route),
     ...SERVICE_PAGES.map((s) => ({ kind: "service", id: s.id }) as Route),

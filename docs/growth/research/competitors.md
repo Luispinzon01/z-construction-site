@@ -142,7 +142,7 @@ Hispanic-owned or possibly Hispanic-owned local firms (none of them advertise Sp
 - **No permit**: painting, carpet, trim, fixture swaps without piping changes, electrical fixture repair without new circuits.
 - Inspections need one day's notice. The third inspection of the same phase costs $35, and any further ones $120 each ([Required Inspections](https://www.auburnal.gov/inspection-services/services/required-inspections/)).
 
-**Permits: City of Opelika** (Building Inspection Division, 700 Fox Trail) ([Opelika residential permit process](https://www.opelika-al.gov/665/Residential-Building-Permit-Process))
+**Permits: City of Opelika** (Building Inspection Division, 710 Fox Trail) ([Opelika residential permit process](https://www.opelika-al.gov/665/Residential-Building-Permit-Process))
 - Plans show heated sq ft, porches and garages, and fees are based on contract cost. Approval takes 3–4 business days. Sewer assessment fees are due before the permit. **The permit poster must be posted on site or no inspections happen.** Electrical, plumbing and mechanical subs pull their own permits.
 - Unincorporated Lee County (e.g., Beauregard, Smiths Station outskirts, Salem, Loachapoka) is handled by [Lee County Building Inspection](https://www.leeco.us/departments/building_inspection/index.php). Smiths Station is its own city; permit specifics unverified.
 

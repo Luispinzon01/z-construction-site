@@ -29,16 +29,20 @@ export interface ServicePage {
 export const SERVICE_UI: Record<Locale, {
   included: string; glance: string; timeline: string; range: string; permit: string; why: string; costEyebrow: string; costH: string;
   estimatorCta: string; details: string; faqEyebrow: string; faqH: string; related: string; areas: string; formEyebrow: string; formH: string; formP: string; crumbServices: string;
+  /* Who / where / language rows in the "at a glance" box, so the page states them in plain text. */
+  who: string; where: string; whereV: string; langs: string; langsV: string; updated: string;
 }> = {
   en: {
     included: "What's included", glance: "At a glance", timeline: "Typical timeline", range: "Typical investment", permit: "Permits", why: "Why homeowners pick us for this",
     costEyebrow: "Pricing, honestly", costH: "What drives the price", estimatorCta: "Try the cost estimator", details: "Details & pricing", faqEyebrow: "Questions we hear", faqH: "Frequently asked questions",
     related: "Related services", areas: "Where we do this work", formEyebrow: "Free written estimate", formH: "Tell us about your project", formP: "Three quick questions. We reply within one business day, usually the same day.", crumbServices: "Services",
+    who: "Contractor", where: "Service area", whereV: "Auburn, Opelika, Smiths Station and Lee County, AL", langs: "Languages", langsV: "English and Spanish", updated: "Updated",
   },
   es: {
     included: "Qué incluye", glance: "En resumen", timeline: "Duración típica", range: "Inversión típica", permit: "Permisos", why: "Por qué nos eligen para esto",
     costEyebrow: "Precios, con franqueza", costH: "Qué hace variar el precio", estimatorCta: "Use la calculadora de costos", details: "Detalles y precios", faqEyebrow: "Lo que nos preguntan", faqH: "Preguntas frecuentes",
     related: "Servicios relacionados", areas: "Dónde hacemos este trabajo", formEyebrow: "Presupuesto gratis por escrito", formH: "Cuéntenos de su proyecto", formP: "Tres preguntas rápidas. Le respondemos en un día hábil, casi siempre el mismo día, en español.", crumbServices: "Servicios",
+    who: "Contratista", where: "Zona de servicio", whereV: "Auburn, Opelika, Smiths Station y el condado de Lee, AL", langs: "Idiomas", langsV: "Español e inglés", updated: "Actualizado el",
   },
 };
 

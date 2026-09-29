@@ -4,6 +4,7 @@ import { Phone, Arrow, WhatsApp } from "./Icons";
 import { BRAND, CONTENT } from "@/lib/content";
 import { SERVICE_PAGES } from "@/lib/content-services";
 import { AREA_PAGES } from "@/lib/content-areas";
+import { FACTS } from "@/lib/content-facts";
 import { href, type Locale } from "@/lib/i18n";
 import { areaHref, serviceHref } from "@/lib/routes";
 
@@ -57,8 +58,10 @@ export default function Footer({ locale }: { locale: Locale }) {
                 <li>{c.footer.hours[0]}<br />{c.footer.hours[1]}</li>
               </ul></div>
               <div><H>{c.footer.resources}</H><ul className="grid gap-2">
+                <L to={href(locale, "help")}>{c.footer.help}</L>
                 <L to={href(locale, "estimator")}>{c.footer.estimator}</L>
                 <L to={href(locale, "guides")}>{c.footer.guides}</L>
+                <L to={href(locale, "facts")}>{FACTS[locale].nav}</L>
               </ul></div>
             </div>
           </div>

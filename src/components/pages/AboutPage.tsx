@@ -6,14 +6,12 @@ import { Arrow, Check } from "@/components/Icons";
 import { Reveal, Stagger, Item } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
-import { JsonLd, webPage } from "@/lib/schema";
 import { photo } from "@/lib/content";
 
 export default function AboutPage({ locale }: { locale: Locale }) {
   const c = CONTENT[locale]; const a = c.about;
   return (
     <>
-      <JsonLd data={webPage({ kind: "AboutPage", name: c.meta.about.title, description: c.meta.about.description, path: href(locale, "about"), locale, image: photo("worker1", 1600) })} />
       <PageHero photoKey="worker1" alt={a.storyBadge} eyebrow={a.eyebrow} h1={a.h1} lede={a.lede} />
       <section className="sec bg-bone" data-tone="light">
         <div className="shell grid gap-8 lg:grid-cols-2 lg:gap-[calc(var(--spacing-gutter)*1.5)] lg:items-center">

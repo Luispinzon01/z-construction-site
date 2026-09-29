@@ -8,29 +8,18 @@
    Sources for third-party figures are named in the text. Re-verify permit
    office details and the HBLB threshold each January.
    ------------------------------------------------------------------------- */
-import type { Locale } from "./i18n";
-import type { PhotoKey } from "./content";
-import type { ServicePageId } from "./content-services";
-import { ESTIMATOR, estimate, money, type EstimatorType } from "./estimator";
 
-export type GuideId = "kitchen-cost" | "bathroom-cost" | "permits" | "hire-contractor" | "rental-turnover" | "cabinets-paint-vs-replace";
-export interface GuideSection { h: string; p?: string[]; list?: string[]; table?: { head: string[]; rows: string[][] } }
-export interface GuideCopy { title: string; description: string; eyebrow: string; h1: string; lede: string; answer: string; sections: GuideSection[]; faq: { q: string; a: string }[] }
-export interface Guide { id: GuideId; slug: Record<Locale, string>; photo: PhotoKey; published: string; updated: string; service: ServicePageId; estimator?: EstimatorType; t: Record<Locale, GuideCopy> }
+import { costTable, estimate, mid, money, type Guide, type GuideId } from "./guide-kit";
+import { NEW_GUIDES } from "./guides";
 
-const range = (type: EstimatorType, tier: 0 | 1 | 2, f: "standard" | "mid" | "premium") => { const r = estimate(type, tier, f); return `${money(r.lo)}–${money(r.hi)}`; };
-function costTable(type: EstimatorType, locale: Locale) {
-  const head = locale === "es" ? ["Alcance", "Estándar", "Intermedio", "Premium"] : ["Scope", "Standard", "Mid-range", "Premium"];
-  return { head, rows: ESTIMATOR[type].tiers.map((t, i) => [`${t.l[locale]} — ${t.d[locale]}`, range(type, i as 0 | 1 | 2, "standard"), range(type, i as 0 | 1 | 2, "mid"), range(type, i as 0 | 1 | 2, "premium")]) };
-}
-const mid = (type: EstimatorType, tier: 0 | 1 | 2) => range(type, tier, "mid");
+export type { Guide, GuideCopy, GuideId, GuideSection } from "./guide-kit";
 
 const D = "2026-09-25";
 
-export const GUIDES: Guide[] = [
+const CORE: Guide[] = [
   /* ------------------------------------------------------------ KITCHEN COST */
   {
-    id: "kitchen-cost", slug: { en: "kitchen-remodel-cost-auburn-al", es: "costo-remodelar-cocina-auburn-al" }, photo: "kitchen1", published: D, updated: D, service: "kitchen", estimator: "kitchen",
+    id: "kitchen-cost", slug: { en: "kitchen-remodel-cost-auburn-al", es: "costo-remodelar-cocina-auburn-al" }, photo: "kitchen1", published: D, updated: D, service: "kitchen", estimator: "kitchen", related: ["cabinets-paint-vs-replace", "builder-grade-upgrades", "permits"],
     t: {
       en: {
         title: "Kitchen Remodel Cost in Auburn, AL (2026 Price Guide)", eyebrow: "Cost guide · 2026",
@@ -106,7 +95,7 @@ export const GUIDES: Guide[] = [
   },
   /* ------------------------------------------------------------ BATH COST */
   {
-    id: "bathroom-cost", slug: { en: "bathroom-remodel-cost-auburn-al", es: "costo-remodelar-bano-alabama" }, photo: "bath2", published: D, updated: D, service: "bathroom", estimator: "bath",
+    id: "bathroom-cost", slug: { en: "bathroom-remodel-cost-auburn-al", es: "costo-remodelar-bano-alabama" }, photo: "bath2", published: D, updated: D, service: "bathroom", estimator: "bath", related: ["tub-to-shower", "permits", "hire-contractor"],
     t: {
       en: {
         title: "Bathroom Remodel Cost in Auburn & Opelika, AL (2026)", eyebrow: "Cost guide · 2026",
@@ -168,7 +157,7 @@ export const GUIDES: Guide[] = [
   },
   /* ------------------------------------------------------------ PERMITS */
   {
-    id: "permits", slug: { en: "remodeling-permits-auburn-opelika-al", es: "permisos-remodelacion-auburn-opelika" }, photo: "framing1", published: D, updated: D, service: "remodeling",
+    id: "permits", slug: { en: "remodeling-permits-auburn-opelika-al", es: "permisos-remodelacion-auburn-opelika" }, photo: "framing1", published: D, updated: D, service: "remodeling", related: ["hire-contractor", "bilingual-contractor", "kitchen-cost"],
     t: {
       en: {
         title: "Remodeling Permits in Auburn & Opelika, AL (2026 Guide)", eyebrow: "Permit guide · 2026",
@@ -182,7 +171,7 @@ export const GUIDES: Guide[] = [
             "Auburn Inspection Services (171 N. Ross St., 334-501-3170) handles residential permits and inspections. Applications go through the Auburn permit portal or by email to plans@auburnal.gov, and the City publishes a Residential Remodel/Alteration permit application. Only minor repairs are exempt; additions, alterations and new plumbing, electrical or mechanical work need permits.",
           ] },
           { h: "City of Opelika", p: [
-            "Opelika's Building Inspection Division (Public Works, 700 Fox Trail, 334-705-5420) requires plans and a building permit for construction, plus separate electrical, plumbing and mechanical permits. Residential plan review typically takes 3–4 business days, the permit card must be posted on site, and inspections use a red-tag/green-tag system. Opelika uses the 2021 International Building Code.",
+            "Opelika's Building Inspection Division (Public Works, 710 Fox Trail, 334-705-5420) requires plans and a building permit for construction, plus separate electrical, plumbing and mechanical permits. Residential plan review typically takes 3–4 business days, the permit card must be posted on site, and inspections use a red-tag/green-tag system. Opelika uses the 2021 International Building Code.",
           ] },
           { h: "Lee County and smaller towns", p: [
             "Outside city limits, Lee County's Building Inspection department handles permits. Smiths Station and other incorporated towns may have their own process, so confirm which office covers your address before work starts.",
@@ -210,7 +199,7 @@ export const GUIDES: Guide[] = [
             "Inspection Services de Auburn (171 N. Ross St., 334-501-3170) maneja los permisos e inspecciones residenciales. Las solicitudes se hacen en el portal de permisos de Auburn o por correo a plans@auburnal.gov. Solo las reparaciones menores están exentas; las ampliaciones, modificaciones y los trabajos nuevos de plomería, electricidad o aire acondicionado necesitan permiso. Los trámites son en inglés; nosotros los hacemos por usted.",
           ] },
           { h: "Ciudad de Opelika", p: [
-            "La división de Building Inspection de Opelika (Public Works, 700 Fox Trail, 334-705-5420) pide planos y permiso de construcción, además de permisos aparte para electricidad, plomería y aire acondicionado. La revisión de una obra residencial toma normalmente de 3 a 4 días hábiles, la tarjeta del permiso debe estar a la vista en la obra y las inspecciones usan etiquetas rojas (no aprobado) y verdes (aprobado). Opelika usa el Código Internacional de Construcción 2021.",
+            "La división de Building Inspection de Opelika (Public Works, 710 Fox Trail, 334-705-5420) pide planos y permiso de construcción, además de permisos aparte para electricidad, plomería y aire acondicionado. La revisión de una obra residencial toma normalmente de 3 a 4 días hábiles, la tarjeta del permiso debe estar a la vista en la obra y las inspecciones usan etiquetas rojas (no aprobado) y verdes (aprobado). Opelika usa el Código Internacional de Construcción 2021.",
           ] },
           { h: "Condado de Lee y pueblos cercanos", p: [
             "Fuera de los límites de la ciudad, el departamento de Building Inspection del condado de Lee lleva los permisos. Smiths Station y otros pueblos pueden tener su propio proceso, así que hay que confirmar qué oficina le toca a su dirección antes de empezar.",
@@ -230,7 +219,7 @@ export const GUIDES: Guide[] = [
   },
   /* ------------------------------------------------------------ HIRE A CONTRACTOR */
   {
-    id: "hire-contractor", slug: { en: "check-contractor-license-alabama", es: "como-verificar-contratista-alabama" }, photo: "worker1", published: D, updated: D, service: "remodeling",
+    id: "hire-contractor", slug: { en: "check-contractor-license-alabama", es: "como-verificar-contratista-alabama" }, photo: "worker1", published: D, updated: D, service: "remodeling", related: ["bilingual-contractor", "permits", "painting-cost"],
     t: {
       en: {
         title: "How to Check a Contractor License in Alabama ($10K Rule)", eyebrow: "Hiring guide · 2026",
@@ -281,7 +270,7 @@ export const GUIDES: Guide[] = [
   },
   /* ------------------------------------------------------------ RENTAL TURNOVER */
   {
-    id: "rental-turnover", slug: { en: "rental-turnover-checklist-auburn-al", es: "preparar-casa-de-renta-auburn" }, photo: "floor1", published: D, updated: D, service: "rental", estimator: "rental",
+    id: "rental-turnover", slug: { en: "rental-turnover-checklist-auburn-al", es: "preparar-casa-de-renta-auburn" }, photo: "floor1", published: D, updated: D, service: "rental", estimator: "rental", related: ["student-condo", "flooring-humidity", "painting-cost"],
     t: {
       en: {
         title: "Rental Turnover Checklist for Auburn, AL Landlords (2026)", eyebrow: "Landlord guide · 2026",
@@ -346,7 +335,7 @@ export const GUIDES: Guide[] = [
   },
   /* ------------------------------------------------------------ CABINETS */
   {
-    id: "cabinets-paint-vs-replace", slug: { en: "paint-or-replace-kitchen-cabinets", es: "pintar-o-cambiar-gabinetes-de-cocina" }, photo: "kitchen2", published: D, updated: D, service: "cabinets", estimator: "cabinets",
+    id: "cabinets-paint-vs-replace", slug: { en: "paint-or-replace-kitchen-cabinets", es: "pintar-o-cambiar-gabinetes-de-cocina" }, photo: "kitchen2", published: D, updated: D, service: "cabinets", estimator: "cabinets", related: ["painting-cost", "kitchen-cost", "builder-grade-upgrades"],
     t: {
       en: {
         title: "Paint or Replace Kitchen Cabinets? 2026 Costs in Auburn", eyebrow: "Decision guide · 2026",
@@ -393,3 +382,5 @@ export const GUIDES: Guide[] = [
     },
   },
 ];
+
+export const GUIDES: Guide[] = [...CORE, ...NEW_GUIDES];

@@ -56,12 +56,22 @@ export function Counter({ value, suffix = "", decimals = 0, duration = 1.6, clas
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduced = useReducedMotion();
-  const [n, setN] = useState(reduced ? value : 0);
+  /* The server HTML carries the real number (crawlers, AI assistants and
+     no-JS readers used to see "0.0 Star rating"). On the client, a counter
+     that is still below the fold is zeroed so it can count up when it
+     scrolls in; one already on screen just stays put. */
+  const [n, setN] = useState(value);
+  const armed = useRef(false);
   useEffect(() => {
-    if (!inView || reduced) return;
-    const c = animate(0, value, { duration, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setN(v) });
+    if (reduced || !ref.current || ref.current.getBoundingClientRect().top < window.innerHeight) return;
+    armed.current = true;
+    setN(0);
+  }, [reduced]);
+  useEffect(() => {
+    if (!inView || !armed.current) return;
+    const c = animate(0, value, { duration, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setN(v), onComplete: () => { armed.current = false; } });
     return () => c.stop();
-  }, [inView, value, duration, reduced]);
+  }, [inView, value, duration]);
   const text = decimals ? n.toFixed(decimals) : Math.round(n).toLocaleString("en-US");
   return <span ref={ref} className={className}>{text}{suffix}</span>;
 }

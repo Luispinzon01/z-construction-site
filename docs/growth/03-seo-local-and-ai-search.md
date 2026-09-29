@@ -84,15 +84,19 @@ The website side is done. Items 1, 2 and 5 are the owner's work, below.
 ## Website SEO — what's live and what to add
 
 ### Live now
-| Asset | URLs |
+| Asset | URLs / where |
 |---|---|
-| 9 service pages × 2 languages | `/services/kitchen-remodeling` … `/es/servicios/remodelacion-de-cocinas` … |
-| 4 town pages × 2 | `/service-areas/auburn-al`, `/opelika-al`, `/smiths-station-al`, `/lee-county-al` (+ `/es/zonas-de-servicio/…`) |
-| 6 guides × 2 | `/guides/…`, `/es/guias/…` |
-| Cost estimator | `/cost-estimator`, `/es/calculadora-de-costos` |
-| Structured data | GeneralContractor (with `knowsLanguage`, areas, services, license credential once the real number is in), Service, FAQPage, BreadcrumbList, Article |
-| International | hreflang en-US / es-US / x-default on every page, self-canonicals, Spanish slugs, no auto-redirects |
-| Crawling | XML sitemap (58 URLs), robots.txt that explicitly welcomes Google, Bing, ChatGPT (OAI-SearchBot), Perplexity, Claude and Apple crawlers, `/llms.txt` |
+| 9 service pages × 2 languages | `/services/…`, `/es/servicios/…`, each with a "Guides for this project" block |
+| 4 town pages × 2 | `/service-areas/…`, `/es/zonas-de-servicio/…`, each linking its most relevant guides |
+| 13 guides × 2 | `/guides/…`, `/es/guias/…`: answer-first, dated, reading time, in-text links to services/guides/towns, numbered sources, "keep reading" |
+| Cost estimator + price catalog | `/cost-estimator`: 27 priced tiers as an `OfferCatalog`; same numbers on the home page and service pages |
+| Entity graph | One `WebPage` node per URL tied to the site, the business, its breadcrumb, its main entity (Service / Article / Place) and its other-language twin (`workTranslation`). Services carry tiered offers, languages and their guides; guides carry word count, subject, places and citations. Audited: 0 dangling references across all pages. |
+| Owner E-E-A-T (switches on when filled) | `BRAND.owner` in `content.ts` → `founder` on the business and `author` on every guide |
+| International | hreflang `en-US`, `en`, `es-US`, `es`, `x-default` on every page and in the sitemap; Spanish slugs; no auto-redirects |
+| Crawling | XML sitemap with image entries and a `lastmod` that only moves when content does (`CONTENT_UPDATED` in `src/lib/seo.ts`); robots.txt welcoming Google, Bing and AI crawlers; `/llms.txt` + `/llms-full.txt` (the whole site as Markdown, both languages) |
+| Instant re-crawl | IndexNow key at `/indexnow.txt`; `npm run indexnow` pushes every URL to Bing/Yandex after a deploy (Bing's index feeds ChatGPT search and Copilot) |
+| Verification | `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` env vars render the meta tags |
+| Share previews | Branded card per page per language (`/api/og`) |
 
 **Deliberately *not* built:** "Bathroom remodel Opelika"-style service × town pages. Google's March 2026 update hit templated city pages hard. Build one only after 2–3 real projects of that service in that town — and make it a case study.
 
@@ -127,6 +131,8 @@ Content lives in `src/lib/content-guides.ts` and `src/lib/content-areas.ts`. Add
 ---
 
 ## Getting recommended by AI assistants (ChatGPT, Google AI, Copilot, Siri)
+
+> Updated, sourced version with the competitor benchmark and the monthly test kit: [09-ai-visibility.md](09-ai-visibility.md).
 
 | Assistant | Where its local answers come from | What Z does |
 |---|---|---|

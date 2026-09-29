@@ -33,7 +33,7 @@ export const BRAND = {
   license: "#00000", // TODO Alabama HBLB license number. Hidden from the page and schema while it is a placeholder.
   googleReviewUrl: "https://g.page/r/REPLACE_WITH_GOOGLE_REVIEW_LINK/review", // TODO
   angiUrl: "https://www.angi.com/", // TODO direct link to the Angi profile
-  hblbSearchUrl: "https://alhobprod.glsuite.us/GLSuiteWeb/Clients/ALHOB/Public/LicenseeSearch.aspx",
+  hblbSearchUrl: "https://alhobv7prod.glsuite.us/GLSuiteWeb/Clients/ALHOB/Public/LicenseeSearch.aspx",
   homeAdvisorUrl: "https://www.homeadvisor.com/", // TODO direct link to the HomeAdvisor profile
   /* WhatsApp Business number, digits only with country code. Spanish-speaking
      families overwhelmingly prefer WhatsApp to a phone call or a form. */
@@ -41,6 +41,12 @@ export const BRAND = {
   /* Profiles that corroborate the business for Google and AI assistants
      (schema sameAs). Add each URL as soon as the profile exists. */
   profiles: [] as string[], // TODO: Google Business Profile, Facebook, Instagram, Nextdoor, Yelp, BBB, Houzz, Angi, Bing Places
+  /* The owner as a named, accountable person: Google's quality raters and AI
+     assistants weigh who stands behind advice. Leave name empty until the
+     owner confirms how he wants to appear (and ideally adds a headshot at
+     public/brand/owner.jpg); nothing about him renders until then.
+     TODO(owner): name, e.g. "Luis Pinzón", and optional profile URLs. */
+  owner: { name: "", jobTitle: { en: "Owner", es: "Dueño" }, image: "", sameAs: [] as string[] },
   hours: [
     { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "18:00" },
     { days: ["Saturday"], opens: "08:00", closes: "14:00" },
@@ -84,17 +90,17 @@ export interface SiteContent {
     langSwitch: string; langSwitchLong: string; whatsappCta: string; langTitle: string; scroll: string; before: string; after: string; dragToCompare: string;
     readMore: string; skip: string; rating: string; ratingSources: string; starsLabel: string; whatsapp: string; home: string;
   };
-  footer: { blurb: string; badge: string; services: string; company: string; contact: string; hours: string[]; rights: string; otherSite: string; areas: string; resources: string; estimator: string; guides: string; privacy: string; allAreas: string };
+  footer: { blurb: string; badge: string; services: string; company: string; contact: string; hours: string[]; rights: string; otherSite: string; areas: string; resources: string; estimator: string; guides: string; privacy: string; allAreas: string; help: string };
   cta: { h: string; p: string; btn: string; word: string };
   promise: { h: string; items: string[] };
   reviewRequest: { eyebrow: string; h1: string; lede: string; google: string; angi: string; ha: string; note: string; thanks: string };
-  meta: Record<PageKey, { title: string; description: string }>;
+  meta: Record<Exclude<PageKey, "help" | "facts">, { title: string; description: string }>; // help: content-help.ts · facts: content-facts.ts
   home: {
     eyebrow: string; h1: string; h1Accent: string; lede: string; primary: string; secondary: string; meta: string[]; marquee: string[];
     proof: Proof[];
     split: { eyebrow: string; h: string; lede: string; build: string; buildSub: string; finish: string; finishSub: string; link: string };
     rental: { eyebrow: string; h: string; p: string; points: string[]; btn: string };
-    processEyebrow: string; processH: string; processLede: string; steps: { h: string; p: string }[];
+    processEyebrow: string; processH: string; processLede: string; steps: { h: string; p: string }[]; newbie: string;
     workEyebrow: string; workH: string; workP: string; workBtn: string;
     reviewsEyebrow: string; reviewsH: string;
     areaEyebrow: string; areaH: string; areaP: string; areaLink: string;
@@ -120,8 +126,8 @@ export interface SiteContent {
   };
   thanks: { eyebrow: string; h1: string; lede: string; home: string; work: string; nextH: string; next: string[]; wa: string };
   estimator: { eyebrow: string; h1: string; lede: string; step1: string; step2: string; step3: string; finish: Record<"standard" | "mid" | "premium", { l: string; d: string }>; result: string; resultNote: string; cta: string; ctaNote: string; disclaimer: string; guidesH: string };
-  guidesIndex: { eyebrow: string; h1: string; lede: string; read: string; updated: string; answer: string; toc: string; related: string; ctaH: string; ctaP: string };
-  areasIndex: { eyebrow: string; h1: string; lede: string; also: string; alsoP: string; popular: string; places: string; local: string; drive: string; view: string };
+  guidesIndex: { eyebrow: string; h1: string; lede: string; read: string; updated: string; answer: string; toc: string; related: string; ctaH: string; ctaP: string; sources: string; next: string; minRead: string; by: string; guidesFor: string };
+  areasIndex: { eyebrow: string; h1: string; lede: string; also: string; alsoP: string; popular: string; places: string; local: string; drive: string; view: string; viewService: string };
   privacy: { eyebrow: string; h1: string; updated: string; sections: { h: string; p: string[] }[] };
   areas: string[];
   langSuggest: { msg: string; go: string; dismiss: string };
@@ -139,10 +145,10 @@ const en: SiteContent = {
     whatsapp: "WhatsApp", home: "Home",
   },
   footer: {
-    blurb: "Family-owned residential construction and remodeling based in Auburn, Alabama. Kitchens, baths, additions, whole-home remodels and the repairs in between.",
+    blurb: "Z Construction & Remodeling LLC is a family-owned painting and remodeling contractor based in Auburn, Alabama, working in English and Spanish across Auburn, Opelika and Lee County. Kitchens, baths, additions, paint, cabinets, floors and the repairs in between.",
     badge: "Licensed & Insured · Alabama", services: "Services", company: "Company", contact: "Contact",
     hours: ["Mon–Fri 7:00am–6:00pm", "Sat 8:00am–2:00pm"], rights: "All rights reserved.", otherSite: "Sitio en español",
-    areas: "Service areas", resources: "Plan your project", estimator: "Cost estimator", guides: "Remodeling guides", privacy: "Privacy policy", allAreas: "All service areas",
+    areas: "Service areas", resources: "Plan your project", estimator: "Cost estimator", guides: "Remodeling guides", privacy: "Privacy policy", allAreas: "All service areas", help: "Questions, answered",
   },
   reviewRequest: { eyebrow: "Thank you", h1: "How did we do?", lede: "Two minutes from you is how the next family on your street finds a contractor they can trust. Pick whichever site you already use.", google: "Review us on Google", angi: "Review us on Angi", ha: "Review us on HomeAdvisor", note: "If anything wasn't right, call or text the owner first and we'll make it right.", thanks: "Thank you for trusting us with your home." },
   promise: { h: "Our promise, in writing", items: ["A written scope and price before any work starts", "No surprise invoices: changes are agreed in writing first", "Licensed for residential work in Alabama and insured", "Clean site every day, and a walkthrough before we call it done", "A reply within one business day, in English or Spanish"] },
@@ -180,7 +186,7 @@ const en: SiteContent = {
       btn: "Plan a rental turn" },
     meta: ["Free written estimates", "Prices on every service page", "Owner on every job", "Hablamos español"],
     marquee: ["Home Additions", "Kitchens & Baths", "Whole-Home Remodels", "Interior Painting", "Exterior Painting", "Cabinet Refinishing", "Flooring", "Repairs & Punch Lists", "Auburn · Opelika · Lee County"],
-    processEyebrow: "How it works", processH: "No surprises. That's the whole process.", processLede: "Four steps, clearly communicated, so you always know where your project stands.",
+    processEyebrow: "How it works", newbie: "Never hired a contractor before? Start with the plain-English answers", processH: "No surprises. That's the whole process.", processLede: "Four steps, clearly communicated, so you always know where your project stands.",
     steps: [
       { h: "Walkthrough", p: "We come to the house, listen to what you want, measure, and talk honestly about what's possible and what it costs." },
       { h: "Written estimate", p: "A clear scope, line-item pricing and a realistic timeline in writing. No vague \"we'll see\" numbers." },
@@ -325,8 +331,8 @@ const en: SiteContent = {
     disclaimer: "Planning range only, not a quote. Your written estimate after a walkthrough is the real number, and it's the one we hold to.",
     guidesH: "Want the detail behind these numbers?",
   },
-  guidesIndex: { eyebrow: "Guides · Lee County homeowners & landlords", h1: "Straight answers before you spend", lede: "Costs, permits, licensing and timing for remodeling in Auburn, Opelika and Lee County, written by the people who do the work.", read: "Read the guide", updated: "Updated", answer: "Short answer", toc: "In this guide", related: "Related service", ctaH: "Want a number for your house?", ctaP: "Guides give ranges. A free walkthrough gives you a written price." },
-  areasIndex: { eyebrow: "Service areas · Lee County, Alabama", h1: "Where we build", lede: "Home base is Auburn. We work throughout Lee County and nearby communities, generally within about 30 minutes of downtown Auburn.", also: "Also serving", alsoP: "Beauregard, Salem, Loachapoka, Waverly, Notasulga and nearby communities. Not sure you're in range? Ask, the answer is usually yes.", popular: "Popular services here", places: "Neighborhoods & communities", local: "Good to know locally", drive: "From our Auburn base", view: "View area" },
+  guidesIndex: { eyebrow: "Guides · Lee County homeowners & landlords", h1: "Straight answers before you spend", lede: "Costs, permits, licensing and timing for remodeling in Auburn, Opelika and Lee County, written by the people who do the work.", read: "Read the guide", updated: "Updated", answer: "Short answer", toc: "In this guide", related: "Related service", ctaH: "Want a number for your house?", ctaP: "Guides give ranges. A free walkthrough gives you a written price.", sources: "Sources", next: "Keep reading", minRead: "min read", by: "Written by the Z Construction team, from the projects we price and build in Lee County", guidesFor: "Guides for this project" },
+  areasIndex: { eyebrow: "Service areas · Lee County, Alabama", h1: "Where we build", lede: "Home base is Auburn. We work throughout Lee County and nearby communities, generally within about 30 minutes of downtown Auburn.", also: "Also serving", alsoP: "Beauregard, Salem, Loachapoka, Waverly, Notasulga and nearby communities. Not sure you're in range? Ask, the answer is usually yes.", popular: "Popular services here", places: "Neighborhoods & communities", local: "Good to know locally", drive: "From our Auburn base", view: "View area", viewService: "See the service" },
   privacy: {
     eyebrow: "Legal", h1: "Privacy policy", updated: "Last updated September 2026",
     sections: [
@@ -356,10 +362,10 @@ const es: SiteContent = {
     whatsapp: "WhatsApp", home: "Inicio",
   },
   footer: {
-    blurb: "Empresa familiar de construcción y remodelación de casas en Auburn, Alabama. Cocinas, baños, ampliaciones, remodelaciones completas y todas esas reparaciones que se van acumulando.",
+    blurb: "Z Construction & Remodeling LLC es una empresa familiar de pintura y remodelación con base en Auburn, Alabama, que atiende en español y en inglés en Auburn, Opelika y el condado de Lee. Cocinas, baños, ampliaciones, pintura, gabinetes, pisos y todas esas reparaciones que se van acumulando.",
     badge: "Con licencia y asegurados · Alabama", services: "Servicios", company: "Empresa", contact: "Contacto",
     hours: ["Lun–Vie 7:00am–6:00pm", "Sáb 8:00am–2:00pm"], rights: "Todos los derechos reservados.", otherSite: "Site in English",
-    areas: "Zonas de servicio", resources: "Planee su proyecto", estimator: "Calculadora de costos", guides: "Guías de remodelación", privacy: "Política de privacidad", allAreas: "Todas las zonas",
+    areas: "Zonas de servicio", resources: "Planee su proyecto", estimator: "Calculadora de costos", guides: "Guías de remodelación", privacy: "Política de privacidad", allAreas: "Todas las zonas", help: "Preguntas frecuentes",
   },
   reviewRequest: { eyebrow: "Gracias", h1: "¿Cómo le fue con nosotros?", lede: "Dos minutos de su tiempo son la forma en que la siguiente familia de su calle encuentra un contratista de confianza. Use el sitio que ya conozca.", google: "Reseña en Google", angi: "Reseña en Angi", ha: "Reseña en HomeAdvisor", note: "Si algo no quedó bien, llame o mande mensaje al dueño primero y lo arreglamos.", thanks: "Gracias por confiarnos su casa." },
   promise: { h: "Nuestro compromiso, por escrito", items: ["Alcance y precio por escrito antes de empezar cualquier trabajo", "Sin cobros sorpresa: cualquier cambio se acuerda por escrito primero", "Licencia para trabajo residencial en Alabama y seguro vigente", "Obra limpia cada día y un recorrido final antes de dar por terminado", "Respuesta en un día hábil, en español o en inglés"] },
@@ -397,7 +403,7 @@ const es: SiteContent = {
       btn: "Planear el cambio de inquilino" },
     meta: ["Presupuesto gratis y por escrito", "Precios en cada servicio", "El dueño en cada obra", "Atención en español"],
     marquee: ["Ampliaciones", "Cocinas y baños", "Remodelaciones completas", "Pintura interior", "Pintura exterior", "Gabinetes", "Pisos", "Reparaciones", "Auburn · Opelika · Condado de Lee"],
-    processEyebrow: "Así trabajamos", processH: "Sin sorpresas. Así de simple.", processLede: "Cuatro pasos, bien explicados, para que usted siempre sepa en qué va su obra.",
+    processEyebrow: "Así trabajamos", newbie: "¿Es la primera vez que contrata a alguien? Empiece por las preguntas frecuentes", processH: "Sin sorpresas. Así de simple.", processLede: "Cuatro pasos, bien explicados, para que usted siempre sepa en qué va su obra.",
     steps: [
       { h: "Visita", p: "Vamos a su casa, escuchamos lo que quiere, medimos y le hablamos con franqueza de lo que se puede hacer y lo que cuesta." },
       { h: "Presupuesto por escrito", p: "Alcance claro, precios detallados y un calendario realista. Nada de \"luego vemos\" ni de letra chica." },
@@ -542,8 +548,8 @@ const es: SiteContent = {
     disclaimer: "Es solo un rango para planear, no una cotización. El número real es el de su presupuesto por escrito después de la visita, y ese es el que respetamos.",
     guidesH: "¿Quiere saber de dónde salen estos números?",
   },
-  guidesIndex: { eyebrow: "Guías · Para familias y dueños del condado de Lee", h1: "Respuestas claras antes de gastar", lede: "Costos, permisos, licencias y tiempos para remodelar en Auburn, Opelika y el condado de Lee, escritos por la gente que hace el trabajo. En español.", read: "Leer la guía", updated: "Actualizada", answer: "Respuesta corta", toc: "En esta guía", related: "Servicio relacionado", ctaH: "¿Quiere un número para su casa?", ctaP: "Las guías dan rangos. Una visita gratis le da un precio por escrito." },
-  areasIndex: { eyebrow: "Zonas de servicio · Condado de Lee, Alabama", h1: "Dónde trabajamos", lede: "Nuestra base es Auburn. Trabajamos en todo el condado de Lee y comunidades cercanas, por lo general a unos 30 minutos del centro de Auburn.", also: "También atendemos", alsoP: "Beauregard, Salem, Loachapoka, Waverly, Notasulga y comunidades cercanas. ¿No sabe si llegamos? Pregunte; casi siempre la respuesta es sí.", popular: "Servicios más pedidos aquí", places: "Vecindarios y comunidades", local: "Bueno saber", drive: "Desde nuestra base en Auburn", view: "Ver zona" },
+  guidesIndex: { eyebrow: "Guías · Para familias y dueños del condado de Lee", h1: "Respuestas claras antes de gastar", lede: "Costos, permisos, licencias y tiempos para remodelar en Auburn, Opelika y el condado de Lee, escritos por la gente que hace el trabajo. En español.", read: "Leer la guía", updated: "Actualizada", answer: "Respuesta corta", toc: "En esta guía", related: "Servicio relacionado", ctaH: "¿Quiere un número para su casa?", ctaP: "Las guías dan rangos. Una visita gratis le da un precio por escrito.", sources: "Fuentes", next: "Siga leyendo", minRead: "min de lectura", by: "Escrita por el equipo de Z Construction, con base en los proyectos que cotizamos y hacemos en el condado de Lee", guidesFor: "Guías para este proyecto" },
+  areasIndex: { eyebrow: "Zonas de servicio · Condado de Lee, Alabama", h1: "Dónde trabajamos", lede: "Nuestra base es Auburn. Trabajamos en todo el condado de Lee y comunidades cercanas, por lo general a unos 30 minutos del centro de Auburn.", also: "También atendemos", alsoP: "Beauregard, Salem, Loachapoka, Waverly, Notasulga y comunidades cercanas. ¿No sabe si llegamos? Pregunte; casi siempre la respuesta es sí.", popular: "Servicios más pedidos aquí", places: "Vecindarios y comunidades", local: "Bueno saber", drive: "Desde nuestra base en Auburn", view: "Ver zona", viewService: "Ver el servicio" },
   privacy: {
     eyebrow: "Legal", h1: "Política de privacidad", updated: "Última actualización: septiembre de 2026",
     sections: [

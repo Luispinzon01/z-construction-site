@@ -12,7 +12,7 @@ export default function ThanksPage({ locale }: { locale: Locale }) {
       <div className="absolute inset-0 -z-30"><Photo k="porch1" alt={t.h1} sizes="100vw" priority /></div>
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(15,26,46,.42),rgba(15,26,46,.94))]" />
       <div className="shell relative grid gap-4 pt-[calc(var(--barh)+5rem)] pb-16">
-        <span className="eyebrow self-start rounded-md bg-navy-2/60 px-3 py-1.5 text-amber-bright">{t.eyebrow}</span>
+        <span className="eyebrow self-start justify-self-start w-fit max-w-full rounded-md bg-navy-2/70 px-2.5 py-1 leading-tight text-amber-bright">{t.eyebrow}</span>
         <SplitWords as="h1" text={t.h1} className="d d-lg max-w-[16ch]" />
         <Reveal delay={0.4}><p className="lede text-bone/95">{t.lede} <a className="text-amber" href={`tel:${BRAND.tel}`}>{BRAND.phone}</a>.</p></Reveal>
         <Reveal delay={0.5} className="mt-4 max-w-[52ch]">
