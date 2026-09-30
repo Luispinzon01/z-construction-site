@@ -3,9 +3,11 @@ import PageHero from "@/components/PageHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
 import HelpFilter from "@/components/HelpFilter";
+import ProjectCta from "@/components/ProjectCta";
 import { Arrow, Phone, WhatsApp } from "@/components/Icons";
 import { Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import { HELP, type Audience } from "@/lib/content-help";
 import { absolute, href, type Locale } from "@/lib/i18n";
 import { plainText, Rich } from "@/lib/inline";
@@ -73,6 +75,7 @@ export default function HelpPage({ locale }: { locale: Locale }) {
                   </div>
                 </section>
               ))}
+              <ProjectCta locale={locale} service={a === "home" ? "painting" : "rental"} estimator={a === "home" ? "interior" : "rental"} context={`${h.h1} · ${h.audiences[a].label}`} where={`help-${a}`} />
             </div>
           ))}
         </div>
@@ -133,7 +136,7 @@ export default function HelpPage({ locale }: { locale: Locale }) {
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">
             <a className="btn btn--solid" href={`tel:${BRAND.tel}`}><Phone /> {BRAND.phone}</a>
-            <a className="btn btn--ghost" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp className="w-[18px] h-[18px]" /> WhatsApp</a>
+            <a className="btn btn--ghost" href={waHref(locale)} target="_blank" rel="noopener"><WhatsApp className="w-[18px] h-[18px]" /> WhatsApp</a>
             <Link className="btn btn--ghost" href={href(locale, "contact")}>{c.ui.freeQuote} <Arrow /></Link>
           </div>
         </div>

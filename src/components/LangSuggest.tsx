@@ -1,16 +1,15 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CONTENT } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
-import { altHrefFor } from "./Nav";
+import { lookupAlt, type AltMap } from "@/lib/alt-lookup";
+import type { SiteContent } from "@/lib/content";
 
-export default function LangSuggest({ locale }: { locale: Locale }) {
+export default function LangSuggest({ locale, t, altMap }: { locale: Locale; t: SiteContent["langSuggest"]; altMap: AltMap }) {
   const pathname = usePathname();
   const [show, setShow] = useState(false);
   const other: Locale = locale === "en" ? "es" : "en";
-  const alt = altHrefFor(locale, pathname);
-  const t = CONTENT[locale].langSuggest;
+  const [alt] = lookupAlt(altMap, locale, pathname);
 
   useEffect(() => {
     let pref: string | null = null;

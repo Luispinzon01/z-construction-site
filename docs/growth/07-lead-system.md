@@ -10,13 +10,17 @@ Visitor lands (Google, ChatGPT, Facebook, yard sign QR…)
    ▼
 Quote form (contact page, every service page, every town page)
 or cost estimator → pre-filled quote form
+or quick request ("call or text me": name + phone only) on every guide,
+   the question hub and under the estimator result; the page they were
+   reading (or the exact estimate) becomes the lead's message
    │  name, phone, email, city, service, timeline, budget,
    │  preferred contact (call / text / WhatsApp / email), SMS consent
    ▼
 /api/quote  →  scores the lead A / B / C  →  works out the channel
    ├─► Email to owner      subject "[A · 80] Kitchen / bath · Opelika · María G. · ESPAÑOL"
    │                        + one-tap call / text / WhatsApp links + full source
-   ├─► SMS to owner phone  "New A lead (80) ES — María G, Kitchen/bath, Opelika…"
+   ├─► Telegram alert      free push to the owner's phone: grade, name, service, one-tap call + WhatsApp
+   ├─► SMS to owner phone  optional, paid (Twilio): same alert as a text
    ├─► Email to homeowner  confirmation in their language + "reply with photos"
    ├─► SMS to homeowner    (only if they ticked consent and texting is registered)
    ├─► Webhook → CRM / Zapier / Make / Google Sheet (every field as JSON)
@@ -35,11 +39,12 @@ All settings are environment variables in **Vercel → Project → Settings → 
 | Step | What to set | Cost |
 |---|---|---|
 | 1. Email alerts + homeowner auto-reply | Create a [Resend](https://resend.com) account, verify the domain, then set `RESEND_API_KEY`, `QUOTE_TO_EMAIL`, `QUOTE_FROM_EMAIL` | Free tier covers this |
-| 2. Instant text to the owner's phone | Create a [Twilio](https://twilio.com) number, then set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM`, `LEAD_ALERT_SMS_TO` (comma-separate several phones) | ~$1–2/month + pennies per text |
+| 2. Instant alert on the owner's phone (**free**) | Telegram: message @BotFather → `/newbot` → copy the token into `TELEGRAM_BOT_TOKEN`; send the bot one message, open `https://api.telegram.org/bot<TOKEN>/getUpdates` and copy the chat id into `TELEGRAM_CHAT_ID` | Free |
+| 2b. Same alert as a text message (optional) | Only if Telegram won't do: [Twilio](https://twilio.com) number + `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM`, `LEAD_ALERT_SMS_TO` | Paid: monthly number + per-text + A2P registration. Skip it. |
 | 3. CRM / spreadsheet | Set `LEAD_WEBHOOK_URL` (+ optional `LEAD_WEBHOOK_SECRET`) to a Zapier/Make webhook, your CRM's inbound webhook, or the free Google Sheet below | Free–$20/month |
 | 4. WhatsApp | Install **WhatsApp Business** on the business phone and set `NEXT_PUBLIC_WHATSAPP` (digits only, e.g. 13345550123) | Free |
 | 5. Ads tracking | GA4, Google Ads, Meta, Microsoft, CallRail, GTM IDs (see [04](04-google-ads.md), [06](06-lsa-meta-and-other-channels.md)) | Free (CallRail from $50/month) |
-| 6. Texting homeowners automatically | Register **A2P 10DLC** with Twilio (brand + campaign, 1–2 weeks), then set `LEAD_SMS_AUTOREPLY=1` | ~$20 one-time + monthly fee |
+| 6. Texting homeowners automatically (optional, paid) | Not needed: the owner texts back by hand from his own phone or WhatsApp, which is free and converts better than a bot. If ever wanted: A2P 10DLC with Twilio, then `LEAD_SMS_AUTOREPLY=1` | Paid |
 
 ### Free CRM option: Google Sheet (10 minutes)
 
@@ -91,7 +96,7 @@ Scoring is in `src/lib/leads.ts` (the `score` function). Tune the weights once y
 Leads contacted within **5 minutes** are about **21× more likely to qualify** than those contacted after 30 minutes, and most contractors take days. Answering fast is the cheapest competitive advantage there is.
 
 **During business hours**
-1. The SMS alert arrives → **call within 5 minutes** (or WhatsApp, if that's their preference; the email shows it).
+1. The Telegram alert (or email) arrives → **call within 5 minutes** (or WhatsApp, if that's their preference; the email shows it).
 2. No answer → text or WhatsApp right away (templates below), then call again in 2 hours.
 3. Book the walkthrough on the first conversation, and send a confirmation text with date, time and the owner's name.
 

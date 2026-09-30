@@ -10,6 +10,7 @@ import ReviewsBlock from "@/components/ReviewsBlock";
 import { Arrow, Check, WhatsApp } from "@/components/Icons";
 import { Reveal, Stagger, Item, SplitWords, Counter, Magnetic } from "@/components/motion";
 import { BRAND, CONTENT, type Service } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import { href, type Locale } from "@/lib/i18n";
 import { serviceHref } from "@/lib/routes";
 import { CARD_PAGE, type ServicePageId } from "@/lib/content-services";
@@ -70,7 +71,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
               <Magnetic><Link className="btn btn--solid" href={href(locale, "contact")}>{h.primary} <Arrow /></Link></Magnetic>
               {/* Spanish-speaking households reach for WhatsApp first (Pew 2024: 54% of Hispanic adults), so the Spanish path offers it up front. */}
               {locale === "es"
-                ? <a className="btn btn--ghost" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp className="w-[18px] h-[18px]" /> {c.ui.whatsappCta}</a>
+                ? <a className="btn btn--ghost" href={waHref(locale)} target="_blank" rel="noopener"><WhatsApp className="w-[18px] h-[18px]" /> {c.ui.whatsappCta}</a>
                 : <Link className="btn btn--ghost" href={href(locale, "estimator")}>{h.secondary}</Link>}
             </div>
             <ul className="flex flex-wrap gap-x-7 gap-y-2.5 mt-6 pt-5 border-t border-hairline-d-strong slate text-bone">

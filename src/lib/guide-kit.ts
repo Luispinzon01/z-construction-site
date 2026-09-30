@@ -18,7 +18,8 @@ import { ESTIMATOR, estimate, money, type EstimatorType } from "./estimator";
 
 export type GuideId =
   | "kitchen-cost" | "bathroom-cost" | "permits" | "hire-contractor" | "rental-turnover" | "cabinets-paint-vs-replace"
-  | "painting-cost" | "exterior-paint-timing" | "builder-grade-upgrades" | "tub-to-shower" | "flooring-humidity" | "bilingual-contractor" | "student-condo";
+  | "painting-cost" | "exterior-paint-timing" | "builder-grade-upgrades" | "tub-to-shower" | "flooring-humidity" | "bilingual-contractor" | "student-condo"
+  | "deck-repair-vs-replace" | "addition-vs-moving";
 export interface GuideSection { h: string; p?: string[]; list?: string[]; table?: { head: string[]; rows: string[][] } }
 export interface GuideCopy { title: string; description: string; eyebrow: string; h1: string; lede: string; answer: string; sections: GuideSection[]; faq: { q: string; a: string }[] }
 export interface Guide {

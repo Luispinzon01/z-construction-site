@@ -18,13 +18,13 @@ const NAVY = "#0f1a2e", BONE = "#f4efe6", AMBER = "#e3931e";
 /* Read from disk rather than fetch(new URL(..., import.meta.url)): Turbopack's
    Node runtime does not serve file: URLs. next.config.ts traces these files
    into the serverless bundle (outputFileTracingIncludes). */
-const load = (rel: string) => readFile(path.join(process.cwd(), rel));
+/* Literal paths (not a variable) so the bundler traces exactly these files. */
 let assets: Promise<{ display: ArrayBuffer; body: ArrayBuffer; logo: string }> | undefined;
 function getAssets() {
   return (assets ??= Promise.all([
-    load("src/assets/fonts/BarlowCondensed-ExtraBold.ttf"),
-    load("src/assets/fonts/Barlow-Regular.ttf"),
-    load("public/brand/logo-on-dark.png"),
+    readFile(path.join(process.cwd(), "src/assets/fonts/BarlowCondensed-ExtraBold.ttf")),
+    readFile(path.join(process.cwd(), "src/assets/fonts/Barlow-Regular.ttf")),
+    readFile(path.join(process.cwd(), "public/brand/logo-on-dark.png")),
   ]).then(([display, body, logo]) => ({
     display: display.buffer.slice(display.byteOffset, display.byteOffset + display.byteLength) as ArrayBuffer,
     body: body.buffer.slice(body.byteOffset, body.byteOffset + body.byteLength) as ArrayBuffer,

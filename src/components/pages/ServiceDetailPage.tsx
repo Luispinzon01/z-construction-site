@@ -11,6 +11,7 @@ import Compare from "@/components/Compare";
 import { Arrow, Check, Phone } from "@/components/Icons";
 import { Reveal, Stagger, Item } from "@/components/motion";
 import { BRAND, CONTENT, photo } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import { SERVICE_UI, serviceById, type ServicePageId } from "@/lib/content-services";
 import { AREA_PAGES } from "@/lib/content-areas";
 import { GUIDES } from "@/lib/content-guides";
@@ -180,7 +181,7 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
             <span className="eyebrow text-amber-deep mb-4">{ui.formEyebrow}</span>
             <h2 className="d h-md text-navy">{ui.formH}</h2>
             <p className="mt-3 text-muted">{ui.formP}</p>
-            <Suspense fallback={null}><QuoteForm locale={locale} service={s.form} compact /></Suspense>
+            <Suspense fallback={null}><QuoteForm locale={locale} t={c.contact} service={s.form} compact /></Suspense>
           </Reveal>
           <Reveal delay={0.1} className="grid gap-8">
             <Promise locale={locale} />
@@ -194,7 +195,7 @@ export default function ServiceDetailPage({ locale, id }: { locale: Locale; id: 
                 <ul className="flex flex-wrap gap-2">{AREA_PAGES.map((a) => <li key={a.id}><Link className="inline-block rounded-full border border-hairline-strong px-3 py-1.5 text-step--1 no-underline hover:border-ink" href={areaHref(locale, a.id)}>{t.name} · {a.t[locale].name}</Link></li>)}</ul>
               </div>
             )}
-            <a className="inline-flex items-center gap-3 rounded-card border border-hairline bg-bone p-5 no-underline" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener">
+            <a className="inline-flex items-center gap-3 rounded-card border border-hairline bg-bone p-5 no-underline" href={waHref(locale, t.name.toLowerCase())} target="_blank" rel="noopener">
               <span className="d text-step-1 text-navy">{c.contact.waH}</span><span className="text-step--1 text-muted">{c.contact.waP}</span>
             </a>
           </Reveal>

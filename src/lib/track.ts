@@ -56,7 +56,7 @@ export function trackLead(l: { leadId: string; service: string; email: string; p
   const value = LEAD_VALUE[l.service] ?? LEAD_VALUE.other;
   const phone = e164(l.phone);
   // Enhanced conversions: gtag hashes these before they leave the browser.
-  window.gtag?.("set", "user_data", { email: l.email, ...(phone ? { phone_number: phone } : {}) });
+  window.gtag?.("set", "user_data", { ...(l.email ? { email: l.email } : {}), ...(phone ? { phone_number: phone } : {}) });
   window.gtag?.("event", "generate_lead", { value, currency: "USD", service: l.service, language: l.language, transaction_id: l.leadId });
   if (IDS.ads && IDS.adsLead) window.gtag?.("event", "conversion", { send_to: `${IDS.ads}/${IDS.adsLead}`, value, currency: "USD", transaction_id: l.leadId });
   // Same eventID as the server-side Conversions API call, so Meta de-duplicates.

@@ -7,26 +7,20 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Globe } from "./Icons";
-import { BRAND, CONTENT } from "@/lib/content";
+import { BRAND } from "@/lib/brand";
 import { href, type Locale } from "@/lib/i18n";
-import { routeFromPath, routeHref, type Route } from "@/lib/routes";
+import { lookupAlt, type AltMap } from "@/lib/alt-lookup";
+import type { SiteContent } from "@/lib/content";
 
 const ORDER = ["home", "services", "about", "work", "reviews", "contact"] as const;
 
-/** The same page in the other language (thank-you → home). */
-export function altHrefFor(locale: Locale, pathname: string): string {
-  const other: Locale = locale === "en" ? "es" : "en";
-  const r: Route = routeFromPath(locale, pathname);
-  return r.kind === "page" && r.key === "thanks" ? href(other, "home") : routeHref(other, r);
-}
-
-export default function Nav({ locale }: { locale: Locale }) {
-  const c = CONTENT[locale];
+/* Strings and the twin-page map come from the server layout as props, so the
+   browser bundle never carries the copy deck or the route tables. */
+export default function Nav({ locale, t, alt }: { locale: Locale; t: Pick<SiteContent, "nav" | "ui">; alt: AltMap }) {
+  const c = t;
   const pathname = usePathname();
-  const route = routeFromPath(locale, pathname);
-  const page = route.kind === "page" ? route.key : route.kind === "service" ? "services" : null;
+  const [altHref, page] = lookupAlt(alt, locale, pathname);
   const other: Locale = locale === "en" ? "es" : "en";
-  const altHref = altHrefFor(locale, pathname);
   const bar = useRef<HTMLElement>(null);
   const menu = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);

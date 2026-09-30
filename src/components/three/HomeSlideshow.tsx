@@ -7,7 +7,7 @@
    Ken Burns zoom (transform only). Reduced motion: first slide, static. */
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { photo, type PhotoKey } from "@/lib/content";
+import { photo, type PhotoKey } from "@/lib/brand";
 
 const SLIDES: PhotoKey[] = ["hero", "kitchen1", "houseWhite", "bath1", "porch2", "kitchen2", "porch1", "bath2"];
 const INTERVAL = 6500;

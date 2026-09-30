@@ -15,6 +15,7 @@ import { serviceHref, areaHref } from "@/lib/routes";
 import { BRAND, CONTENT, photo } from "@/lib/content";
 import { isLocale, LOCALES, SITE_URL, type Locale } from "@/lib/i18n";
 import { ownerNode, OWNER_ID } from "@/lib/schema";
+import { altMap } from "@/lib/alt-map";
 
 /* Barlow Condensed for the display voice: upright, industrial, squared off —
    the type equivalent of a plumb wall. Barlow for body, Space Mono for the
@@ -83,16 +84,17 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const c = CONTENT[locale];
+  const alt = altMap(locale);
   return (
     <html lang={locale} className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body className="pb-[72px] lg:pb-0">
         <a className="skip-link" href="#main">{c.ui.skip}</a>
         <Grain />
         <ScrollProgress />
-        <Nav locale={locale} />
+        <Nav locale={locale} t={{ nav: c.nav, ui: c.ui }} alt={alt} />
         <main id="main">{children}</main>
         <Footer locale={locale} />
-        <LangSuggest locale={locale} />
+        <LangSuggest locale={locale} t={c.langSuggest} altMap={alt} />
         <Tracking />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd(locale), {
           "@context": "https://schema.org", "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: BRAND.name, inLanguage: ["en", "es"], publisher: { "@id": `${SITE_URL}/#business` },

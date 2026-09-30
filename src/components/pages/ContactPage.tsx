@@ -4,6 +4,7 @@ import QuoteForm from "@/components/QuoteForm";
 import Promise from "@/components/Promise";
 import { Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
 import { href, type Locale } from "@/lib/i18n";
@@ -24,12 +25,12 @@ export default function ContactPage({ locale }: { locale: Locale }) {
             <span className="eyebrow text-amber-deep mb-4">{k.formEyebrow}</span>
             <h2 className="d h-md text-navy">{k.formH}</h2>
             <p className="mt-3 text-muted">{k.formP}</p>
-            <Suspense fallback={null}><QuoteForm locale={locale} /></Suspense>
+            <Suspense fallback={null}><QuoteForm locale={locale} t={c.contact} /></Suspense>
           </Reveal>
           <Reveal delay={0.1} className="grid gap-4">
             <Promise locale={locale} />
             <Card title={k.callH}><a className="d text-step-2 text-navy hover:text-amber-deep no-underline" href={`tel:${BRAND.tel}`}>{BRAND.phone}</a><p className="mt-2 text-step--1 text-muted">{k.callP}</p></Card>
-            <Card title={k.waH}><a className="d text-step-1 text-navy hover:text-amber-deep no-underline" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener">WhatsApp →</a><p className="mt-2 text-step--1 text-muted">{k.waP}</p></Card>
+            <Card title={k.waH}><a className="d text-step-1 text-navy hover:text-amber-deep no-underline" href={waHref(locale)} target="_blank" rel="noopener">WhatsApp →</a><p className="mt-2 text-step--1 text-muted">{k.waP}</p></Card>
             <Card title={k.emailH}><a className="d text-step-1 text-navy hover:text-amber-deep no-underline break-all" href={`mailto:${BRAND.email}`}>{BRAND.email}</a><p className="mt-2 text-step--1 text-muted">{k.emailP}</p></Card>
             <Card title={k.hoursH}><table className="w-full text-step--1 border-collapse"><tbody>{k.hoursRows.map(([d, t]) => <tr key={d} className="border-b border-hairline last:border-0"><td className="py-2">{d}</td><td className="py-2 text-right font-mono text-[.72rem] tracking-[.06em]">{t}</td></tr>)}</tbody></table></Card>
             <Card title={k.basedH}><p className="text-ink">{BRAND.city}, Alabama {BRAND.zip}<br /><span className="text-muted">{k.basedP}</span></p></Card>

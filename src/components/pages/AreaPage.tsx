@@ -97,7 +97,7 @@ export default function AreaPage({ locale, id }: { locale: Locale; id: AreaId })
             <span className="eyebrow text-amber-deep mb-4">{ui.formEyebrow}</span>
             <h2 className="d h-md text-navy">{ui.formH}</h2>
             <p className="mt-3 text-muted">{ui.formP}</p>
-            <Suspense fallback={null}><QuoteForm locale={locale} compact /></Suspense>
+            <Suspense fallback={null}><QuoteForm locale={locale} t={c.contact} compact /></Suspense>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-mono font-normal text-[.74rem] tracking-[.14em] uppercase text-muted mb-3">{c.footer.allAreas}</h2>

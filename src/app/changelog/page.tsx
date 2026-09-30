@@ -244,6 +244,8 @@ export default function ChangelogPage() {
             [true, "Review-request page to text customers after every job: /review and /es/deje-su-resena (one tap to Google, Angi, HomeAdvisor)"],
             [true, "Prices on the home page, branded share cards on every page, price catalog in structured data"],
             [true, "13 bilingual guides, 60-question hub, company facts page, connected schema graph, llms-full.txt, IndexNow"],
+            [true, "Funnel: project call-to-action on every guide and hub lane, 2-field quick lead, prefilled WhatsApp, lean client bundles"],
+            [false, "Free Telegram lead alert: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID in Vercel (5 minutes, see docs/growth/07)"],
             [false, "Confirm EPA lead-safe (RRP) firm certification: required to paint pre-1978 homes, and a selling point once confirmed"],
             [false, "Owner name for guide authorship (BRAND.owner in content.ts) and an optional headshot"],
             [false, "Yelp + Bing Places + Apple Business profiles with identical name/phone (ChatGPT's local cards come mostly from Yelp)"],
@@ -324,6 +326,35 @@ export default function ChangelogPage() {
               <li><b className="text-bone">Bugs that fed crawlers wrong facts, fixed</b>: the star counter read "0.0" in the HTML; Spanish town pages showed English drive times; the license-search link pointed at a dead state server; the Opelika permit address was wrong (710, not 700, Fox Trail).</li>
               <li><b className="text-bone">Lighthouse</b>: SEO, accessibility and best practices 100 on every page tested; mobile performance 84–90 in the slow-4G lab.</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* FIFTH PASS: SALES FUNNEL */}
+      <section className="shell py-10 md:py-14 border-t border-hairline-d">
+        <H2 k="10 · Sales funnel">Every answer now ends in a next step</H2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          <Stat label="Ways to become a lead" value="4" delta="from 2" note="Number, WhatsApp, full form, call" />
+          <Stat label="Fields for the quickest lead" value="2" delta="from 9" note="Name + phone; page becomes the message" />
+          <Stat label="JavaScript on every page" value="215 KB" delta="from 327 KB" note="Copy deck no longer shipped to browsers" />
+          <Stat label="Paid texting needed" value="$0" note="Free Telegram alert; owner texts back by hand" />
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card title="Lighthouse mobile performance, before and after" sub="The nav and forms were importing the whole bilingual copy deck and every page's text (about 170 KB compressed) into the browser. They now get only the strings they need from the server. Slow-4G, 4× CPU lab test." table={{ head: ["Page", "Before", "After"], rows: [["Home", 85, 90], ["Question hub", 84, 92], ["Guide: painter pricing", 89, 93]] }}>
+            <GroupedBars rows={[{ label: "Home", values: [85, 90] }, { label: "Question hub", values: [84, 92] }, { label: "Painter pricing guide", values: [89, 93] }]} series={[{ label: "Before", color: C.dim }, { label: "After", color: C.s1 }]} max={108} />
+            <Legend items={[{ label: "Before", color: C.dim }, { label: "After", color: C.s1 }]} />
+          </Card>
+          <div className="rounded-card border border-hairline-d bg-bone/[.03] p-5 md:p-6">
+            <h3 className="d text-step-1 leading-none mb-4">The funnel, stage by stage</h3>
+            <ol className="grid gap-2.5 text-step--1 text-bone/85 list-decimal pl-5">
+              <li><b className="text-bone">Find:</b> 15 guides, 60-question hub, town and service pages, company facts (EN + ES).</li>
+              <li><b className="text-bone">Trust:</b> dates, sources, license lookup, owner-on-every-job promise, native Spanish.</li>
+              <li><b className="text-bone">Price it:</b> a real range on every page; the estimator in three taps.</li>
+              <li><b className="text-bone">Act:</b> a project block ends every guide and each hub lane, with a slim prompt mid-guide: leave a number, WhatsApp with a prefilled first line naming the service, the full form pre-set with the page as context, or call. The estimator result now has the two-field box too.</li>
+              <li><b className="text-bone">Respond:</b> quick requests are graded by the estimate they carry (a priced $25k–$45k kitchen now grades B, not C), and a free Telegram alert puts the lead on the owner's phone in seconds.</li>
+              <li><b className="text-bone">Measure:</b> quick_lead_start, quick_lead, whatsapp_click, estimator and form events feed a GA4 funnel; setup and weekly review in docs/growth/10-seo-sales-funnel.md.</li>
+            </ol>
+            <p className="mt-4 text-[.8rem] text-bone/60">Also: two new guides (deck repair vs replace; addition vs moving), and the share-card function no longer bundles the whole project.</p>
           </div>
         </div>
       </section>

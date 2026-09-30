@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Arrow, WhatsApp } from "./Icons";
 import { BRAND, CONTENT } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import { SERVICE_PAGES } from "@/lib/content-services";
 import { AREA_PAGES } from "@/lib/content-areas";
 import { FACTS } from "@/lib/content-facts";
@@ -25,7 +26,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             <p className="text-ink"><strong className="d text-step-1 text-navy mr-2">Hablamos español.</strong><span className="text-muted">Spanish-speaking contractor in Auburn · Presupuesto, contrato y obra en español.</span></p>
             <div className="flex flex-wrap gap-2">
               <a className="btn btn--line btn--sm" href={href("es", "home")} hrefLang="es">Ver en español</a>
-              <a className="btn btn--sm bg-[#075e54] text-white" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp /> WhatsApp</a>
+              <a className="btn btn--sm bg-[#075e54] text-white" href={waHref(locale)} target="_blank" rel="noopener"><WhatsApp /> WhatsApp</a>
             </div>
           </div>
         </aside>
@@ -52,7 +53,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             <div className="grid gap-10 content-start">
               <div><H>{c.footer.contact}</H><ul className="grid gap-2">
                 <li><a className="text-bone hover:text-amber no-underline" href={`tel:${BRAND.tel}`}>{BRAND.phone}</a></li>
-                <li><a className="text-bone hover:text-amber no-underline" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener">WhatsApp</a></li>
+                <li><a className="text-bone hover:text-amber no-underline" href={waHref(locale)} target="_blank" rel="noopener">WhatsApp</a></li>
                 <li><a className="text-bone hover:text-amber no-underline break-all" href={`mailto:${BRAND.email}`}>{BRAND.email}</a></li>
                 <li>{BRAND.city}, {BRAND.region} {BRAND.zip}</li>
                 <li>{c.footer.hours[0]}<br />{c.footer.hours[1]}</li>
@@ -75,11 +76,11 @@ export default function Footer({ locale }: { locale: Locale }) {
       {/* Mobile bar. Spanish path: WhatsApp is a full button and comes first. */}
       <div className={`fixed left-3 right-3 bottom-3 z-[900] grid gap-1.5 p-1.5 rounded-full bg-navy-2/95 shadow-[0_20px_50px_-20px_rgba(0,0,0,.6)] lg:hidden ${locale === "es" ? "grid-cols-[1.3fr_auto_1.2fr]" : "grid-cols-[1fr_auto_1.45fr]"}`} aria-label={c.ui.quickActions} data-track="mobile-bar">
         {locale === "es"
-          ? <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.04em] text-[.95rem] text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /> WhatsApp</a>
+          ? <a href={waHref(locale)} target="_blank" rel="noopener" className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.04em] text-[.95rem] text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /> WhatsApp</a>
           : <a href={`tel:${BRAND.tel}`} className="h-[46px] rounded-full inline-flex items-center justify-center gap-2 no-underline font-display uppercase font-bold tracking-[.06em] text-bone border border-hairline-d-strong"><Phone className="w-4 h-4" /> {c.ui.call}</a>}
         {locale === "es"
           ? <a href={`tel:${BRAND.tel}`} aria-label={c.ui.call} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone border border-hairline-d-strong"><Phone className="w-5 h-5" /></a>
-          : <a href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /></a>}
+          : <a href={waHref(locale)} target="_blank" rel="noopener" aria-label={c.ui.whatsapp} className="h-[46px] w-[46px] rounded-full inline-flex items-center justify-center text-bone bg-[#075e54]"><WhatsApp className="w-5 h-5" /></a>}
         <Link href={href(locale, "contact")} className="h-[46px] px-3 rounded-full inline-flex items-center justify-center gap-1.5 no-underline font-display uppercase font-bold tracking-[.04em] whitespace-nowrap text-[.95rem] bg-amber text-navy-2">{c.ui.quoteShort} <Arrow className="w-4 h-4 max-[380px]:hidden" /></Link>
       </div>
     </>

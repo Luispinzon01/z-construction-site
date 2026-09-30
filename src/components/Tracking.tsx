@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { captureAttribution } from "@/lib/attribution";
 import { IDS, trackContact } from "@/lib/track";
-import { BRAND } from "@/lib/content";
+import { BRAND } from "@/lib/brand";
 
 export default function Tracking() {
   const pathname = usePathname();

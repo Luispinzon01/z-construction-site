@@ -6,16 +6,17 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Arrow } from "./Icons";
-import { CONTENT } from "@/lib/content";
+import type { SiteContent } from "@/lib/content";
 import { ESTIMATOR, estimate, money, type EstimatorType, type Finish } from "@/lib/estimator";
 import { href, type Locale } from "@/lib/i18n";
 import { track } from "@/lib/track";
+import QuickLead from "./QuickLead";
 
 const TYPES = Object.keys(ESTIMATOR) as EstimatorType[];
 const FINISHES: Finish[] = ["standard", "mid", "premium"];
 
-export default function CostEstimator({ locale }: { locale: Locale }) {
-  const e = CONTENT[locale].estimator;
+export default function CostEstimator({ locale, t }: { locale: Locale; t: Pick<SiteContent, "estimator" | "funnel" | "contact"> }) {
+  const e = t.estimator;
   const q = useSearchParams().get("type") as EstimatorType | null;
   const [type, setType] = useState<EstimatorType>(q && ESTIMATOR[q] ? q : "kitchen");
   const [tier, setTier] = useState<0 | 1 | 2>(1);
@@ -73,6 +74,10 @@ export default function CostEstimator({ locale }: { locale: Locale }) {
         <p className="mt-2 text-step--1 text-muted-d">{e.resultNote}</p>
         <Link className="btn btn--solid mt-6 w-full" href={cta} onClick={() => track("estimator_cta", { type, lo: r.lo, hi: r.hi })}>{e.cta} <Arrow /></Link>
         <p className="mt-3 slate text-bone/70">{e.ctaNote}</p>
+        <div className="mt-6 pt-5 border-t border-hairline-d">
+          <p className="d text-step-0 mb-3">{t.funnel.quickH}</p>
+          <QuickLead locale={locale} t={t.funnel} labels={t.contact} err={t.contact.f.err} service={def.form} context={note.trim()} dark where="estimator" />
+        </div>
         <p className="mt-6 pt-5 border-t border-hairline-d text-[.8rem] leading-relaxed text-muted-d">{e.disclaimer}</p>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function EstimatorPage({ locale }: { locale: Locale }) {
       <PageHero photoKey="kitchen3" alt={e.h1} eyebrow={e.eyebrow} h1={e.h1} lede={e.lede} />
       <Breadcrumbs items={[{ name: c.ui.home, path: href(locale, "home") }, { name: c.footer.estimator, path: href(locale, "estimator") }]} />
       <section className="sec bg-bone" data-tone="light">
-        <div className="shell"><Suspense fallback={null}><CostEstimator locale={locale} /></Suspense></div>
+        <div className="shell"><Suspense fallback={null}><CostEstimator locale={locale} t={{ estimator: c.estimator, funnel: c.funnel, contact: c.contact }} /></Suspense></div>
       </section>
       {/* The full price table, server-rendered, so search engines and AI assistants can read and cite it. */}
       <section className="sec bg-bone-2" data-tone="light">

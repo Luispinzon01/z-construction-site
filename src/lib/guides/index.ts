@@ -8,5 +8,7 @@ import { guide as tubToShower } from "./tub-to-shower";
 import { guide as flooringHumidity } from "./flooring-humidity";
 import { guide as bilingualContractor } from "./bilingual-contractor";
 import { guide as studentCondo } from "./student-condo";
+import { guide as deckRepair } from "./deck-repair-vs-replace";
+import { guide as additionVsMoving } from "./addition-vs-moving";
 
-export const NEW_GUIDES: Guide[] = [paintingCost, exteriorPaintTiming, builderGradeUpgrades, tubToShower, flooringHumidity, bilingualContractor, studentCondo];
+export const NEW_GUIDES: Guide[] = [paintingCost, exteriorPaintTiming, builderGradeUpgrades, tubToShower, flooringHumidity, bilingualContractor, studentCondo, deckRepair, additionVsMoving];

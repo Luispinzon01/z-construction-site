@@ -40,8 +40,14 @@ export function score(l: Pick<Lead, "service" | "timeline" | "budget" | "city" |
   const time: Record<string, number> = { asap: 20, "1-3m": 20, "3-6m": 10, planning: 3 };
   const bud: Record<string, number> = { "100+": 30, "40-100": 28, "15-40": 22, "5-15": 14, lt5: 5, unsure: 10 };
   const inArea = IN_AREA.test(l.city);
-  let s = (svc[l.service] ?? 8) + (time[l.timeline] ?? 8) + (bud[l.budget] ?? 8);
-  s += inArea ? 10 : -10;
+  /* A lead that carries a priced estimate (from the estimator or a guide)
+     told us its budget without answering the budget question: use the top
+     of that range. */
+  const priced = Math.max(0, ...[...l.message.matchAll(/\$([\d,]{4,})/g)].map((m) => Number(m[1].replace(/,/g, ""))));
+  const budget = l.budget || (priced >= 100000 ? "100+" : priced >= 40000 ? "40-100" : priced >= 15000 ? "15-40" : priced >= 5000 ? "5-15" : priced ? "lt5" : "");
+  let s = (svc[l.service] ?? 8) + (time[l.timeline] ?? 8) + (bud[budget] ?? 8);
+  /* No city given (quick requests) is unknown, not out of area. */
+  s += inArea ? 10 : l.city ? -10 : 0;
   if (l.message.length > 80) s += 5;
   if (l.contactPref === "call" || l.contactPref === "whatsapp") s += 3;
   s = Math.max(0, Math.min(100, s));
@@ -67,8 +73,15 @@ export function channelOf(t?: Touch): string {
 }
 
 export function parseLead(b: Record<string, unknown>, meta: { ip?: string; userAgent?: string; fbp?: string; fbc?: string }): Lead | null {
-  const name = clean(b.name, 120), phone = clean(b.phone, 40), email = clean(b.email, 160), message = clean(b.message);
-  if (!name || !phone || !email || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || phone.replace(/\D/g, "").length < 10) return null;
+  const name = clean(b.name, 120), phone = clean(b.phone, 40), email = clean(b.email, 160);
+  /* Two shapes: the full estimate form (email + message required), and the
+     quick "text me a price" request from content pages (name + phone only;
+     the page context becomes the message). A phone number is the one thing
+     every lead must have: it's how the owner closes. */
+  const quick = clean(b.form, 20) === "quick";
+  const message = clean(b.message) || (quick ? "Quick request from the website: please call or text with a price." : "");
+  if (!name || !phone || !message || phone.replace(/\D/g, "").length < 10) return null;
+  if (email ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) : !quick) return null;
   let attribution: Attribution = {};
   try { attribution = typeof b.attribution === "string" ? JSON.parse(b.attribution) : ((b.attribution as Attribution) ?? {}); } catch {}
   const base = {
@@ -95,7 +108,7 @@ export function ownerEmail(l: Lead) {
     "",
     `Name:      ${l.name}`,
     `Phone:     ${l.phone}    call: tel:+${digits(l.phone)}   text: sms:+${digits(l.phone)}   WhatsApp: https://wa.me/${digits(l.phone)}`,
-    `Email:     ${l.email}`,
+    `Email:     ${l.email || "(not given: quick request, reply by call/text)"}`,
     `Prefers:   ${l.contactPref}${l.smsConsent ? " (OK to text)" : ""}   Language: ${l.language === "es" ? "SPANISH" : "English"}`,
     `City:      ${l.city}`,
     `Service:   ${SERVICE_LABEL[l.service] ?? l.service}`,
@@ -190,7 +203,7 @@ async function metaCapi(l: Lead) {
     data: [{
       event_name: "Lead", event_time: Math.floor(Date.now() / 1000), event_id: l.id, action_source: "website", event_source_url: l.page,
       user_data: {
-        em: [sha(l.email)], ph: [sha(digits(l.phone))], fn: [sha(fn)], ...(rest.length ? { ln: [sha(rest.join(" "))] } : {}),
+        ...(l.email ? { em: [sha(l.email)] } : {}), ph: [sha(digits(l.phone))], fn: [sha(fn)], ...(rest.length ? { ln: [sha(rest.join(" "))] } : {}),
         ct: l.city ? [sha(l.city.replace(/[^a-z]/gi, ""))] : undefined, st: [sha("al")], country: [sha("us")],
         client_ip_address: l.ip, client_user_agent: l.userAgent, fbp: l.fbp, fbc: l.fbc,
       },
@@ -223,24 +236,38 @@ async function run(channel: string, enabled: boolean, fn: () => Promise<void>): 
   try { await fn(); return { channel, ok: true }; } catch (e) { console.error(`[lead] ${channel} failed`, e); return { channel, ok: false, error: String(e) }; }
 }
 
+/* Free instant alert to the owner's phone: a Telegram bot message (no
+   per-message cost, unlike SMS). Setup: message @BotFather → /newbot → copy
+   the token; send the bot any message, then open
+   https://api.telegram.org/bot<TOKEN>/getUpdates to read your chat id. */
+async function telegramSend(text: string) {
+  const r = await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: process.env.TELEGRAM_CHAT_ID, text, disable_web_page_preview: true }),
+  });
+  if (!r.ok) throw new Error(`telegram ${r.status}`);
+}
+
 export async function deliver(l: Lead): Promise<{ delivered: boolean; results: Result[] }> {
   const env = process.env;
   const owner = ownerEmail(l);
   const ownerTo = env.QUOTE_TO_EMAIL || BRAND.email;
   const results = await Promise.all([
-    run("owner-email", !!env.RESEND_API_KEY, () => resendSend({ to: ownerTo, subject: owner.subject, text: owner.text, replyTo: l.email })),
+    run("owner-email", !!env.RESEND_API_KEY, () => resendSend({ to: ownerTo, subject: owner.subject, text: owner.text, replyTo: l.email || undefined })),
     run("owner-sms", !!(env.TWILIO_ACCOUNT_SID && env.TWILIO_AUTH_TOKEN && env.TWILIO_FROM && env.LEAD_ALERT_SMS_TO), () =>
       Promise.all(env.LEAD_ALERT_SMS_TO!.split(",").map((to) => twilioSend(to.trim(),
         `New ${l.grade} lead (${l.score}) ${l.language === "es" ? "ES " : ""}— ${l.name}, ${SERVICE_LABEL[l.service] ?? l.service}, ${l.city}. ${TIMELINE_LABEL[l.timeline] ?? ""} ${BUDGET_LABEL[l.budget] ?? ""}. Prefers ${l.contactPref}. ${l.phone} · via ${l.channel}`.slice(0, 320)))).then(() => {})),
-    run("customer-email", !!env.RESEND_API_KEY && env.LEAD_AUTOREPLY !== "0", () => { const m = customerEmail(l); return resendSend({ to: l.email, subject: m.subject, text: m.text, replyTo: ownerTo }); }),
+    run("customer-email", !!env.RESEND_API_KEY && env.LEAD_AUTOREPLY !== "0" && !!l.email, () => { const m = customerEmail(l); return resendSend({ to: l.email, subject: m.subject, text: m.text, replyTo: ownerTo }); }),
     // Texting the homeowner requires their consent (checkbox) and a registered A2P 10DLC number.
     run("customer-sms", !!(env.TWILIO_ACCOUNT_SID && env.TWILIO_FROM && env.LEAD_SMS_AUTOREPLY === "1" && l.smsConsent), () =>
       twilioSend(`+${digits(l.phone)}`, l.language === "es"
         ? `Z Construction: Hola ${l.name.split(/\s+/)[0]}, recibimos su solicitud. Le llamamos pronto. Si gusta, mande fotos del espacio por aquí. Responda STOP para no recibir mensajes.`
         : `Z Construction: Hi ${l.name.split(/\s+/)[0]}, we got your request and will call you shortly. Feel free to text photos of the space here. Reply STOP to opt out.`)),
+    run("owner-telegram", !!(env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID), () => telegramSend(
+      `${l.grade} lead ${l.language === "es" ? "· ESPAÑOL " : ""}— ${l.name}\n${SERVICE_LABEL[l.service] ?? l.service} · ${l.city || "?"}\n${l.message.slice(0, 400)}\n\nCall: tel:+${digits(l.phone)}\nWhatsApp: https://wa.me/${digits(l.phone)}\nvia ${l.channel}`)),
     run("webhook", !!env.LEAD_WEBHOOK_URL, () => webhook(l)),
     run("meta-capi", !!(env.NEXT_PUBLIC_META_PIXEL_ID && env.META_CAPI_TOKEN), () => metaCapi(l)),
   ]);
-  const reachedOwner = results.some((r) => r.ok && ["owner-email", "owner-sms", "webhook"].includes(r.channel));
+  const reachedOwner = results.some((r) => r.ok && ["owner-email", "owner-sms", "owner-telegram", "webhook"].includes(r.channel));
   return { delivered: reachedOwner, results };
 }

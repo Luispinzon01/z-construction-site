@@ -19,15 +19,17 @@ Z is entering a market where **no remodeler has more than about 30 Google review
 | [07-lead-system.md](07-lead-system.md) | How the lead pipeline works, how to turn each piece on, speed-to-lead scripts (EN/ES), follow-up cadence, review requests, CRM |
 | [08-budget-and-90-day-plan.md](08-budget-and-90-day-plan.md) | Budgets at $1,500 / $3,000 / $5,000 a month, KPIs, week-by-week 90-day plan |
 | [09-ai-visibility.md](09-ai-visibility.md) + [prompts](ai-visibility-prompts.csv) + [scorecard](ai-visibility-scorecard.csv) | How ChatGPT, Google AI, Copilot and Perplexity pick local businesses (sourced), the company-facts page, a competitor AI-readiness benchmark, the monthly 30-prompt test (EN + ES) and off-site actions ranked |
+| [10-seo-sales-funnel.md](10-seo-sales-funnel.md) | The funnel from search to booked walkthrough: which page does which job, the conversion blocks, the GA4 events and funnel exploration, leak-by-leak fixes, and a weekly review |
 | [research/](research/) | The full sourced research (competitors, market & SEO, paid channels) with links |
 
 ## What was built into the website
 
 - **9 service landing pages** in English and native Spanish (kitchen, bathroom, additions, remodeling, painting, cabinet painting, flooring, repairs, rental turnovers), each with pricing ranges, what's included, cost drivers, FAQs, an on-page quote form, and Service + FAQ structured data. These double as Google Ads landing pages.
 - **4 town pages** (Auburn, Opelika, Smiths Station & Beauregard, rural Lee County) built on real local facts — permit offices, historic districts, housing stock — not city-name swaps.
-- **6 guides** in both languages (kitchen cost, bathroom cost, permits, how to check a contractor's license, rental turnover checklist, paint vs. replace cabinets), written answer-first so Google's AI Overviews and ChatGPT can quote them.
+- **13+ guides** in both languages (costs, permits, licensing, painting, flooring, tub-to-shower, builder-grade upgrades, rental turns, student condos, hiring a Spanish-speaking contractor…), written answer-first with sources, each ending in a project call-to-action.
+- **Question hub** (`/questions`, `/es/preguntas-frecuentes`): 60 plain-language answers per language for first-timers and for landlords/property managers, a glossary and an Auburn vs Opelika local-facts table.
 - **Interactive cost estimator** (`/cost-estimator`, `/es/calculadora-de-costos`) that hands the visitor's choices to the quote form, so leads arrive pre-qualified.
-- **Lead pipeline**: lead scoring (A/B/C), marketing attribution on every lead (Google Ads, organic, ChatGPT/AI assistant, Facebook, GBP…), owner email with one-tap call/text/WhatsApp, instant SMS alert, bilingual auto-reply to the homeowner, webhook to any CRM or Google Sheet, Meta Conversions API.
+- **Lead pipeline**: lead scoring (A/B/C), marketing attribution on every lead (Google Ads, organic, ChatGPT/AI assistant, Facebook, GBP…), owner email with one-tap call/text/WhatsApp, free Telegram alert (SMS optional), bilingual auto-reply to the homeowner, webhook to any CRM or Google Sheet, Meta Conversions API.
 - **Tracking**: GA4, Google Ads (with enhanced conversions and call tracking), Meta Pixel, Microsoft UET, CallRail and optional Google Tag Manager — each switched on by setting one environment variable.
 - **WhatsApp everywhere**: mobile action bar, contact page, service pages, thank-you page; "Hablamos español" band on every English page.
 - **Technical SEO**: hreflang en-US/es-US/x-default on every URL, localized slugs, breadcrumbs, sitemap with all 58 URLs, robots.txt that welcomes AI search crawlers, `/llms.txt` fact sheet, privacy policy with SMS terms (required for A2P 10DLC texting and ad platforms). Fixed a bug where English pages rendered the wrong language-switch link for search engines.

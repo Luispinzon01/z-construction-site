@@ -1,7 +1,9 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaBand from "@/components/CtaBand";
+import ProjectCta from "@/components/ProjectCta";
 import { Arrow } from "@/components/Icons";
 import { Reveal } from "@/components/motion";
 import { CONTENT, photo } from "@/lib/content";
@@ -39,7 +41,8 @@ export default function GuidePage({ locale, id }: { locale: Locale; id: GuideId 
               <h2 className="eyebrow text-amber-deep mb-3">{gi.answer}</h2>
               <p className="text-step-1 leading-snug text-ink"><R x={t.answer} /></p>
             </Reveal>
-            {t.sections.map((s) => (
+            {t.sections.map((s, si) => (<Fragment key={s.h}>
+              {si === 3 && t.sections.length >= 5 && <ProjectCta slim locale={locale} service={g.service} estimator={g.estimator} context={`${gi.read}: ${t.h1}`} where="guide" />}
               <section key={s.h} id={slugify(s.h)} className="mb-12 [scroll-margin-top:6rem]">
                 <h2 className="d text-step-3 text-navy mb-4">{s.h}</h2>
                 <div className="grid gap-4 text-muted">
@@ -53,7 +56,8 @@ export default function GuidePage({ locale, id }: { locale: Locale; id: GuideId 
                   )}
                 </div>
               </section>
-            ))}
+            </Fragment>))}
+            <ProjectCta locale={locale} service={g.service} estimator={g.estimator} context={`${gi.read}: ${t.h1}`} where="guide" />
             {t.faq.length > 0 && (
               <section className="faq">
                 <h2 className="d text-step-3 text-navy mb-4">FAQ</h2>

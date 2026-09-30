@@ -3,6 +3,7 @@ import Photo from "@/components/Photo";
 import { Arrow, WhatsApp } from "@/components/Icons";
 import { SplitWords, Reveal } from "@/components/motion";
 import { BRAND, CONTENT } from "@/lib/content";
+import { waHref } from "@/lib/wa";
 import { href, type Locale } from "@/lib/i18n";
 
 export default function ThanksPage({ locale }: { locale: Locale }) {
@@ -19,7 +20,7 @@ export default function ThanksPage({ locale }: { locale: Locale }) {
           <h2 className="eyebrow text-amber-bright mb-3">{t.nextH}</h2>
           <ol className="grid gap-2">{t.next.map((x, i) => <li key={x} className="flex gap-3"><span className="font-mono text-amber">0{i + 1}</span><span className="text-bone/90">{x}</span></li>)}</ol>
         </Reveal>
-        <Reveal delay={0.6} className="flex flex-wrap gap-3 mt-4"><a className="btn btn--solid" href={`https://wa.me/${BRAND.whatsapp}`} target="_blank" rel="noopener"><WhatsApp /> {t.wa}</a><Link className="btn btn--ghost" href={href(locale, "work")}>{t.work}</Link></Reveal>
+        <Reveal delay={0.6} className="flex flex-wrap gap-3 mt-4"><a className="btn btn--solid" href={waHref(locale, "photos")} target="_blank" rel="noopener"><WhatsApp /> {t.wa}</a><Link className="btn btn--ghost" href={href(locale, "work")}>{t.work}</Link></Reveal>
       </div>
     </section>
   );
