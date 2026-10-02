@@ -32,11 +32,11 @@ export async function POST(req: Request) {
   const configured = results.some((r) => !r.skipped);
   if (!configured) {
     console.log(`[lead] (no delivery channels configured, logging only) ${lead.grade}/${lead.score} ${lead.channel}\n` + JSON.stringify(lead, null, 2));
-    return NextResponse.json({ ok: true, leadId: lead.id, delivered: false });
+    return NextResponse.json({ ok: true, leadId: lead.id, delivered: false, grade: lead.grade, score: lead.score, channel: lead.channel });
   }
   if (!delivered) {
     console.error("[lead] NOT DELIVERED to owner", JSON.stringify({ lead, results }));
     return NextResponse.json({ ok: false, error: "send failed" }, { status: 502 });
   }
-  return NextResponse.json({ ok: true, leadId: lead.id, delivered: true, grade: lead.grade });
+  return NextResponse.json({ ok: true, leadId: lead.id, delivered: true, grade: lead.grade, score: lead.score, channel: lead.channel });
 }

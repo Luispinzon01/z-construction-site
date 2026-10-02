@@ -1,12 +1,11 @@
 /* Client-side lead delivery, shared by the full estimate form and the quick
-   "call or text me" box. Two paths run side by side:
-   1. /api/quote: the full pipeline (Resend email, Telegram alert, CRM
-      webhook, optional Twilio), active for whichever channels have env vars.
-   2. Web3Forms (free, 250/month), when NEXT_PUBLIC_WEB3FORMS_KEY is set. It
-      posts from the browser because the free plan rejects server-side calls,
-      so a lead reaches the owner's inbox before any paid channel exists. The
-      key is public by design.
-   The lead counts as sent if either path delivers it. */
+   "call or text me" box. Two steps, in order:
+   1. /api/quote grades the lead, finds its source and delivers through any
+      configured channel (Telegram alert, Resend email, CRM webhook).
+   2. Web3Forms (free, 250/month) emails the owner, with that grade and
+      source in the message. It posts from the browser because the free plan
+      rejects server-side calls.
+   The lead counts as sent if either step delivers it. */
 import type { SiteContent } from "./content";
 import type { Locale } from "./i18n";
 import { getAttribution } from "./attribution";
@@ -21,25 +20,49 @@ export async function submitLead(locale: Locale, data: Record<string, string>, c
   const w3fKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "4073f9e9-9005-4810-b6c0-745df45295fd";
   const label = (opts: { v: string; l: string }[], v?: string) => opts.find((o) => o.v === v)?.l || v || "-";
   const quick = data.form === "quick";
-  const w3f = w3fKey && !data.company
-    ? fetch("https://api.web3forms.com/submit", {
+  /* Step 1: our own endpoint. It validates, grades the lead A/B/C, works out
+     which channel produced it, and delivers through any configured channel
+     (Telegram, Resend, webhook). Capped at 5 s so a slow function never
+     holds up the email below. */
+  type Api = { ok?: boolean; leadId?: string; delivered?: boolean; grade?: string; score?: number; channel?: string };
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 5000);
+  const { r, j } = await fetch("/api/quote", {
+    method: "POST", headers: { "Content-Type": "application/json" }, signal: ctl.signal,
+    body: JSON.stringify({ ...data, language: locale, page: location.href, attribution: getAttribution() }),
+  }).then(async (r) => ({ r, j: (await r.json().catch(() => ({}))) as Api }))
+    .catch(() => ({ r: null as Response | null, j: {} as Api }));
+  clearTimeout(timer);
+
+  /* Step 2: the owner's email, via Web3Forms. Written to be acted on from a
+     phone: grade and source in the subject, then a one-tap WhatsApp link to
+     the customer, then the details in the order he needs them. */
+  const digits = data.phone.replace(/\D/g, "").replace(/^(\d{10})$/, "1$1");
+  const es = locale === "es";
+  const svc = label(c.serviceOptions, data.service);
+  const w3fOk = w3fKey && !data.company
+    ? await fetch("https://api.web3forms.com/submit", {
         method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: w3fKey, botcheck: "", from_name: "Z Construction website", ...(data.email ? { replyto: data.email } : {}),
-          subject: `${quick ? "CALL BACK" : "New estimate request"}: ${data.name} · ${data.city || "Lee County"} · ${label(c.serviceOptions, data.service)}${locale === "es" ? " · ESPAÑOL" : ""}`,
-          Name: data.name, Phone: data.phone, Email: data.email || "-", City: data.city || "-",
-          Service: label(c.serviceOptions, data.service), Timeline: label(c.timelineOptions, data.timeline), Budget: label(c.budgetOptions, data.budget),
-          "Contact by": label(c.contactOptions, data.contactPref), "Texts OK": data.smsConsent ? "Yes" : "No",
-          Message: data.message || "-", Language: locale === "es" ? "Spanish" : "English", Page: location.href,
+          subject: `${j.grade ? `[${j.grade}] ` : ""}${quick ? "CALL BACK" : "Estimate request"} · ${svc} · ${data.city || "city not given"} · ${data.name}${es ? " · ESPAÑOL" : ""}`,
+          "Lead": `${quick ? "Quick request: call or text back" : "Full estimate request"}${j.grade ? ` · grade ${j.grade} (${j.score}/100)` : ""}${es ? " · SPEAKS SPANISH" : ""}`,
+          "Name": data.name,
+          "Phone": data.phone,
+          "WhatsApp them": `https://wa.me/${digits}`,
+          "Email": data.email || "not given (reply by call, text or WhatsApp)",
+          "Prefers": `${label(c.contactOptions, data.contactPref)}${data.smsConsent ? " · OK to text" : ""}`,
+          "Service": svc,
+          "City": data.city || "-",
+          "Timeline": label(c.timelineOptions, data.timeline),
+          "Budget": label(c.budgetOptions, data.budget),
+          "Message": data.message || "-",
+          "Language": es ? "Spanish" : "English",
+          "Found us via": j.channel || "-",
+          "Sent from page": location.href,
+          "Lead ID": j.leadId || "-",
         }),
-      }).then((r) => r.json()).then((j: { success?: boolean }) => !!j.success).catch(() => false)
-    : Promise.resolve(false);
-  const api = fetch("/api/quote", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...data, language: locale, page: location.href, attribution: getAttribution() }),
-  }).then(async (r) => ({ r, j: (await r.json().catch(() => ({}))) as { ok?: boolean; leadId?: string; delivered?: boolean } }))
-    .catch(() => ({ r: null as Response | null, j: {} as { ok?: boolean; leadId?: string; delivered?: boolean } }));
-  const [w3fOk, { r, j }] = await Promise.all([w3f, api]);
+      }).then((x) => x.json()).then((x: { success?: boolean }) => !!x.success).catch(() => false)
+    : false;
   /* In production an "ok but delivered: false" answer means no channel is
      configured: report failure so the visitor sees the call-us message
      instead of a false success. */
