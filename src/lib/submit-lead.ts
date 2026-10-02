@@ -15,7 +15,10 @@ import { trackLead } from "./track";
 export type LeadLabels = Pick<SiteContent["contact"], "serviceOptions" | "timelineOptions" | "budgetOptions" | "contactOptions">;
 
 export async function submitLead(locale: Locale, data: Record<string, string>, c: LeadLabels): Promise<{ ok: boolean; leadId?: string }> {
-  const w3fKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+  /* Web3Forms access keys are public by design (they ship in the browser
+     either way and can only send to the inbox they're tied to), so the live
+     key is the default; a Vercel env var overrides it. */
+  const w3fKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "4073f9e9-9005-4810-b6c0-745df45295fd";
   const label = (opts: { v: string; l: string }[], v?: string) => opts.find((o) => o.v === v)?.l || v || "-";
   const quick = data.form === "quick";
   const w3f = w3fKey && !data.company
