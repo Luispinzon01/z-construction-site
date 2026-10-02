@@ -27,7 +27,7 @@ The website side is done. Items 1, 2 and 5 are the owner's work, below.
 - [ ] **Description** (750 chars): English, with one Spanish sentence. Example:
   > Family-owned, licensed and insured construction, remodeling and painting contractor based in Auburn, Alabama. Kitchens, bathrooms, home additions, whole-home remodels, cabinet painting, flooring, repairs and rental turnovers for Auburn, Opelika and Lee County. The same crew builds and finishes your project, the owner is on every job, and every estimate is written and itemized. **Hablamos español — presupuestos gratis en español.**
 - [ ] **Chat**: Edit profile → Contact → Chat → **WhatsApp**.
-- [ ] **Website link** with tracking: `https://www.zconstructionremodeling.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp` (the site's lead attribution will then show "Google Business Profile" as the source).
+- [ ] **Website link** with tracking: `https://www.zconstructionauburn.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp` (the site's lead attribution will then show "Google Business Profile" as the source).
 - [ ] **Booking link**: `/contact` (also feeds LSA booking).
 - [ ] **Photos**: 30+ at launch (logo, cover, team, truck, before/after); then 5–10 per week while jobs are active. Photos now sort by recency.
 - [ ] **Products** (optional but they show prominently): Cabinet Refresh Package, Tub-to-Shower Conversion, Rental Turnover Package, Interior Painting (per room) — each with a photo and "from" price.

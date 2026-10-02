@@ -8,7 +8,7 @@ export const BRAND = {
   short: "Z Construction",
   phone: "(334) 319-2126",
   tel: "+13343192126",
-  email: "info@zconstructionremodeling.com", // TODO real inbox
+  email: "zefreino@zconstructionauburn.com",
   city: "Auburn",
   region: "AL",
   zip: "36830",
