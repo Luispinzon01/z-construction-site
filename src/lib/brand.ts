@@ -17,7 +17,7 @@ export const BRAND = {
   rating: "5.0", // real: 5.0 across the reviews on Angi and HomeAdvisor
   license: "#00000", // TODO Alabama HBLB license number. Hidden from the page and schema while it is a placeholder.
   googleReviewUrl: "https://g.page/r/REPLACE_WITH_GOOGLE_REVIEW_LINK/review", // TODO
-  angiUrl: "https://www.angi.com/", // TODO direct link to the Angi profile
+  angiUrl: "https://www.angi.com/companylist/us/al/opelika/z-construction-remodeling-llc-reviews-1.htm",
   hblbSearchUrl: "https://alhobv7prod.glsuite.us/GLSuiteWeb/Clients/ALHOB/Public/LicenseeSearch.aspx",
   homeAdvisorUrl: "https://www.homeadvisor.com/", // TODO direct link to the HomeAdvisor profile
   /* WhatsApp Business number, digits only with country code. Spanish-speaking
@@ -25,7 +25,7 @@ export const BRAND = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "13343192126", // same number as the phone
   /* Profiles that corroborate the business for Google and AI assistants
      (schema sameAs). Add each URL as soon as the profile exists. */
-  profiles: [] as string[], // TODO: Google Business Profile, Facebook, Instagram, Nextdoor, Yelp, BBB, Houzz, Angi, Bing Places
+  profiles: ["https://www.angi.com/companylist/us/al/opelika/z-construction-remodeling-llc-reviews-1.htm"] as string[], // add as they exist: Google Business Profile, Facebook, Instagram, Nextdoor, Yelp, BBB, Houzz, HomeAdvisor, Bing Places
   /* The owner as a named, accountable person: Google's quality raters and AI
      assistants weigh who stands behind advice. Leave name empty until the
      owner confirms how he wants to appear (and ideally adds a headshot at
