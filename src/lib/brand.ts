@@ -6,8 +6,8 @@
 export const BRAND = {
   name: "Z Construction & Remodeling LLC",
   short: "Z Construction",
-  phone: "(334) 555-0123", // TODO real number
-  tel: "+13345550123",
+  phone: "(334) 319-2126",
+  tel: "+13343192126",
   email: "info@zconstructionremodeling.com", // TODO real inbox
   city: "Auburn",
   region: "AL",
@@ -22,7 +22,7 @@ export const BRAND = {
   homeAdvisorUrl: "https://www.homeadvisor.com/", // TODO direct link to the HomeAdvisor profile
   /* WhatsApp Business number, digits only with country code. Spanish-speaking
      families overwhelmingly prefer WhatsApp to a phone call or a form. */
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "13345550123", // TODO real WhatsApp Business number
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "13343192126", // same number as the phone
   /* Profiles that corroborate the business for Google and AI assistants
      (schema sameAs). Add each URL as soon as the profile exists. */
   profiles: [] as string[], // TODO: Google Business Profile, Facebook, Instagram, Nextdoor, Yelp, BBB, Houzz, Angi, Bing Places
