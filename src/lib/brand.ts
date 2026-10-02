@@ -30,7 +30,7 @@ export const BRAND = {
      assistants weigh who stands behind advice. Leave name empty until the
      owner confirms how he wants to appear (and ideally adds a headshot at
      public/brand/owner.jpg); nothing about him renders until then.
-     TODO(owner): name, e.g. "Luis Pinzón", and optional profile URLs. */
+     TODO(owner): full name as he wants it shown (first name is spelled "Zefreino"), and optional profile URLs. */
   owner: { name: "", jobTitle: { en: "Owner", es: "Dueño" }, image: "", sameAs: [] as string[] },
   hours: [
     { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:00", closes: "18:00" },

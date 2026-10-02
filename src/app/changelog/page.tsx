@@ -49,7 +49,7 @@ export default function ChangelogPage() {
         <div className="shell relative pt-16 pb-14 md:pt-24 md:pb-20 grid gap-5">
           <div className="flex items-center gap-3"><Image src="/brand/mark-on-dark.png" alt="" width={62} height={28} className="h-7 w-auto" /><span className="font-mono text-[.7rem] tracking-[.16em] uppercase text-bone/60">Z Construction & Remodeling · build report · Sep 23–25, 2026</span></div>
           <h1 className="d d-lg max-w-[14ch]">New site, <span className="text-amber">new you.</span></h1>
-          <p className="lede text-bone/85">Everything that changed, measured. From a six-page brochure to a 66-page bilingual lead engine: what was built, what it fixed, what the numbers say, and what still needs Luis.</p>
+          <p className="lede text-bone/85">Everything that changed, measured. From a six-page brochure to a 66-page bilingual lead engine: what was built, what it fixed, what the numbers say, and what still needs the owner.</p>
           <p className="font-mono text-[.7rem] tracking-[.12em] uppercase text-bone/50">Unlisted page · not indexed · not in the sitemap</p>
         </div>
       </header>
@@ -156,7 +156,7 @@ export default function ChangelogPage() {
             <Bars rows={[{ label: "E&S Contractor Painting", value: 114 }, { label: "CertaPro Columbus-Auburn", value: 90 }, { label: "JL Remodeling", value: 44 }, { label: "Paintnovations", value: 23 }, { label: "Priceless Painting Plus", value: 10 }, { label: "Z Construction", value: 2 }]} emphasis={5} color={C.s2} max={125} labelW={200} />
             <p className="mt-2 text-[.78rem] text-bone/60">Sources: <Src href="https://reviews.birdeye.com/es-contractor-painting-company-inc-166337522062091">Birdeye</Src>, <Src href="https://reputation.5starbusiness.com/certapro-painters-of-columbus-ga-and-auburn-al-163885549365496">5starbusiness</Src>, <Src href="https://www.trustindex.io/reviews/jlremodelingauburn.com">Trustindex</Src>, Houzz, Yelp. Directory pages blocked automated fetches, so some counts come from aggregators.</p>
           </Card>
-          <Card title="What nobody else in the market offers" sub="Checked on every competitor site on Sep 25, 2026. Four lanes are wide open, and this site is already in three of them." table={{ head: ["Signal", "Competitors offering it (of 14)", "Z Construction"], rows: [["Prices shown on the site", "0", "Yes: every service page, guides, estimator"], ["Spanish-language pages", "0", "Yes: full site"], ["Landlord / rental-turnover page", "0 (one handyman mentions absentee owners)", "Yes"], ["License number printed", "1 (Guerrero)", "As soon as Luis provides it"], ["Financing offered", "2 (Priceless, Floor Coverings Intl.)", "Not yet"], ["Written warranty stated", "1 concrete (Five Star, 2-year)", "Not yet: decide and publish"]] }}>
+          <Card title="What nobody else in the market offers" sub="Checked on every competitor site on Sep 25, 2026. Four lanes are wide open, and this site is already in three of them." table={{ head: ["Signal", "Competitors offering it (of 14)", "Z Construction"], rows: [["Prices shown on the site", "0", "Yes: every service page, guides, estimator"], ["Spanish-language pages", "0", "Yes: full site"], ["Landlord / rental-turnover page", "0 (one handyman mentions absentee owners)", "Yes"], ["License number printed", "1 (Guerrero)", "As soon as the owner provides it"], ["Financing offered", "2 (Priceless, Floor Coverings Intl.)", "Not yet"], ["Written warranty stated", "1 concrete (Five Star, 2-year)", "Not yet: decide and publish"]] }}>
             <Bars rows={[{ label: "Prices shown on site", value: 0 }, { label: "Spanish pages", value: 0 }, { label: "Landlord page", value: 0 }, { label: "License number shown", value: 1 }, { label: "Concrete warranty", value: 1 }, { label: "Financing", value: 2 }, { label: "Online booking / estimate form", value: 3 }, { label: "City pages", value: 3 }]} unit=" of 14" max={14} labelW={220} color={C.s3} />
           </Card>
         </div>
@@ -200,7 +200,7 @@ export default function ChangelogPage() {
       <section className="shell py-10 md:py-14 border-t border-hairline-d">
         <H2 k="06 · Integrations & budget">Wired and waiting for IDs</H2>
         <div className="grid gap-4 lg:grid-cols-2">
-          <Card title="What $500 a month buys, estimated leads" sub="Angi Pro is the current spend. Google Local Services Ads charge per lead (painting median $48) and carry the Google Verified badge; standard Search costs about $138 per painting lead. Angi's lead count must come from Luis's dashboard; the industry median is not published." table={{ head: ["Channel", "Cost per lead", "Leads from $500"], rows: [["Google Local Services Ads", "$48 (median, painting)", "≈ 10"], ["Google Search ads", "$138 (avg, painting)", "≈ 3.6"], ["Angi Pro (current)", "check the Angi dashboard", "?"]] }}>
+          <Card title="What $500 a month buys, estimated leads" sub="Angi Pro is the current spend. Google Local Services Ads charge per lead (painting median $48) and carry the Google Verified badge; standard Search costs about $138 per painting lead. Angi's lead count must come from the owner's dashboard; the industry median is not published." table={{ head: ["Channel", "Cost per lead", "Leads from $500"], rows: [["Google Local Services Ads", "$48 (median, painting)", "≈ 10"], ["Google Search ads", "$138 (avg, painting)", "≈ 3.6"], ["Angi Pro (current)", "check the Angi dashboard", "?"]] }}>
             <Bars rows={[{ label: "Local Services Ads", value: 10.4 }, { label: "Google Search", value: 3.6 }]} unit=" leads" max={12} labelW={170} color={C.s4} />
             <p className="mt-2 text-[.78rem] text-bone/60">Sources: <Src href="https://localiq.com/blog/home-services-search-advertising-benchmarks/">LocaliQ 2025</Src>; LSA median via 99 Calls / Web Tonic 2026 (in the growth playbook).</p>
           </Card>
@@ -233,7 +233,7 @@ export default function ChangelogPage() {
 
       {/* CHECKLIST */}
       <section className="shell py-10 md:py-14 border-t border-hairline-d">
-        <H2 k="07 · Launch">What's done, and what needs Luis</H2>
+        <H2 k="07 · Launch">What's done, and what needs the owner</H2>
         <div className="grid gap-3 md:grid-cols-2">
           {[
             [true, "Site merged, deployed on Vercel, auto-deploys from GitHub main"],
