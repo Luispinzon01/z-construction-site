@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /* Submit every sitemap URL to IndexNow (Bing, Yandex, Seznam, Naver share
    submissions). Usage:
-     INDEXNOW_KEY=<key> SITE_URL=https://example.com npm run indexnow
+     INDEXNOW_KEY=<key> SITE_URL=https://www.zconstructionauburn.com npm run indexnow
    Run after a deploy that added or changed pages. Google does not use
    IndexNow; for Google, the sitemap in Search Console does the job. */
-const key = process.env.INDEXNOW_KEY, site = (process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "").replace(/\/$/, "");
+const key = process.env.INDEXNOW_KEY || "cd3cd945dd7130fe8ef5e48a038c35ac", site = (process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "https://www.zconstructionauburn.com").replace(/\/$/, "");
 if (!key || !site) { console.error("Set INDEXNOW_KEY and SITE_URL (or NEXT_PUBLIC_SITE_URL)."); process.exit(1); }
 
 const xml = await (await fetch(`${site}/sitemap.xml`)).text();
